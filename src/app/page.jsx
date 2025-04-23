@@ -1,14 +1,18 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import ThemeSwitcher from "../components/ThemeSwitcher";
+import Link from "next/link"
+import ThemeSwitcher from "@/components/theme-switcher"
+import ExampleComponent from "@/components/ExampleComponent"
+
 
 export default function Home() {
   return (
     <div className="container mx-auto p-4 bg-background text-foreground min-h-screen">
-      <div className="flex justify-end mb-4">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-primary-500">School Management System</h1>
         <ThemeSwitcher />
       </div>
+
       <h1 className="text-2xl font-bold mb-4 text-primary-500">
         School Management System
       </h1>
@@ -39,9 +43,13 @@ export default function Home() {
             <p className="text-default-700">
               Trage deine Noten ein und berechne deinen Schnitt
             </p>
+
           </div>
         </Link>
       </div>
+
+      <ExampleComponent />
     </div>
   );
+
 }
