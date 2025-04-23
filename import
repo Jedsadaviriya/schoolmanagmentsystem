@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Introduction to Programming",
+    "module_number": "CS101",
+    "description": "Learn the basics of programming."
+  },
+  {
+    "title": "Database Systems",
+    "module_number": "CS202",
+    "description": "Understand relational databases."
+  },
+  {
+    "title": "Web Development",
+    "module_number": "CS303",
+    "description": "Build modern web applications."
+  },
+  {
+    "title": "Data Structures",
+    "module_number": "CS404",
+    "description": "Explore advanced data structures."
+  },
+  {
+    "title": "Algorithms",
+    "module_number": "CS505",
+    "description": "Study efficient algorithms."
+  },
+  {
+    "title": "Software Engineering",
+    "module_number": "CS606",
+    "description": "Learn software development practices."
+  },
+  {
+    "title": "Operating Systems",
+    "module_number": "CS707",
+    "description": "Understand OS concepts."
+  },
+  {
+    "title": "Networking",
+    "module_number": "CS808",
+    "description": "Explore computer networks."
+  }
+]
