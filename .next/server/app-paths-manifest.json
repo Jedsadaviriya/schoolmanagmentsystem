@@ -1,7 +1,0 @@
-{
-  "/api/grades/route": "app/api/grades/route.js",
-  "/kalender/page": "app/kalender/page.js",
-  "/module/page": "app/module/page.js",
-  "/noten/page": "app/noten/page.js",
-  "/page": "app/page.js"
-}
