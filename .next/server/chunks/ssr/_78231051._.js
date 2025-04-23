@@ -29,12 +29,21 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 function ExampleComponent() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "p-6 bg-background text-foreground rounded-lg shadow-md",
+        className: "p-6 bg-content1 text-content1-foreground rounded-lg shadow-md",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                className: "text-xl font-semibold text-primary-500 mb-4",
-                children: "Beispiel-Komponente"
-            }, void 0, false, {
+                className: "text-xl font-semibold mb-4 flex items-center text-secondary-500",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "w-2 h-6 bg-secondary-500 rounded mr-2 inline-block"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/ExampleComponent.jsx",
+                        lineNumber: 5,
+                        columnNumber: 9
+                    }, this),
+                    "Beispiel-Komponente"
+                ]
+            }, void 0, true, {
                 fileName: "[project]/src/components/ExampleComponent.jsx",
                 lineNumber: 4,
                 columnNumber: 7
@@ -44,40 +53,76 @@ function ExampleComponent() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "p-4 bg-success-500 text-success-foreground rounded",
-                        children: "Erfolg: Dies ist ein erfolgreiches Element!"
-                    }, void 0, false, {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                children: "Erfolg:"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ExampleComponent.jsx",
+                                lineNumber: 10,
+                                columnNumber: 11
+                            }, this),
+                            " Dies ist ein erfolgreiches Element!"
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/src/components/ExampleComponent.jsx",
-                        lineNumber: 6,
+                        lineNumber: 9,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "p-4 bg-warning-500 text-warning-foreground rounded",
-                        children: "Warnung: Dies ist eine Warnung!"
-                    }, void 0, false, {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                children: "Warnung:"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ExampleComponent.jsx",
+                                lineNumber: 13,
+                                columnNumber: 11
+                            }, this),
+                            " Dies ist eine Warnung!"
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/src/components/ExampleComponent.jsx",
-                        lineNumber: 7,
+                        lineNumber: 12,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "p-4 bg-danger-500 text-danger-foreground rounded",
-                        children: "Fehler: Dies ist ein Fehler!"
-                    }, void 0, false, {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                children: "Fehler:"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ExampleComponent.jsx",
+                                lineNumber: 16,
+                                columnNumber: 11
+                            }, this),
+                            " Dies ist ein Fehler!"
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/src/components/ExampleComponent.jsx",
-                        lineNumber: 8,
+                        lineNumber: 15,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "p-4 bg-content1 text-content1-foreground rounded",
-                        children: "Content1: Dies ist ein neutrales Element."
-                    }, void 0, false, {
+                        className: "p-4 bg-content2 text-content2-foreground rounded",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                children: "Content2:"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/ExampleComponent.jsx",
+                                lineNumber: 19,
+                                columnNumber: 11
+                            }, this),
+                            " Dies ist ein neutrales Element."
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/src/components/ExampleComponent.jsx",
-                        lineNumber: 9,
+                        lineNumber: 18,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ExampleComponent.jsx",
-                lineNumber: 5,
+                lineNumber: 8,
                 columnNumber: 7
             }, this)
         ]
