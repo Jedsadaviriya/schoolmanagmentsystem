@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import ThemeSwitcher from '../components/ThemeSwitcher';
+import ExampleComponent from '../components/ExampleComponent';
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         <ThemeSwitcher />
       </div>
       <h1 className="text-2xl font-bold mb-4 text-primary-500">School Management System</h1>
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <Link href="/kalender" className="flex-1">
           <div className="bg-content1 shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow">
             <h2 className="text-xl font-semibold text-content1-foreground">Kalender</h2>
@@ -24,6 +25,7 @@ export default function Home() {
           </div>
         </Link>
       </div>
+      <ExampleComponent />
     </div>
   );
 }

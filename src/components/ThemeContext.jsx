@@ -1,3 +1,4 @@
+// src/components/ThemeContext.jsx
 'use client';
 
 import { createContext, useState, useEffect, useContext } from 'react';
@@ -5,10 +6,9 @@ import { createContext, useState, useEffect, useContext } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('dark'); // Standardmäßig Dark-Theme
+  const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
-    // Beim Laden die Klasse 'dark' hinzufügen/entfernen
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {

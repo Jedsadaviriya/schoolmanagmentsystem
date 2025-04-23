@@ -6,7 +6,7 @@ import { ThemeProvider } from '../components/ThemeContext';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
-  weight: ['400', '500', '600', '700'], // Gewichte für normale und fette Texte
+  weight: ['400', '500', '600', '700'],
 });
 
 export const metadata = {

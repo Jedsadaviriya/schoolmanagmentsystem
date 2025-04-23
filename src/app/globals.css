@@ -1,21 +1,204 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
---background: #ffffff;
---foreground: #171717;
-}
+@theme {
+    --color-default-50: #fafafa;
+    --color-default-100: #f2f2f3;
+    --color-default-200: #ebebec;
+    --color-default-300: #e3e3e6;
+    --color-default-400: #dcdcdf;
+    --color-default-500: #d4d4d8;
+    --color-default-600: #afafb2;
+    --color-default-700: #8a8a8c;
+    --color-default-800: #656567;
+    --color-default-900: #404041;
+    --color-default-foreground: #000;
+    --color-default: #d4d4d8;
+  
+    --color-primary-50: #f7f0ff;
+    --color-primary-100: #ebdbfe;
+    --color-primary-200: #dfc6fe;
+    --color-primary-300: #d3b0fd;
+    --color-primary-400: #c79bfd;
+    --color-primary-500: #bb86fc;
+    --color-primary-600: #9a6fd0;
+    --color-primary-700: #7a57a4;
+    --color-primary-800: #594078;
+    --color-primary-900: #38284c;
+    --color-primary-foreground: #000;
+    --color-primary: #bb86fc;
+  
+    --color-secondary-50: #e0faf8;
+    --color-secondary-100: #b3f4ee;
+    --color-secondary-200: #87ede4;
+    --color-secondary-300: #5be7da;
+    --color-secondary-400: #2fe0d0;
+    --color-secondary-500: #03dac6;
+    --color-secondary-600: #02b4a3;
+    --color-secondary-700: #028e81;
+    --color-secondary-800: #01685e;
+    --color-secondary-900: #01413b;
+    --color-secondary-foreground: #000;
+    --color-secondary: #03dac6;
+  
+    --color-success-50: #e9f5e9;
+    --color-success-100: #c9e7cb;
+    --color-success-200: #aad9ac;
+    --color-success-300: #8bcb8d;
+    --color-success-400: #6bbd6f;
+    --color-success-500: #4caf50;
+    --color-success-600: #3f9042;
+    --color-success-700: #317234;
+    --color-success-800: #245326;
+    --color-success-900: #173518;
+    --color-success-foreground: #000;
+    --color-success: #4caf50;
+  
+    --color-warning-50: #fff6df;
+    --color-warning-100: #ffe8b3;
+    --color-warning-200: #ffdb86;
+    --color-warning-300: #ffce59;
+    --color-warning-400: #ffc02d;
+    --color-warning-500: #ffb300;
+    --color-warning-600: #d29400;
+    --color-warning-700: #a67400;
+    --color-warning-800: #795500;
+    --color-warning-900: #4d3600;
+    --color-warning-foreground: #000;
+    --color-warning: #ffb300;
+  
+    --color-danger-50: #f9ecee;
+    --color-danger-100: #f1d1d7;
+    --color-danger-200: #e8b6bf;
+    --color-danger-300: #e09ca8;
+    --color-danger-400: #d78190;
+    --color-danger-500: #cf6679;
+    --color-danger-600: #ab5464;
+    --color-danger-700: #87424f;
+    --color-danger-800: #623039;
+    --color-danger-900: #3e1f24;
+    --color-danger-foreground: #000;
+    --color-danger: #cf6679;
+  
+    --color-background: #121212;
+    --color-foreground: #000000;
+    --color-content1: #ffffff;
+    --color-content1-foreground: #000;
+    --color-content2: #f4f4f5;
+    --color-content2-foreground: #000;
+    --color-content3: #e4e4e7;
+    --color-content3-foreground: #000;
+    --color-content4: #d4d4d8;
+    --color-content4-foreground: #000;
+    --color-focus: #BB86FC;
+    --color-overlay: #000000;
+  
+    --opacity-disabled-opacity: 0.8;
 
-@media (prefers-color-scheme: dark) {
-:root {
---background: #0a0a0a;
---foreground: #ededed;
-}
+    /* [data-theme="dark"] {
+        --default-50: #2d2d2d;
+        --default-100: #5a5a5a;
+        --default-200: #868686;
+        --default-300: #b3b3b3;
+        --default-400: #e0e0e0;
+        --default-500: #e6e6e6;
+        --default-600: #ececec;
+        --default-700: #f3f3f3;
+        --default-800: #f9f9f9;
+        --default-900: #ffffff;
+        --default-foreground: #000;
+        --default: #e0e0e0;
+      
+        --primary-50: #38284c;
+        --primary-100: #594078;
+        --primary-200: #7a57a4;
+        --primary-300: #9a6fd0;
+        --primary-400: #bb86fc;
+        --primary-500: #c79bfd;
+        --primary-600: #d3b0fd;
+        --primary-700: #dfc6fe;
+        --primary-800: #ebdbfe;
+        --primary-900: #f7f0ff;
+        --primary-foreground: #000;
+        --primary: #bb86fc;
+      
+        --secondary-50: #01413b;
+        --secondary-100: #01685e;
+        --secondary-200: #028e81;
+        --secondary-300: #02b4a3;
+        --secondary-400: #03dac6;
+        --secondary-500: #2fe0d0;
+        --secondary-600: #5be7da;
+        --secondary-700: #87ede4;
+        --secondary-800: #b3f4ee;
+        --secondary-900: #e0faf8;
+        --secondary-foreground: #000;
+        --secondary: #03dac6;
+      
+        --success-50: #173518;
+        --success-100: #245326;
+        --success-200: #317234;
+        --success-300: #3f9042;
+        --success-400: #4caf50;
+        --success-500: #6bbd6f;
+        --success-600: #8bcb8d;
+        --success-700: #aad9ac;
+        --success-800: #c9e7cb;
+        --success-900: #e9f5e9;
+        --success-foreground: #000;
+        --success: #4caf50;
+      
+        --warning-50: #4d3600;
+        --warning-100: #795500;
+        --warning-200: #a67400;
+        --warning-300: #d29400;
+        --warning-400: #ffb300;
+        --warning-500: #ffc02d;
+        --warning-600: #ffce59;
+        --warning-700: #ffdb86;
+        --warning-800: #ffe8b3;
+        --warning-900: #fff6df;
+        --warning-foreground: #000;
+        --warning: #ffb300;
+      
+        --danger-50: #3e1f24;
+        --danger-100: #623039;
+        --danger-200: #87424f;
+        --danger-300: #ab5464;
+        --danger-400: #cf6679;
+        --danger-500: #d78190;
+        --danger-600: #e09ca8;
+        --danger-700: #e8b6bf;
+        --danger-800: #f1d1d7;
+        --danger-900: #f9ecee;
+        --danger-foreground: #000;
+        --danger: #cf6679;
+      
+        --background: #121212;
+        --foreground: #EAF4FF;
+        --content1: #E0E0E0;
+        --content1-foreground: #000;
+        --content2: #B0B0B0;
+        --content2-foreground: #000;
+        --content3: #888888;
+        --content3-foreground: #000;
+        --content4: #555555;
+        --content4-foreground: #fff;
+        --focus: #BB86FC;
+        --overlay: #ffffff;
+      
+        --disabled-opacity: 0.8;
+      } */
 }
 
 body {
-background: var(--color-background);
-color: var(--color-foreground);
-font-family: var(--font-inter), sans-serif;
-}
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-inter), sans-serif;
+  }
+  
+  
+  
+  /* Apply disabled opacity globally */
+  /* [disabled] {
+    opacity: var(--disabled-opacity);
+  } */

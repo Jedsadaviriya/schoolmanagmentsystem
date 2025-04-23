@@ -1,3 +1,4 @@
+// src/components/ThemeSwitcher.jsx
 'use client';
 
 import { useTheme } from './ThemeContext';
