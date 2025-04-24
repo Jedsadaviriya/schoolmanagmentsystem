@@ -4,9 +4,9 @@
 // module.exports = {
 //   darkMode: ["class"],
 //   content: [
-//     "./src/pages/**/*.{js,jsx,mdx}",
-//     "./src/components/**/*.{js,jsx,mdx}",
 //     "./src/app/**/*.{js,jsx,mdx}",
+//     "./src/components/**/*.{js,jsx,mdx}",
+//     "./src/pages/**/*.{js,jsx,mdx}",
 //     "*.{js,ts,jsx,tsx,mdx}",
 //   ],
 //   theme: {
@@ -179,5 +179,5 @@
 //       },
 //     },
 //   },
-//   plugins: [require("tailwindcss-animate")], 
+//   //plugins: [require("tailwindcss-animate")], 
 // }
