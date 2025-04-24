@@ -18,12 +18,12 @@ export default function RootLayout({ children }) {
     <html lang="de" className={inter.variable} suppressHydrationWarning>
       <body className="antialiased">
         <ThemeProvider>
-          <header className="bg-primary-500 text-primary-foreground p-4 shadow-md">
-            <div className="container mx-auto">
-              <h1 className="text-2xl font-bold">SMS</h1>
+          <header className="bg-primary-500 text-primary-foreground  shadow-md">
+            <div >
+              <h1 className="seitenTitel">SMS</h1>
             </div>
           </header>
-          <main className="container mx-auto py-6">{children}</main>
+          <main>{children}</main>
         </ThemeProvider>
       </body>
     </html>

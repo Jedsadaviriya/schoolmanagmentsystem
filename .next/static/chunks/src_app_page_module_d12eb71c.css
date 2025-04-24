@@ -1,0 +1,105 @@
+/* [project]/src/app/page.module.css [app-client] (css) */
+.page-module___8aEwW__container {
+  background-color: var(--color-background);
+  max-width: 1200px;
+  color: var(--color-foreground);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2.5rem;
+}
+
+.page-module___8aEwW__header {
+  border-bottom: 2px solid var(--color-primary-100);
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  display: flex;
+}
+
+.page-module___8aEwW__headerTitle {
+  color: var(--color-primary-500);
+  font-size: 2.5rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.page-module___8aEwW__headerTitle:after {
+  content: "";
+  background-color: var(--color-secondary-500);
+  border-radius: 2px;
+  width: 60px;
+  height: 4px;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+}
+
+.page-module___8aEwW__grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  display: grid;
+}
+
+.page-module___8aEwW__card {
+  background-color: var(--color-content1);
+  border: 1px solid var(--color-default-200);
+  border-radius: 12px;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  transition: all .3s;
+  display: flex;
+  box-shadow: 0 4px 12px #00000014;
+}
+
+.page-module___8aEwW__card:hover {
+  border-color: var(--color-secondary-400);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px #0000001f;
+}
+
+.page-module___8aEwW__cardTitle {
+  color: var(--color-content1-foreground);
+  margin-bottom: .75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.page-module___8aEwW__cardDescription {
+  color: var(--color-default-700);
+  font-size: .95rem;
+  line-height: 1.5;
+}
+
+.page-module___8aEwW__exampleWrapper {
+  background-color: var(--color-content2);
+  border: 1px solid var(--color-default-300);
+  border-radius: 12px;
+  margin-top: 4rem;
+  padding: 2rem;
+}
+
+@media (width <= 768px) {
+  .page-module___8aEwW__container {
+    padding: 1.5rem;
+  }
+
+  .page-module___8aEwW__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .page-module___8aEwW__headerTitle {
+    font-size: 2rem;
+  }
+
+  .page-module___8aEwW__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/*# sourceMappingURL=src_app_page_module_d12eb71c.css.map*/

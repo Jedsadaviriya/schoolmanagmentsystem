@@ -1,0 +1,115 @@
+/* page.module.css */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    min-height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-primary-100);
+  }
+  
+  .headerTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary-500);
+    position: relative;
+  }
+
+  .headerTitle::after {
+    content: "";
+    position: absolute;
+    bottom: -8px; /* Adjust the distance from the text */
+    left: 0;
+    width: 105%; /* Make the underline span the full width of the text */
+    height: 4px; /* Thickness of the underline */
+    background-color: var(--color-secondary-500); /* Secondary color */
+    border-radius: 2px; /* Optional: rounded edges for the underline */
+}
+  
+  /*
+  .headerTitle::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 200px;
+    height: 4px;
+    background-color: var(--color-secondary-500);
+    border-radius: 2px;
+  } */
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+  
+  .card {
+    background-color: var(--color-content1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-default-200);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-color: var(--color-secondary-400);
+  }
+  
+  .cardTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--color-content1-foreground);
+  }
+  
+  .cardDescription {
+    color: var(--color-default-700);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .exampleWrapper {
+    margin-top: 4rem;
+    padding: 2rem;
+    background-color: var(--color-content2);
+    border-radius: 12px;
+    border: 1px solid var(--color-default-300);
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 1.5rem;
+    }
+  
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  
+    .headerTitle {
+      font-size: 2rem;
+    }
+  
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  

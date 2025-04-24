@@ -1,55 +1,41 @@
-"use client"
-
 import Link from "next/link"
 import ThemeSwitcher from "@/components/theme-switcher"
 import ExampleComponent from "@/components/ExampleComponent"
 
+import styles from "./page.module.css"
 
 export default function Home() {
   return (
-    <div className="container mx-auto p-4 bg-background text-foreground min-h-screen">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-primary-500">School Management System</h1>
+    <div className={`${styles.container} bg-background text-foreground`}>
+      {/* Header */}
+      <div className={styles.header}>
+        <h1 className={styles.headerTitle}>School Management System</h1>
         <ThemeSwitcher />
       </div>
 
-      <h1 className="text-2xl font-bold mb-4 text-primary-500">
-        School Management System
-      </h1>
-      <div className="flex flex-col sm:flex-row gap-4">
-        <Link href="/kalender" className="flex-1">
-          <div className="bg-content1 shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h2 className="text-xl font-semibold text-content1-foreground">
-              Kalender
-            </h2>
-            <p className="text-default-700">Verwalte deine Events und Tests</p>
+      {/* Card grid */}
+      <div className={styles.grid}>
+        <Link href="/kalender">
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>Kalender</h2>
+            <p className={styles.cardDescription}>Verwalte deine Events und Tests</p>
           </div>
         </Link>
-        <Link href="/noten" className="flex-1">
-          <div className="bg-content1 shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h2 className="text-xl font-semibold text-content1-foreground">
-              Noten
-            </h2>
-            <p className="text-default-700">
-              Trage deine Noten ein und berechne deinen Schnitt
-            </p>
-          </div>
-        </Link>
-        <Link href="/module" className="flex-1">
-          <div className="bg-content1 shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h2 className="text-xl font-semibold text-content1-foreground">
-              Module
-            </h2>
-            <p className="text-default-700">
-              Trage deine Noten ein und berechne deinen Schnitt
-            </p>
 
+        <Link href="/noten">
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>Noten</h2>
+            <p className={styles.cardDescription}>Trage deine Noten ein und berechne deinen Schnitt</p>
+          </div>
+        </Link>
+
+        <Link href="/module">
+          <div className={styles.card}>
+            <h2 className={styles.cardTitle}>Module</h2>
+            <p className={styles.cardDescription}>Trage deine Noten ein und berechne deinen Schnitt</p>
           </div>
         </Link>
       </div>
-
-      <ExampleComponent />
     </div>
-  );
-
+  )
 }
