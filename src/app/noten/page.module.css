@@ -1,0 +1,257 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+  
+  .pageTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary-500);
+    position: relative;
+  }
+  
+  .pageTitle::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-secondary-500);
+    border-radius: 2px;
+  }
+  
+  .pageDescription {
+    margin-bottom: 2rem;
+    color: var(--color-default-700);
+    font-size: 1rem;
+    max-width: 600px;
+  }
+  
+  .formSection {
+    margin-top: 2rem;
+    background-color: var(--color-content1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-default-200);
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-content1-foreground);
+  }
+  
+  .input {
+    padding: 0.75rem;
+    border: 1px solid var(--color-default-300);
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    transition: border-color 0.2s ease;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: var(--color-secondary-500);
+    box-shadow: 0 0 0 2px var(--color-secondary-100);
+  }
+  
+  .input.error {
+    border-color: var(--color-danger-500);
+  }
+  
+  .submitButton {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-primary-500);
+    color: var(--color-primary-foreground);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 0.5rem;
+    align-self: flex-start;
+  }
+  
+  .submitButton:hover {
+    background-color: var(--color-primary-600);
+  }
+  
+  .submitButton:active {
+    background-color: var(--color-primary-700);
+  }
+  
+  .gradesSection {
+    margin-top: 2.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-primary-500);
+  }
+  
+  .gradesList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  
+  .gradeItem {
+    padding: 1rem;
+    background-color: var(--color-content1);
+    border-radius: 8px;
+    border: 1px solid var(--color-default-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .gradeSubject {
+    font-weight: 600;
+    color: var(--color-content1-foreground);
+  }
+  
+  .gradeValue {
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-700);
+    border-radius: 999px;
+  }
+  
+  .gradeDate {
+    font-size: 0.8rem;
+    color: var(--color-default-600);
+    margin-top: 0.5rem;
+  }
+  
+  .emptyMessage {
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--color-content2);
+    border-radius: 8px;
+    color: var(--color-default-600);
+  }
+  
+  /* Notification System */
+  .notificationContainer {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 350px;
+  }
+  
+  .notification {
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .notificationSuccess {
+    background-color: var(--color-success-50);
+    border-left: 4px solid var(--color-success-500);
+    color: var(--color-success-900);
+  }
+  
+  .notificationError {
+    background-color: var(--color-danger-50);
+    border-left: 4px solid var(--color-danger-500);
+    color: var(--color-danger-900);
+  }
+  
+  .notificationIcon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .notificationContent {
+    flex-grow: 1;
+  }
+  
+  .notificationTitle {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .notificationMessage {
+    font-size: 0.9rem;
+  }
+  
+  .fieldError {
+    color: var(--color-warning-600);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .fieldErrorIcon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .notificationContainer {
+      left: 1rem;
+      right: 1rem;
+      max-width: calc(100% - 2rem);
+    }
+  }
+  

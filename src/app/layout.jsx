@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import Link from "next/link"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,9 +20,11 @@ export default function RootLayout({ children }) {
       <body className="antialiased">
         <ThemeProvider>
           <header className="bg-primary-500 text-primary-foreground  shadow-md">
+            <Link href="/">
             <div >
               <h1 className="seitenTitel">SMS</h1>
             </div>
+            </Link>
           </header>
           <main>{children}</main>
         </ThemeProvider>
