@@ -32,6 +32,144 @@
     max-width: 600px;
   }
   
+  /* Statistics Section */
+  .statisticsSection {
+    margin-bottom: 2.5rem;
+  }
+  
+  .statisticsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .statisticsCard {
+    background-color: var(--color-content1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-default-200);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .statisticsHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .statisticsIcon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-700);
+    border-radius: 50%;
+    padding: 0.5rem;
+  }
+  
+  .statisticsIcon svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .statisticsTitle {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-content1-foreground);
+  }
+  
+  .averageValue {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 1rem 0;
+    color: var(--color-primary-600);
+    position: relative;
+  }
+  
+  .averageValue[data-grade="excellent"] {
+    color: var(--color-success-600);
+  }
+  
+  .averageValue[data-grade="good"] {
+    color: var(--color-secondary-600);
+  }
+  
+  .averageValue[data-grade="satisfactory"] {
+    color: var(--color-warning-600);
+  }
+  
+  .averageValue[data-grade="insufficient"] {
+    color: var(--color-danger-600);
+  }
+  
+  .statisticsFooter {
+    text-align: center;
+    color: var(--color-default-600);
+    font-size: 0.9rem;
+    margin-top: auto;
+  }
+  
+  /* Distribution */
+  .distributionGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .distributionItem {
+    display: grid;
+    grid-template-columns: 80px 1fr 30px;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .distributionLabel {
+    font-size: 0.85rem;
+    color: var(--color-content1-foreground);
+  }
+  
+  .distributionBar {
+    height: 8px;
+    background-color: var(--color-default-200);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .distributionBarFill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  
+  .distributionBarFill.excellent {
+    background-color: var(--color-success-500);
+  }
+  
+  .distributionBarFill.good {
+    background-color: var(--color-secondary-500);
+  }
+  
+  .distributionBarFill.satisfactory {
+    background-color: var(--color-warning-500);
+  }
+  
+  .distributionBarFill.insufficient {
+    background-color: var(--color-danger-500);
+  }
+  
+  .distributionCount {
+    font-weight: 600;
+    text-align: right;
+    font-size: 0.9rem;
+  }
+  
   .formSection {
     margin-top: 2rem;
     background-color: var(--color-content1);
@@ -140,6 +278,26 @@
     background-color: var(--color-primary-100);
     color: var(--color-primary-700);
     border-radius: 999px;
+  }
+  
+  .gradeExcellent {
+    background-color: var(--color-success-100);
+    color: var(--color-success-700);
+  }
+  
+  .gradeGood {
+    background-color: var(--color-secondary-100);
+    color: var(--color-secondary-700);
+  }
+  
+  .gradeSatisfactory {
+    background-color: var(--color-warning-100);
+    color: var(--color-warning-700);
+  }
+  
+  .gradeInsufficient {
+    background-color: var(--color-danger-100);
+    color: var(--color-danger-700);
   }
   
   .gradeDate {
@@ -252,6 +410,14 @@
       left: 1rem;
       right: 1rem;
       max-width: calc(100% - 2rem);
+    }
+  
+    .statisticsGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .averageValue {
+      font-size: 2.5rem;
     }
   }
   
