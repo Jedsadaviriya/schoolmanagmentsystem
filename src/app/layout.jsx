@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import ThemeSwitcher from "@/components/theme-switcher"
 import Link from "next/link"
 
 const inter = Inter({
@@ -19,12 +20,13 @@ export default function RootLayout({ children }) {
     <html lang="de" className={inter.variable} suppressHydrationWarning>
       <body className="antialiased">
         <ThemeProvider>
-          <header className="bg-primary-500 text-primary-foreground  shadow-md">
+          <header className="bg-primary-500 shadow-md header">
             <Link href="/">
             <div >
               <h1 className="seitenTitel">SMS</h1>
             </div>
             </Link>
+            <ThemeSwitcher />
           </header>
           <main>{children}</main>
         </ThemeProvider>

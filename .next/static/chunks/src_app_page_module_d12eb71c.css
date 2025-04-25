@@ -28,7 +28,7 @@
   content: "";
   background-color: var(--color-secondary-500);
   border-radius: 2px;
-  width: 60px;
+  width: 105%;
   height: 4px;
   position: absolute;
   bottom: -8px;
