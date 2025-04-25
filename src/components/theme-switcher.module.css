@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: var(--color-content1);
+    background-color: var(--color-primary-500);
     padding: 0.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -20,16 +20,16 @@
   }
   
   .themeButton:hover {
-    background-color: var(--color-content2);
+    background-color: var(--color-primary-400);
   }
   
   .activeLight {
-    background-color: var(--color-content2);
+    background-color: var(--color-primary-500);
     border: 2px solid var(--color-secondary-500);
   }
   
   .activeDark {
-    background-color: var(--color-content2);
+    background-color: var(--color-primary-500);
     border: 2px solid var(--color-secondary-500);
   }
   
