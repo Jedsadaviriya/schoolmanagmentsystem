@@ -39,7 +39,27 @@ export default async function ModuleDetail({ params }) {
       <p className={styles.moduleNumber}>Modul-Nummer: {module.module_number}</p>
 
       <div className={styles.moduleCard}>
-        
+        {/* <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Modulinformationen</h2>
+          <div className={styles.infoGrid}>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Dozent</span>
+              <span className={styles.infoValue}>{module.instructor || "Nicht angegeben"}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Semester</span>
+              <span className={styles.infoValue}>{module.semester || "Nicht angegeben"}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>ECTS</span>
+              <span className={styles.infoValue}>{module.credits || "Nicht angegeben"}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Status</span>
+              <span className={styles.infoValue}>{module.status || "Aktiv"}</span>
+            </div>
+          </div>
+        </div>  */}
 
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Beschreibung</h2>
@@ -70,7 +90,7 @@ export default async function ModuleDetail({ params }) {
         )}
       </div>
 
-      <Link href="/module" className={styles.backButton}>
+      <Link href="/module" className={`${styles.backButton} animated-button`}>
         Zurück zu Modulen
       </Link>
     </div>
