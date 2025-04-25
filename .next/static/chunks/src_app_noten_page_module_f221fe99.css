@@ -1,0 +1,261 @@
+/* [project]/src/app/noten/page.module.css [app-client] (css) */
+.page-module__ANWkCW__container {
+  background-color: var(--color-background);
+  max-width: 800px;
+  color: var(--color-foreground);
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-module__ANWkCW__pageTitle {
+  color: var(--color-primary-500);
+  margin-bottom: .5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.page-module__ANWkCW__pageTitle:after {
+  content: "";
+  background-color: var(--color-secondary-500);
+  border-radius: 2px;
+  width: 60px;
+  height: 4px;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+}
+
+.page-module__ANWkCW__pageDescription {
+  color: var(--color-default-700);
+  max-width: 600px;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.page-module__ANWkCW__formSection {
+  background-color: var(--color-content1);
+  border: 1px solid var(--color-default-200);
+  border-radius: 12px;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px #00000014;
+}
+
+.page-module__ANWkCW__form {
+  flex-direction: column;
+  gap: 1.5rem;
+  display: flex;
+}
+
+.page-module__ANWkCW__formGroup {
+  flex-direction: column;
+  gap: .5rem;
+  display: flex;
+}
+
+.page-module__ANWkCW__label {
+  color: var(--color-content1-foreground);
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.page-module__ANWkCW__input {
+  border: 1px solid var(--color-default-300);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border-radius: 6px;
+  padding: .75rem;
+  font-size: 1rem;
+  transition: border-color .2s;
+}
+
+.page-module__ANWkCW__input:focus {
+  border-color: var(--color-secondary-500);
+  box-shadow: 0 0 0 2px var(--color-secondary-100);
+  outline: none;
+}
+
+.page-module__ANWkCW__input.page-module__ANWkCW__error {
+  border-color: var(--color-danger-500);
+}
+
+.page-module__ANWkCW__submitButton {
+  background-color: var(--color-primary-500);
+  color: var(--color-primary-foreground);
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  align-self: flex-start;
+  margin-top: .5rem;
+  padding: .75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color .2s;
+}
+
+.page-module__ANWkCW__submitButton:hover {
+  background-color: var(--color-primary-600);
+}
+
+.page-module__ANWkCW__submitButton:active {
+  background-color: var(--color-primary-700);
+}
+
+.page-module__ANWkCW__gradesSection {
+  margin-top: 2.5rem;
+}
+
+.page-module__ANWkCW__sectionTitle {
+  color: var(--color-primary-500);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.page-module__ANWkCW__gradesList {
+  flex-direction: column;
+  gap: .75rem;
+  margin-top: 1rem;
+  display: flex;
+}
+
+.page-module__ANWkCW__gradeItem {
+  background-color: var(--color-content1);
+  border: 1px solid var(--color-default-200);
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  display: flex;
+}
+
+.page-module__ANWkCW__gradeSubject {
+  color: var(--color-content1-foreground);
+  font-weight: 600;
+}
+
+.page-module__ANWkCW__gradeValue {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-700);
+  border-radius: 999px;
+  padding: .25rem .75rem;
+  font-weight: 700;
+}
+
+.page-module__ANWkCW__gradeDate {
+  color: var(--color-default-600);
+  margin-top: .5rem;
+  font-size: .8rem;
+}
+
+.page-module__ANWkCW__emptyMessage {
+  text-align: center;
+  background-color: var(--color-content2);
+  color: var(--color-default-600);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.page-module__ANWkCW__notificationContainer {
+  z-index: 1000;
+  flex-direction: column;
+  gap: .5rem;
+  max-width: 350px;
+  display: flex;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+
+.page-module__ANWkCW__notification {
+  border-radius: 8px;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: 1rem;
+  animation: .3s page-module__ANWkCW__slideIn, .5s 2.5s forwards page-module__ANWkCW__fadeOut;
+  display: flex;
+  box-shadow: 0 4px 12px #00000026;
+}
+
+.page-module__ANWkCW__notificationSuccess {
+  background-color: var(--color-success-50);
+  border-left: 4px solid var(--color-success-500);
+  color: var(--color-success-900);
+}
+
+.page-module__ANWkCW__notificationError {
+  background-color: var(--color-danger-50);
+  border-left: 4px solid var(--color-danger-500);
+  color: var(--color-danger-900);
+}
+
+.page-module__ANWkCW__notificationIcon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.page-module__ANWkCW__notificationContent {
+  flex-grow: 1;
+}
+
+.page-module__ANWkCW__notificationTitle {
+  margin-bottom: .25rem;
+  font-weight: 600;
+}
+
+.page-module__ANWkCW__notificationMessage {
+  font-size: .9rem;
+}
+
+.page-module__ANWkCW__fieldError {
+  color: var(--color-warning-600);
+  align-items: center;
+  gap: .25rem;
+  margin-top: .25rem;
+  font-size: .8rem;
+  display: flex;
+}
+
+.page-module__ANWkCW__fieldErrorIcon {
+  width: 14px;
+  height: 14px;
+}
+
+@keyframes page-module__ANWkCW__slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes page-module__ANWkCW__fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@media (width <= 768px) {
+  .page-module__ANWkCW__container {
+    padding: 1rem;
+  }
+
+  .page-module__ANWkCW__notificationContainer {
+    max-width: calc(100% - 2rem);
+    left: 1rem;
+    right: 1rem;
+  }
+}
+
+
+/*# sourceMappingURL=src_app_noten_page_module_f221fe99.css.map*/
