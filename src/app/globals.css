@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tailwindcss/preflight";
 
+  body {
+    font-family: var(--font-inter), sans-serif;
+  }
 
 
 .seitenTitel {
@@ -29,6 +32,75 @@
   }
 
 
+}
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Button Animation */
+  .animated-button {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease;
+    z-index: 1;
+  }
+
+  .animated-button::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: var(--color-primary-600);
+    transition: height 0.3s ease;
+    z-index: -1;
+  }
+
+  .animated-button:hover {
+    color: white !important; /* Ensure text is always white on hover for contrast */
+  }
+
+  .animated-button:hover::before {
+    height: 100%;
+  }
+
+  .animated-button:active {
+    transform: scale(0.97);
+  }
+
+  /* Secondary button animation */
+  .animated-button-secondary {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease;
+    z-index: 1;
+  }
+
+  .animated-button-secondary::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: var(--color-secondary-600);
+    transition: height 0.3s ease;
+    z-index: -1;
+  }
+
+  .animated-button-secondary:hover {
+    color: white !important; /* Ensure text is always white on hover for contrast */
+  }
+
+  .animated-button-secondary:hover::before {
+    height: 100%;
+  }
+
+  .animated-button-secondary:active {
+    transform: scale(0.97);
+  }
 }
 
 
