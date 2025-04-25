@@ -1,51 +1,78 @@
-// src/app/modules/[id]/page.jsx
-import { connectToDatabase } from "../../lib/mongodb";
+import { connectToDatabase } from "../../lib/mongodb"
+import Link from "next/link"
+import styles from "./page.module.css"
+import { ObjectId } from "mongodb"
 
 export default async function ModuleDetail({ params }) {
-  const { db } = await connectToDatabase();
-
-  // Convert the string ID to MongoDB ObjectId
-  const { ObjectId } = require("mongodb");
-  let module;
+  const { db } = await connectToDatabase()
+  let module
 
   try {
-    module = await db
-      .collection("modules")
-      .findOne({ _id: new ObjectId(params.id) });
+    module = await db.collection("modules").findOne({ _id: new ObjectId(params.id) })
   } catch (e) {
-    return <div className="container mx-auto p-4">Module not found</div>;
+    return <div className={styles.container}>Modul nicht gefunden</div>
   }
 
   if (!module) {
-    return <div className="container mx-auto p-4">Module not found</div>;
+    return <div className={styles.container}>Modul nicht gefunden</div>
   }
 
+  // Fetch grades related to this module
+  const grades = await db.collection("grades").find({ module_id: params.id }).toArray()
+
+  // Calculate average grade for this module
+  const calculateAverage = () => {
+    if (grades.length === 0) return 0
+
+    const sum = grades.reduce((total, grade) => {
+      return total + Number.parseFloat(grade.grade)
+    }, 0)
+
+    return sum / grades.length
+  }
+
+  const averageGrade = calculateAverage()
+
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">{module.title}</h1>
-      <div className="bg-white rounded-lg shadow p-6">
-        <div className="mb-4">
-          <h2 className="text-xl font-semibold">Module Information</h2>
-          <p className="text-gray-600">Module Number: {module.module_number}</p>
+    <div className={styles.container}>
+      <h1 className={styles.pageTitle}>{module.title}</h1>
+      <p className={styles.moduleNumber}>Modul-Nummer: {module.module_number}</p>
+
+      <div className={styles.moduleCard}>
+        
+
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Beschreibung</h2>
+          <p className={styles.sectionContent}>{module.description || "Keine Beschreibung verfügbar"}</p>
         </div>
 
-        <div className="mb-4">
-          <h2 className="text-xl font-semibold">Description</h2>
-          <p className="text-gray-600">
-            {module.description || "No description available"}
-          </p>
-        </div>
-
-        {/* Add more module details as needed */}
-        <div className="mt-6">
-          <a
-            href="/module"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
-            Back to Modules
-          </a>
-        </div>
+        {grades.length > 0 && (
+          <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Noten</h2>
+            <div className={styles.gradesGrid}>
+              {grades.map((grade, index) => (
+                <div key={index} className={styles.gradeCard}>
+                  <h3 className={styles.gradeTitle}>{grade.subject || "Prüfung"}</h3>
+                  <div className={styles.gradeValue}>{Number.parseFloat(grade.grade).toFixed(1)}</div>
+                  <div className={styles.gradeDate}>
+                    Eingetragen am: {new Date(grade.createdAt).toLocaleDateString()}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: "1.5rem", textAlign: "center" }}>
+              <div className={styles.sectionTitle}>Durchschnittsnote</div>
+              <div className={styles.gradeValue} style={{ display: "inline-block" }}>
+                {averageGrade.toFixed(2)}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
+      <Link href="/module" className={styles.backButton}>
+        Zurück zu Modulen
+      </Link>
     </div>
-  );
+  )
 }
