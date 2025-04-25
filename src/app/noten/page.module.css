@@ -267,6 +267,10 @@
     align-items: center;
   }
   
+  .gradeInfo {
+    flex-grow: 1;
+  }
+  
   .gradeSubject {
     font-weight: 600;
     color: var(--color-content1-foreground);
@@ -306,12 +310,77 @@
     margin-top: 0.5rem;
   }
   
+  .gradeActions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .deleteButton {
+    background-color: var(--color-danger-500);
+    color: var(--color-danger-foreground);
+    border: none;
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .deleteButton:hover {
+    background-color: var(--color-danger-600);
+  }
+  
+  .deleteButton svg {
+    width: 16px;
+    height: 16px;
+  }
+  
   .emptyMessage {
     padding: 2rem;
     text-align: center;
     background-color: var(--color-content2);
     border-radius: 8px;
     color: var(--color-default-600);
+  }
+  
+  /* Subject Averages */
+  .subjectAverages {
+    margin-top: 2.5rem;
+  }
+  
+  .subjectGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .subjectCard {
+    background-color: var(--color-content1);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid var(--color-default-200);
+    text-align: center;
+  }
+  
+  .subjectName {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-content1-foreground);
+  }
+  
+  .subjectAverage {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .subjectCount {
+    font-size: 0.8rem;
+    color: var(--color-default-600);
+    margin-top: 0.5rem;
   }
   
   /* Notification System */
@@ -381,6 +450,77 @@
     height: 14px;
   }
   
+  /* Confirmation Modal */
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background-color: var(--color-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modalTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-content1-foreground);
+  }
+  
+  .modalContent {
+    margin-bottom: 1.5rem;
+    color: var(--color-default-700);
+  }
+  
+  .modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+  
+  .cancelButton {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-default-200);
+    color: var(--color-default-700);
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .cancelButton:hover {
+    background-color: var(--color-default-300);
+  }
+  
+  .confirmButton {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-danger-500);
+    color: var(--color-danger-foreground);
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .confirmButton:hover {
+    background-color: var(--color-danger-600);
+  }
+  
   @keyframes slideIn {
     from {
       transform: translateX(100%);
@@ -418,6 +558,10 @@
   
     .averageValue {
       font-size: 2.5rem;
+    }
+  
+    .subjectGrid {
+      grid-template-columns: 1fr;
     }
   }
   
