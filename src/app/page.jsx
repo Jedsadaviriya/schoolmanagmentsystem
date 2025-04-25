@@ -10,7 +10,6 @@ export default function Home() {
       {/* Header */}
       <div className={styles.header}>
         <h1 className={styles.headerTitle}>School Management System</h1>
-        <ThemeSwitcher />
       </div>
 
       {/* Card grid */}
