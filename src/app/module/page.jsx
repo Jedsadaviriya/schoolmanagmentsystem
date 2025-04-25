@@ -21,7 +21,7 @@ export default async function Modules() {
               </div>
               <div className={styles.moduleBody}>
                 <p className={styles.moduleDescription}>{module.description || "Keine Beschreibung verfügbar"}</p>
-                <Link href={`/module/${module._id}`} className={styles.viewButton}>
+                <Link href={`/module/${module._id}`} className={`${styles.viewButton} animated-button-secondary`}>
                   Details anzeigen
                 </Link>
               </div>
