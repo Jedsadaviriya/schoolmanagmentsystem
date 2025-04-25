@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tailwindcss/preflight";
 
+
+
 .seitenTitel {
   font-family: var(--font-inter), sans-serif;
   font-size: 1.8rem;

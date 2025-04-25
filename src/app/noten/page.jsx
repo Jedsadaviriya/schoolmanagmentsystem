@@ -12,6 +12,10 @@ export default function Noten() {
     subject: "",
     grade: "",
   })
+  const [deleteConfirmation, setDeleteConfirmation] = useState({
+    show: false,
+    gradeId: null,
+  })
 
   // Fetch grades when the component mounts
   useEffect(() => {
@@ -53,6 +57,34 @@ export default function Noten() {
     }, 0)
 
     return sum / grades.length
+  }
+
+  // Calculate average per subject
+  const calculateSubjectAverages = () => {
+    const subjects = {}
+
+    grades.forEach((grade) => {
+      const subjectName = grade.subject
+      const gradeValue = Number.parseFloat(grade.grade)
+
+      if (!subjects[subjectName]) {
+        subjects[subjectName] = {
+          total: gradeValue,
+          count: 1,
+        }
+      } else {
+        subjects[subjectName].total += gradeValue
+        subjects[subjectName].count += 1
+      }
+    })
+
+    const averages = Object.keys(subjects).map((subject) => ({
+      subject,
+      average: subjects[subject].total / subjects[subject].count,
+      count: subjects[subject].count,
+    }))
+
+    return averages
   }
 
   // Get grade distribution
@@ -118,7 +150,13 @@ export default function Noten() {
       const data = await res.json()
 
       if (data.success) {
-        setGrades([...grades, { subject, grade: Number.parseFloat(grade), createdAt: new Date().toISOString() }])
+        const newGrade = {
+          _id: data.id,
+          subject,
+          grade: Number.parseFloat(grade),
+          createdAt: new Date().toISOString(),
+        }
+        setGrades([...grades, newGrade])
         setSubject("")
         setGrade("")
         showNotification("success", "Note gespeichert", `Die Note für ${subject} wurde erfolgreich gespeichert.`)
@@ -131,9 +169,38 @@ export default function Noten() {
     }
   }
 
+  // Handle grade deletion
+  const handleDeleteGrade = async (id) => {
+    try {
+      const res = await fetch(`/api/grades/${id}`, {
+        method: "DELETE",
+      })
+
+      const data = await res.json()
+
+      if (data.success) {
+        setGrades(grades.filter((grade) => grade._id !== id))
+        showNotification("success", "Note gelöscht", "Die Note wurde erfolgreich gelöscht.")
+      } else {
+        showNotification("error", "Fehler beim Löschen", data.error || "Die Note konnte nicht gelöscht werden.")
+      }
+    } catch (error) {
+      console.error("Error deleting grade:", error)
+      showNotification("error", "Verbindungsfehler", "Es konnte keine Verbindung zum Server hergestellt werden.")
+    } finally {
+      setDeleteConfirmation({ show: false, gradeId: null })
+    }
+  }
+
+  // Show delete confirmation modal
+  const confirmDelete = (id) => {
+    setDeleteConfirmation({ show: true, gradeId: id })
+  }
+
   // Calculate the average grade
   const average = calculateAverage()
   const distribution = getGradeDistribution()
+  const subjectAverages = calculateSubjectAverages()
 
   return (
     <div className={styles.container}>
@@ -186,6 +253,29 @@ export default function Noten() {
           </div>
         ))}
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirmation.show && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
+            <h3 className={styles.modalTitle}>Note löschen</h3>
+            <p className={styles.modalContent}>
+              Bist du sicher, dass du diese Note löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
+            </p>
+            <div className={styles.modalActions}>
+              <button
+                className={styles.cancelButton}
+                onClick={() => setDeleteConfirmation({ show: false, gradeId: null })}
+              >
+                Abbrechen
+              </button>
+              <button className={styles.confirmButton} onClick={() => handleDeleteGrade(deleteConfirmation.gradeId)}>
+                Löschen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Grade Statistics */}
       <div className={styles.statisticsSection}>
@@ -286,6 +376,26 @@ export default function Noten() {
         </div>
       </div>
 
+      {/* Subject Averages */}
+      {subjectAverages.length > 0 && (
+        <div className={styles.subjectAverages}>
+          <h2 className={styles.sectionTitle}>Durchschnitt pro Fach</h2>
+          <div className={styles.subjectGrid}>
+            {subjectAverages.map((item, index) => (
+              <div key={index} className={styles.subjectCard}>
+                <div className={styles.subjectName}>{item.subject}</div>
+                <div className={styles.subjectAverage} style={{ color: getGradeColor(item.average) }}>
+                  {item.average.toFixed(2)}
+                </div>
+                <div className={styles.subjectCount}>
+                  {item.count} {item.count === 1 ? "Note" : "Noten"}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Form to add a new grade */}
       <div className={styles.formSection}>
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -369,9 +479,9 @@ export default function Noten() {
         <h2 className={styles.sectionTitle}>Gespeicherte Noten</h2>
         {grades.length > 0 ? (
           <div className={styles.gradesList}>
-            {grades.map((entry, index) => (
-              <div key={index} className={styles.gradeItem}>
-                <div>
+            {grades.map((entry) => (
+              <div key={entry._id} className={styles.gradeItem}>
+                <div className={styles.gradeInfo}>
                   <span className={styles.gradeSubject}>{entry.subject}</span>
                   <div className={styles.gradeDate}>
                     Eingetragen am: {new Date(entry.createdAt).toLocaleDateString()}
@@ -380,6 +490,29 @@ export default function Noten() {
                 <span className={`${styles.gradeValue} ${getGradeValueClass(Number.parseFloat(entry.grade))}`}>
                   {Number.parseFloat(entry.grade).toFixed(1)}
                 </span>
+                <div className={styles.gradeActions}>
+                  <button
+                    className={styles.deleteButton}
+                    onClick={() => confirmDelete(entry._id)}
+                    aria-label="Note löschen"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M3 6h18"></path>
+                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                      <line x1="10" y1="11" x2="10" y2="17"></line>
+                      <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -405,4 +538,12 @@ function getGradeValueClass(grade) {
   if (grade >= 4.5) return styles.gradeGood
   if (grade >= 4.0) return styles.gradeSatisfactory
   return styles.gradeInsufficient
+}
+
+// Helper function to get color for grade value
+function getGradeColor(grade) {
+  if (grade >= 5.5) return "var(--color-success-600)"
+  if (grade >= 4.5) return "var(--color-secondary-600)"
+  if (grade >= 4.0) return "var(--color-warning-600)"
+  return "var(--color-danger-600)"
 }
