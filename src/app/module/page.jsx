@@ -1,32 +1,39 @@
-import { connectToDatabase } from "../lib/mongodb";
-import Link from "next/link";
+import { connectToDatabase } from "../lib/mongodb"
+import Link from "next/link"
+import styles from "./page.module.css"
 
 export default async function Modules() {
   // Fetch modules from MongoDB
-  const { db } = await connectToDatabase();
-  const modules = await db.collection("modules").find({}).toArray();
+  const { db } = await connectToDatabase()
+  const modules = await db.collection("modules").find({}).toArray()
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">Modules</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {modules.map((module) => (
-          <div
-            key={module._id.toString()}
-            className="border rounded p-4 bg-gray-100 text-center"
-          >
-            <h2 className="text-lg font-semibold">{module.title}</h2>
-            <p className="text-sm text-gray-600">
-              Module ({module.module_number})
-            </p>
-            <Link href={`/module/${module._id}`}>
-              <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                View Details
-              </button>
-            </Link>
-          </div>
-        ))}
-      </div>
+    <div className={styles.container}>
+      <h1 className={styles.pageTitle}>Module</h1>
+
+      {modules.length > 0 ? (
+        <div className={styles.moduleGrid}>
+          {modules.map((module) => (
+            <div key={module._id.toString()} className={styles.moduleCard}>
+              <div className={styles.moduleHeader}>
+                <h2 className={styles.moduleTitle}>{module.title}</h2>
+                <p className={styles.moduleNumber}>Modul ({module.module_number})</p>
+              </div>
+              <div className={styles.moduleBody}>
+                <p className={styles.moduleDescription}>{module.description || "Keine Beschreibung verfügbar"}</p>
+                <Link href={`/module/${module._id}`} className={styles.viewButton}>
+                  Details anzeigen
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={styles.emptyState}>
+          <div className={styles.emptyStateIcon}>📚</div>
+          <p className={styles.emptyStateText}>Keine Module gefunden</p>
+        </div>
+      )}
     </div>
-  );
+  )
 }

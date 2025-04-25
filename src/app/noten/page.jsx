@@ -43,6 +43,38 @@ export default function Noten() {
     }, 3000)
   }
 
+  // Calculate grade average
+  const calculateAverage = () => {
+    if (grades.length === 0) return 0
+
+    const sum = grades.reduce((total, grade) => {
+      const gradeValue = Number.parseFloat(grade.grade)
+      return isNaN(gradeValue) ? total : total + gradeValue
+    }, 0)
+
+    return sum / grades.length
+  }
+
+  // Get grade distribution
+  const getGradeDistribution = () => {
+    const distribution = {
+      excellent: 0, // 5.5 - 6.0
+      good: 0, // 4.5 - 5.4
+      satisfactory: 0, // 4.0 - 4.4
+      insufficient: 0, // < 4.0
+    }
+
+    grades.forEach((grade) => {
+      const value = Number.parseFloat(grade.grade)
+      if (value >= 5.5) distribution.excellent++
+      else if (value >= 4.5) distribution.good++
+      else if (value >= 4.0) distribution.satisfactory++
+      else distribution.insufficient++
+    })
+
+    return distribution
+  }
+
   // Validate form inputs
   const validateInputs = () => {
     let isValid = true
@@ -99,6 +131,10 @@ export default function Noten() {
     }
   }
 
+  // Calculate the average grade
+  const average = calculateAverage()
+  const distribution = getGradeDistribution()
+
   return (
     <div className={styles.container}>
       <h1 className={styles.pageTitle}>Noten</h1>
@@ -149,6 +185,105 @@ export default function Noten() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Grade Statistics */}
+      <div className={styles.statisticsSection}>
+        <h2 className={styles.sectionTitle}>Notenstatistik</h2>
+        <div className={styles.statisticsGrid}>
+          <div className={styles.statisticsCard}>
+            <div className={styles.statisticsHeader}>
+              <div className={styles.statisticsIcon}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                  <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                  <path d="M7 21h10"></path>
+                  <path d="M12 3v18"></path>
+                  <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
+                </svg>
+              </div>
+              <div className={styles.statisticsTitle}>Notendurchschnitt</div>
+            </div>
+            <div className={styles.averageValue} data-grade={getGradeCategory(average)}>
+              {average.toFixed(2)}
+            </div>
+            <div className={styles.statisticsFooter}>
+              Basierend auf {grades.length} {grades.length === 1 ? "Note" : "Noten"}
+            </div>
+          </div>
+
+          <div className={styles.statisticsCard}>
+            <div className={styles.statisticsHeader}>
+              <div className={styles.statisticsIcon}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 3v18h18"></path>
+                  <path d="M18 17V9"></path>
+                  <path d="M13 17V5"></path>
+                  <path d="M8 17v-3"></path>
+                </svg>
+              </div>
+              <div className={styles.statisticsTitle}>Notenverteilung</div>
+            </div>
+            <div className={styles.distributionGrid}>
+              <div className={styles.distributionItem}>
+                <div className={styles.distributionLabel}>Sehr gut</div>
+                <div className={styles.distributionBar}>
+                  <div
+                    className={`${styles.distributionBarFill} ${styles.excellent}`}
+                    style={{ width: grades.length ? `${(distribution.excellent / grades.length) * 100}%` : "0%" }}
+                  ></div>
+                </div>
+                <div className={styles.distributionCount}>{distribution.excellent}</div>
+              </div>
+              <div className={styles.distributionItem}>
+                <div className={styles.distributionLabel}>Gut</div>
+                <div className={styles.distributionBar}>
+                  <div
+                    className={`${styles.distributionBarFill} ${styles.good}`}
+                    style={{ width: grades.length ? `${(distribution.good / grades.length) * 100}%` : "0%" }}
+                  ></div>
+                </div>
+                <div className={styles.distributionCount}>{distribution.good}</div>
+              </div>
+              <div className={styles.distributionItem}>
+                <div className={styles.distributionLabel}>Genügend</div>
+                <div className={styles.distributionBar}>
+                  <div
+                    className={`${styles.distributionBarFill} ${styles.satisfactory}`}
+                    style={{ width: grades.length ? `${(distribution.satisfactory / grades.length) * 100}%` : "0%" }}
+                  ></div>
+                </div>
+                <div className={styles.distributionCount}>{distribution.satisfactory}</div>
+              </div>
+              <div className={styles.distributionItem}>
+                <div className={styles.distributionLabel}>Ungenügend</div>
+                <div className={styles.distributionBar}>
+                  <div
+                    className={`${styles.distributionBarFill} ${styles.insufficient}`}
+                    style={{ width: grades.length ? `${(distribution.insufficient / grades.length) * 100}%` : "0%" }}
+                  ></div>
+                </div>
+                <div className={styles.distributionCount}>{distribution.insufficient}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Form to add a new grade */}
@@ -242,7 +377,9 @@ export default function Noten() {
                     Eingetragen am: {new Date(entry.createdAt).toLocaleDateString()}
                   </div>
                 </div>
-                <span className={styles.gradeValue}>{Number.parseFloat(entry.grade).toFixed(1)}</span>
+                <span className={`${styles.gradeValue} ${getGradeValueClass(Number.parseFloat(entry.grade))}`}>
+                  {Number.parseFloat(entry.grade).toFixed(1)}
+                </span>
               </div>
             ))}
           </div>
@@ -252,4 +389,20 @@ export default function Noten() {
       </div>
     </div>
   )
+}
+
+// Helper function to determine grade category for styling
+function getGradeCategory(grade) {
+  if (grade >= 5.5) return "excellent"
+  if (grade >= 4.5) return "good"
+  if (grade >= 4.0) return "satisfactory"
+  return "insufficient"
+}
+
+// Helper function to get class name for grade value
+function getGradeValueClass(grade) {
+  if (grade >= 5.5) return styles.gradeExcellent
+  if (grade >= 4.5) return styles.gradeGood
+  if (grade >= 4.0) return styles.gradeSatisfactory
+  return styles.gradeInsufficient
 }
