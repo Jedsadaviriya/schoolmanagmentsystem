@@ -453,7 +453,7 @@ function Noten() {
                             className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$noten$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].modalActions,
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$noten$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cancelButton,
+                                    className: `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$noten$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].cancelButton} animated-button`,
                                     onClick: ()=>setDeleteConfirmation({
                                             show: false,
                                             gradeId: null
@@ -465,7 +465,7 @@ function Noten() {
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$noten$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].confirmButton,
+                                    className: `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$noten$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].confirmButton} animated-button`,
                                     onClick: ()=>handleDeleteGrade(deleteConfirmation.gradeId),
                                     children: "Löschen"
                                 }, void 0, false, {
@@ -498,7 +498,7 @@ function Noten() {
                         children: "Notenstatistik"
                     }, void 0, false, {
                         fileName: "[project]/src/app/noten/page.jsx",
-                        lineNumber: 282,
+                        lineNumber: 285,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -525,46 +525,46 @@ function Noten() {
                                                             d: "m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 296,
+                                                            lineNumber: 299,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                             d: "m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 297,
+                                                            lineNumber: 300,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                             d: "M7 21h10"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 298,
+                                                            lineNumber: 301,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                             d: "M12 3v18"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 299,
+                                                            lineNumber: 302,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                             d: "M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 300,
+                                                            lineNumber: 303,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/noten/page.jsx",
-                                                    lineNumber: 287,
+                                                    lineNumber: 290,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 286,
+                                                lineNumber: 289,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -572,13 +572,13 @@ function Noten() {
                                                 children: "Notendurchschnitt"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 303,
+                                                lineNumber: 306,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 285,
+                                        lineNumber: 288,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -587,7 +587,7 @@ function Noten() {
                                         children: average.toFixed(2)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 305,
+                                        lineNumber: 308,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -600,13 +600,13 @@ function Noten() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 308,
+                                        lineNumber: 311,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/noten/page.jsx",
-                                lineNumber: 284,
+                                lineNumber: 287,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -630,39 +630,39 @@ function Noten() {
                                                             d: "M3 3v18h18"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 325,
+                                                            lineNumber: 328,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                             d: "M18 17V9"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 326,
+                                                            lineNumber: 329,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                             d: "M13 17V5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 327,
+                                                            lineNumber: 330,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                             d: "M8 17v-3"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 328,
+                                                            lineNumber: 331,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/noten/page.jsx",
-                                                    lineNumber: 316,
+                                                    lineNumber: 319,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 315,
+                                                lineNumber: 318,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -670,13 +670,13 @@ function Noten() {
                                                 children: "Notenverteilung"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 331,
+                                                lineNumber: 334,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 314,
+                                        lineNumber: 317,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -690,7 +690,7 @@ function Noten() {
                                                         children: "Sehr gut"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 335,
+                                                        lineNumber: 338,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -702,12 +702,12 @@ function Noten() {
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 337,
+                                                            lineNumber: 340,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 336,
+                                                        lineNumber: 339,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -715,13 +715,13 @@ function Noten() {
                                                         children: distribution.excellent
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 342,
+                                                        lineNumber: 345,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 334,
+                                                lineNumber: 337,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -732,7 +732,7 @@ function Noten() {
                                                         children: "Gut"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 345,
+                                                        lineNumber: 348,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -744,12 +744,12 @@ function Noten() {
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 347,
+                                                            lineNumber: 350,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 346,
+                                                        lineNumber: 349,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -757,13 +757,13 @@ function Noten() {
                                                         children: distribution.good
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 352,
+                                                        lineNumber: 355,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 344,
+                                                lineNumber: 347,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -774,7 +774,7 @@ function Noten() {
                                                         children: "Genügend"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 355,
+                                                        lineNumber: 358,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -786,12 +786,12 @@ function Noten() {
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 357,
+                                                            lineNumber: 360,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 356,
+                                                        lineNumber: 359,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -799,13 +799,13 @@ function Noten() {
                                                         children: distribution.satisfactory
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 362,
+                                                        lineNumber: 365,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 354,
+                                                lineNumber: 357,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -816,7 +816,7 @@ function Noten() {
                                                         children: "Ungenügend"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 365,
+                                                        lineNumber: 368,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -828,12 +828,12 @@ function Noten() {
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/noten/page.jsx",
-                                                            lineNumber: 367,
+                                                            lineNumber: 370,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 366,
+                                                        lineNumber: 369,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -841,37 +841,37 @@ function Noten() {
                                                         children: distribution.insufficient
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 372,
+                                                        lineNumber: 375,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 364,
+                                                lineNumber: 367,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 333,
+                                        lineNumber: 336,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/noten/page.jsx",
-                                lineNumber: 313,
+                                lineNumber: 316,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/noten/page.jsx",
-                        lineNumber: 283,
+                        lineNumber: 286,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/noten/page.jsx",
-                lineNumber: 281,
+                lineNumber: 284,
                 columnNumber: 7
             }, this),
             subjectAverages.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -882,7 +882,7 @@ function Noten() {
                         children: "Durchschnitt pro Fach"
                     }, void 0, false, {
                         fileName: "[project]/src/app/noten/page.jsx",
-                        lineNumber: 382,
+                        lineNumber: 385,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -895,7 +895,7 @@ function Noten() {
                                         children: item.subject
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 386,
+                                        lineNumber: 389,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -906,7 +906,7 @@ function Noten() {
                                         children: item.average.toFixed(2)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 387,
+                                        lineNumber: 390,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -918,24 +918,24 @@ function Noten() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 390,
+                                        lineNumber: 393,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, index, true, {
                                 fileName: "[project]/src/app/noten/page.jsx",
-                                lineNumber: 385,
+                                lineNumber: 388,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/noten/page.jsx",
-                        lineNumber: 383,
+                        lineNumber: 386,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/noten/page.jsx",
-                lineNumber: 381,
+                lineNumber: 384,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -953,7 +953,7 @@ function Noten() {
                                     children: "Fach:"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/noten/page.jsx",
-                                    lineNumber: 403,
+                                    lineNumber: 406,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -965,7 +965,7 @@ function Noten() {
                                     placeholder: "z.B. Mathematik"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/noten/page.jsx",
-                                    lineNumber: 406,
+                                    lineNumber: 409,
                                     columnNumber: 13
                                 }, this),
                                 errors.subject && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -988,7 +988,7 @@ function Noten() {
                                                         r: "10"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 426,
+                                                        lineNumber: 429,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -998,7 +998,7 @@ function Noten() {
                                                         y2: "12"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 427,
+                                                        lineNumber: 430,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -1008,31 +1008,31 @@ function Noten() {
                                                         y2: "16"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 428,
+                                                        lineNumber: 431,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 417,
+                                                lineNumber: 420,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/noten/page.jsx",
-                                            lineNumber: 416,
+                                            lineNumber: 419,
                                             columnNumber: 17
                                         }, this),
                                         errors.subject
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/noten/page.jsx",
-                                    lineNumber: 415,
+                                    lineNumber: 418,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/noten/page.jsx",
-                            lineNumber: 402,
+                            lineNumber: 405,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1044,7 +1044,7 @@ function Noten() {
                                     children: "Note:"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/noten/page.jsx",
-                                    lineNumber: 436,
+                                    lineNumber: 439,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1059,7 +1059,7 @@ function Noten() {
                                     placeholder: "1.0 - 6.0"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/noten/page.jsx",
-                                    lineNumber: 439,
+                                    lineNumber: 442,
                                     columnNumber: 13
                                 }, this),
                                 errors.grade && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1082,7 +1082,7 @@ function Noten() {
                                                         r: "10"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 462,
+                                                        lineNumber: 465,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -1092,7 +1092,7 @@ function Noten() {
                                                         y2: "12"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 463,
+                                                        lineNumber: 466,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -1102,51 +1102,51 @@ function Noten() {
                                                         y2: "16"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 464,
+                                                        lineNumber: 467,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 453,
+                                                lineNumber: 456,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/noten/page.jsx",
-                                            lineNumber: 452,
+                                            lineNumber: 455,
                                             columnNumber: 17
                                         }, this),
                                         errors.grade
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/noten/page.jsx",
-                                    lineNumber: 451,
+                                    lineNumber: 454,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/noten/page.jsx",
-                            lineNumber: 435,
+                            lineNumber: 438,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             type: "submit",
-                            className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$noten$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].submitButton,
+                            className: `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$noten$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].submitButton} animated-button`,
                             children: "Note speichern"
                         }, void 0, false, {
                             fileName: "[project]/src/app/noten/page.jsx",
-                            lineNumber: 471,
+                            lineNumber: 474,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/noten/page.jsx",
-                    lineNumber: 401,
+                    lineNumber: 404,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/noten/page.jsx",
-                lineNumber: 400,
+                lineNumber: 403,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1157,7 +1157,7 @@ function Noten() {
                         children: "Gespeicherte Noten"
                     }, void 0, false, {
                         fileName: "[project]/src/app/noten/page.jsx",
-                        lineNumber: 479,
+                        lineNumber: 482,
                         columnNumber: 9
                     }, this),
                     grades.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1173,7 +1173,7 @@ function Noten() {
                                                 children: entry.subject
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 485,
+                                                lineNumber: 488,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1184,13 +1184,13 @@ function Noten() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 486,
+                                                lineNumber: 489,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 484,
+                                        lineNumber: 487,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1198,7 +1198,7 @@ function Noten() {
                                         children: Number.parseFloat(entry.grade).toFixed(1)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 490,
+                                        lineNumber: 493,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1220,21 +1220,21 @@ function Noten() {
                                                         d: "M3 6h18"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 508,
+                                                        lineNumber: 511,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                         d: "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 509,
+                                                        lineNumber: 512,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                                         d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 510,
+                                                        lineNumber: 513,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -1244,7 +1244,7 @@ function Noten() {
                                                         y2: "17"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 511,
+                                                        lineNumber: 514,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
@@ -1254,47 +1254,47 @@ function Noten() {
                                                         y2: "17"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/noten/page.jsx",
-                                                        lineNumber: 512,
+                                                        lineNumber: 515,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/noten/page.jsx",
-                                                lineNumber: 499,
+                                                lineNumber: 502,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/noten/page.jsx",
-                                            lineNumber: 494,
+                                            lineNumber: 497,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/noten/page.jsx",
-                                        lineNumber: 493,
+                                        lineNumber: 496,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, entry._id, true, {
                                 fileName: "[project]/src/app/noten/page.jsx",
-                                lineNumber: 483,
+                                lineNumber: 486,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/noten/page.jsx",
-                        lineNumber: 481,
+                        lineNumber: 484,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$noten$2f$page$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].emptyMessage,
                         children: "Keine Noten vorhanden. Füge deine erste Note hinzu!"
                     }, void 0, false, {
                         fileName: "[project]/src/app/noten/page.jsx",
-                        lineNumber: 520,
+                        lineNumber: 523,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/noten/page.jsx",
-                lineNumber: 478,
+                lineNumber: 481,
                 columnNumber: 7
             }, this)
         ]

@@ -264,12 +264,15 @@ export default function Noten() {
             </p>
             <div className={styles.modalActions}>
               <button
-                className={styles.cancelButton}
+                className={`${styles.cancelButton} animated-button`}
                 onClick={() => setDeleteConfirmation({ show: false, gradeId: null })}
               >
                 Abbrechen
               </button>
-              <button className={styles.confirmButton} onClick={() => handleDeleteGrade(deleteConfirmation.gradeId)}>
+              <button
+                className={`${styles.confirmButton} animated-button`}
+                onClick={() => handleDeleteGrade(deleteConfirmation.gradeId)}
+              >
                 Löschen
               </button>
             </div>
@@ -468,7 +471,7 @@ export default function Noten() {
               </div>
             )}
           </div>
-          <button type="submit" className={styles.submitButton}>
+          <button type="submit" className={`${styles.submitButton} animated-button`}>
             Note speichern
           </button>
         </form>
