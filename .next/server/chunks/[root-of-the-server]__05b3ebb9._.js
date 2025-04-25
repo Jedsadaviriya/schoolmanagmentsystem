@@ -96,10 +96,13 @@ async function connectToDatabase() {
 var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.s({
+    "DELETE": (()=>DELETE),
     "GET": (()=>GET),
     "POST": (()=>POST)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$lib$2f$mongodb$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/lib/mongodb.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/mongodb [external] (mongodb, cjs)");
+;
 ;
 async function POST(request) {
     try {
@@ -139,6 +142,44 @@ async function GET() {
         return new Response(JSON.stringify({
             success: true,
             grades
+        }), {
+            status: 200,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    } catch (error) {
+        return new Response(JSON.stringify({
+            success: false,
+            error: error.message
+        }), {
+            status: 500,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    }
+}
+async function DELETE(request, { params }) {
+    try {
+        const { id } = params;
+        const { db } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$lib$2f$mongodb$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
+        const result = await db.collection("grades").deleteOne({
+            _id: new __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["ObjectId"](id)
+        });
+        if (result.deletedCount === 0) {
+            return new Response(JSON.stringify({
+                success: false,
+                error: "Note nicht gefunden"
+            }), {
+                status: 404,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+        }
+        return new Response(JSON.stringify({
+            success: true
         }), {
             status: 200,
             headers: {

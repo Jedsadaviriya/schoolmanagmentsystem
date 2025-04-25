@@ -1211,6 +1211,22 @@ button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-se
   font-weight: 600;
 }
 
+.header {
+  background: var(--color-primary-500);
+  border-bottom: 2px solid var(--color-primary-100);
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+@media (width <= 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
 :where(.dark) {
   --color-default-50: #404041;
   --color-default-100: #656567;

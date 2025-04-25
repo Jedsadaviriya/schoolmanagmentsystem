@@ -266,6 +266,10 @@
   display: flex;
 }
 
+.page-module__ANWkCW__gradeInfo {
+  flex-grow: 1;
+}
+
 .page-module__ANWkCW__gradeSubject {
   color: var(--color-content1-foreground);
   font-weight: 600;
@@ -305,12 +309,76 @@
   font-size: .8rem;
 }
 
+.page-module__ANWkCW__gradeActions {
+  gap: .5rem;
+  display: flex;
+}
+
+.page-module__ANWkCW__deleteButton {
+  background-color: var(--color-danger-500);
+  color: var(--color-danger-foreground);
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  transition: background-color .2s;
+  display: flex;
+}
+
+.page-module__ANWkCW__deleteButton:hover {
+  background-color: var(--color-danger-600);
+}
+
+.page-module__ANWkCW__deleteButton svg {
+  width: 16px;
+  height: 16px;
+}
+
 .page-module__ANWkCW__emptyMessage {
   text-align: center;
   background-color: var(--color-content2);
   color: var(--color-default-600);
   border-radius: 8px;
   padding: 2rem;
+}
+
+.page-module__ANWkCW__subjectAverages {
+  margin-top: 2.5rem;
+}
+
+.page-module__ANWkCW__subjectGrid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  display: grid;
+}
+
+.page-module__ANWkCW__subjectCard {
+  background-color: var(--color-content1);
+  border: 1px solid var(--color-default-200);
+  text-align: center;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.page-module__ANWkCW__subjectName {
+  color: var(--color-content1-foreground);
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+
+.page-module__ANWkCW__subjectAverage {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.page-module__ANWkCW__subjectCount {
+  color: var(--color-default-600);
+  margin-top: .5rem;
+  font-size: .8rem;
 }
 
 .page-module__ANWkCW__notificationContainer {
@@ -379,6 +447,73 @@
   height: 14px;
 }
 
+.page-module__ANWkCW__modalOverlay {
+  z-index: 1000;
+  background-color: #00000080;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.page-module__ANWkCW__modal {
+  background-color: var(--color-background);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 24px #0003;
+}
+
+.page-module__ANWkCW__modalTitle {
+  color: var(--color-content1-foreground);
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.page-module__ANWkCW__modalContent {
+  color: var(--color-default-700);
+  margin-bottom: 1.5rem;
+}
+
+.page-module__ANWkCW__modalActions {
+  justify-content: flex-end;
+  gap: 1rem;
+  display: flex;
+}
+
+.page-module__ANWkCW__cancelButton {
+  background-color: var(--color-default-200);
+  color: var(--color-default-700);
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: .5rem 1rem;
+  font-size: .95rem;
+  transition: background-color .2s;
+}
+
+.page-module__ANWkCW__cancelButton:hover {
+  background-color: var(--color-default-300);
+}
+
+.page-module__ANWkCW__confirmButton {
+  background-color: var(--color-danger-500);
+  color: var(--color-danger-foreground);
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: .5rem 1rem;
+  font-size: .95rem;
+  transition: background-color .2s;
+}
+
+.page-module__ANWkCW__confirmButton:hover {
+  background-color: var(--color-danger-600);
+}
+
 @keyframes page-module__ANWkCW__slideIn {
   from {
     opacity: 0;
@@ -418,6 +553,10 @@
 
   .page-module__ANWkCW__averageValue {
     font-size: 2.5rem;
+  }
+
+  .page-module__ANWkCW__subjectGrid {
+    grid-template-columns: 1fr;
   }
 }
 
