@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import styles from "./page.module.css"
+import LoadingAnimation from "@/components/loading-animation"
 
 export default function Noten() {
   const [grades, setGrades] = useState([])
@@ -16,21 +17,65 @@ export default function Noten() {
     show: false,
     gradeId: null,
   })
+  const [isLoading, setIsLoading] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [pageLoaded, setPageLoaded] = useState(false)
+  const [animateStats, setAnimateStats] = useState(false)
+
+  const statsRef = useRef(null)
+
+  // Intersection Observer for animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setAnimateStats(true)
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.2 },
+    )
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current)
+    }
+
+    return () => {
+      if (statsRef.current) {
+        observer.unobserve(statsRef.current)
+      }
+    }
+  }, [])
 
   // Fetch grades when the component mounts
   useEffect(() => {
     async function fetchGrades() {
       try {
+        setIsLoading(true)
         const res = await fetch("/api/grades")
+
+        // Check if the response is JSON
+        const contentType = res.headers.get("content-type")
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error(`Server returned non-JSON response: ${await res.text()}`)
+        }
+
         const data = await res.json()
         if (data.success) {
           setGrades(data.grades)
         } else {
-          showNotification("error", "Fehler beim Laden", "Die Noten konnten nicht geladen werden.")
+          showNotification("error", "Fehler beim Laden", data.error || "Die Noten konnten nicht geladen werden.")
         }
       } catch (error) {
         console.error("Error fetching grades:", error)
-        showNotification("error", "Verbindungsfehler", "Es konnte keine Verbindung zum Server hergestellt werden.")
+        showNotification("error", "Verbindungsfehler", `Fehler beim Laden: ${error.message}`)
+      } finally {
+        setIsLoading(false)
+        setTimeout(() => {
+          setPageLoaded(true)
+        }, 300)
       }
     }
     fetchGrades()
@@ -41,10 +86,10 @@ export default function Noten() {
     const id = Date.now()
     setNotifications((prev) => [...prev, { id, type, title, message }])
 
-    // Auto-remove notification after 3 seconds
+    // Auto-remove notification after 5 seconds
     setTimeout(() => {
       setNotifications((prev) => prev.filter((notification) => notification.id !== id))
-    }, 3000)
+    }, 5000)
   }
 
   // Calculate grade average
@@ -140,6 +185,7 @@ export default function Noten() {
       return
     }
 
+    setIsSubmitting(true)
     try {
       const res = await fetch("/api/grades", {
         method: "POST",
@@ -156,7 +202,7 @@ export default function Noten() {
           grade: Number.parseFloat(grade),
           createdAt: new Date().toISOString(),
         }
-        setGrades([...grades, newGrade])
+        setGrades((prevGrades) => [...prevGrades, newGrade])
         setSubject("")
         setGrade("")
         showNotification("success", "Note gespeichert", `Die Note für ${subject} wurde erfolgreich gespeichert.`)
@@ -166,28 +212,52 @@ export default function Noten() {
     } catch (error) {
       console.error("Error saving grade:", error)
       showNotification("error", "Verbindungsfehler", "Es konnte keine Verbindung zum Server hergestellt werden.")
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
   // Handle grade deletion
   const handleDeleteGrade = async (id) => {
+    setIsSubmitting(true)
     try {
+      // Log the ID being deleted for debugging
+      console.log(`Deleting grade with ID: ${id}`)
+
       const res = await fetch(`/api/grades/${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
 
+      // Log the response status for debugging
+      console.log(`Delete response status: ${res.status}`)
+
+      // Handle non-JSON responses
+      const contentType = res.headers.get("content-type")
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error(`Server returned non-JSON response: ${await res.text()}`)
+      }
+
       const data = await res.json()
+      console.log("Delete response data:", data)
 
       if (data.success) {
-        setGrades(grades.filter((grade) => grade._id !== id))
+        // Update the grades state by filtering out the deleted grade
+        setGrades((prevGrades) => {
+          const updatedGrades = prevGrades.filter((grade) => grade._id !== id)
+          return updatedGrades
+        })
         showNotification("success", "Note gelöscht", "Die Note wurde erfolgreich gelöscht.")
       } else {
         showNotification("error", "Fehler beim Löschen", data.error || "Die Note konnte nicht gelöscht werden.")
       }
     } catch (error) {
       console.error("Error deleting grade:", error)
-      showNotification("error", "Verbindungsfehler", "Es konnte keine Verbindung zum Server hergestellt werden.")
+      showNotification("error", "Verbindungsfehler", `Fehler beim Löschen: ${error.message}`)
     } finally {
+      setIsSubmitting(false)
       setDeleteConfirmation({ show: false, gradeId: null })
     }
   }
@@ -203,220 +273,107 @@ export default function Noten() {
   const subjectAverages = calculateSubjectAverages()
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.pageTitle}>Noten</h1>
-      <p className={styles.pageDescription}>
-        Hier kannst du deine Noten eintragen und deinen Notendurchschnitt berechnen.
-      </p>
+    <>
+      {isLoading && <LoadingAnimation />}
 
-      {/* Notification system */}
-      <div className={styles.notificationContainer}>
-        {notifications.map((notification) => (
-          <div
-            key={notification.id}
-            className={`${styles.notification} ${notification.type === "success" ? styles.notificationSuccess : styles.notificationError}`}
-          >
-            <div className={styles.notificationIcon}>
-              {notification.type === "success" ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-              )}
-            </div>
-            <div className={styles.notificationContent}>
-              <div className={styles.notificationTitle}>{notification.title}</div>
-              <div className={styles.notificationMessage}>{notification.message}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Delete Confirmation Modal */}
-      {deleteConfirmation.show && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modal}>
-            <h3 className={styles.modalTitle}>Note löschen</h3>
-            <p className={styles.modalContent}>
-              Bist du sicher, dass du diese Note löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
-            </p>
-            <div className={styles.modalActions}>
-              <button
-                className={`${styles.cancelButton} animated-button`}
-                onClick={() => setDeleteConfirmation({ show: false, gradeId: null })}
-              >
-                Abbrechen
-              </button>
-              <button
-                className={`${styles.confirmButton} animated-button`}
-                onClick={() => handleDeleteGrade(deleteConfirmation.gradeId)}
-              >
-                Löschen
-              </button>
-            </div>
-          </div>
+      <div className={`${styles.container} ${pageLoaded ? styles.loaded : ""}`}>
+        <div className={styles.pageHeader}>
+          <h1 className={styles.pageTitle}>Noten</h1>
+          <p className={styles.pageDescription}>
+            Hier kannst du deine Noten eintragen und deinen Notendurchschnitt berechnen.
+          </p>
         </div>
-      )}
 
-      {/* Grade Statistics */}
-      <div className={styles.statisticsSection}>
-        <h2 className={styles.sectionTitle}>Notenstatistik</h2>
-        <div className={styles.statisticsGrid}>
-          <div className={styles.statisticsCard}>
-            <div className={styles.statisticsHeader}>
-              <div className={styles.statisticsIcon}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-                  <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-                  <path d="M7 21h10"></path>
-                  <path d="M12 3v18"></path>
-                  <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
-                </svg>
+        {/* Notification system */}
+        <div className={styles.notificationContainer}>
+          {notifications.map((notification) => (
+            <div
+              key={notification.id}
+              className={`${styles.notification} ${notification.type === "success" ? styles.notificationSuccess : styles.notificationError}`}
+            >
+              <div className={styles.notificationIcon}>
+                {notification.type === "success" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={styles.notificationIconSvg}
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={styles.notificationIconSvg}
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                )}
               </div>
-              <div className={styles.statisticsTitle}>Notendurchschnitt</div>
-            </div>
-            <div className={styles.averageValue} data-grade={getGradeCategory(average)}>
-              {average.toFixed(2)}
-            </div>
-            <div className={styles.statisticsFooter}>
-              Basierend auf {grades.length} {grades.length === 1 ? "Note" : "Noten"}
-            </div>
-          </div>
-
-          <div className={styles.statisticsCard}>
-            <div className={styles.statisticsHeader}>
-              <div className={styles.statisticsIcon}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M3 3v18h18"></path>
-                  <path d="M18 17V9"></path>
-                  <path d="M13 17V5"></path>
-                  <path d="M8 17v-3"></path>
-                </svg>
-              </div>
-              <div className={styles.statisticsTitle}>Notenverteilung</div>
-            </div>
-            <div className={styles.distributionGrid}>
-              <div className={styles.distributionItem}>
-                <div className={styles.distributionLabel}>Sehr gut</div>
-                <div className={styles.distributionBar}>
-                  <div
-                    className={`${styles.distributionBarFill} ${styles.excellent}`}
-                    style={{ width: grades.length ? `${(distribution.excellent / grades.length) * 100}%` : "0%" }}
-                  ></div>
-                </div>
-                <div className={styles.distributionCount}>{distribution.excellent}</div>
-              </div>
-              <div className={styles.distributionItem}>
-                <div className={styles.distributionLabel}>Gut</div>
-                <div className={styles.distributionBar}>
-                  <div
-                    className={`${styles.distributionBarFill} ${styles.good}`}
-                    style={{ width: grades.length ? `${(distribution.good / grades.length) * 100}%` : "0%" }}
-                  ></div>
-                </div>
-                <div className={styles.distributionCount}>{distribution.good}</div>
-              </div>
-              <div className={styles.distributionItem}>
-                <div className={styles.distributionLabel}>Genügend</div>
-                <div className={styles.distributionBar}>
-                  <div
-                    className={`${styles.distributionBarFill} ${styles.satisfactory}`}
-                    style={{ width: grades.length ? `${(distribution.satisfactory / grades.length) * 100}%` : "0%" }}
-                  ></div>
-                </div>
-                <div className={styles.distributionCount}>{distribution.satisfactory}</div>
-              </div>
-              <div className={styles.distributionItem}>
-                <div className={styles.distributionLabel}>Ungenügend</div>
-                <div className={styles.distributionBar}>
-                  <div
-                    className={`${styles.distributionBarFill} ${styles.insufficient}`}
-                    style={{ width: grades.length ? `${(distribution.insufficient / grades.length) * 100}%` : "0%" }}
-                  ></div>
-                </div>
-                <div className={styles.distributionCount}>{distribution.insufficient}</div>
+              <div className={styles.notificationContent}>
+                <div className={styles.notificationTitle}>{notification.title}</div>
+                <div className={styles.notificationMessage}>{notification.message}</div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      </div>
 
-      {/* Subject Averages */}
-      {subjectAverages.length > 0 && (
-        <div className={styles.subjectAverages}>
-          <h2 className={styles.sectionTitle}>Durchschnitt pro Fach</h2>
-          <div className={styles.subjectGrid}>
-            {subjectAverages.map((item, index) => (
-              <div key={index} className={styles.subjectCard}>
-                <div className={styles.subjectName}>{item.subject}</div>
-                <div className={styles.subjectAverage} style={{ color: getGradeColor(item.average) }}>
-                  {item.average.toFixed(2)}
-                </div>
-                <div className={styles.subjectCount}>
-                  {item.count} {item.count === 1 ? "Note" : "Noten"}
-                </div>
+        {/* Delete Confirmation Modal */}
+        {deleteConfirmation.show && (
+          <div className={styles.modalOverlay}>
+            <div className={`${styles.modal} ${styles.modalAnimation}`}>
+              <h3 className={styles.modalTitle}>Note löschen</h3>
+              <p className={styles.modalContent}>
+                Bist du sicher, dass du diese Note löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
+              </p>
+              <div className={styles.modalActions}>
+                <button
+                  className={`${styles.cancelButton} animated-button`}
+                  onClick={() => setDeleteConfirmation({ show: false, gradeId: null })}
+                  disabled={isSubmitting}
+                >
+                  Abbrechen
+                </button>
+                <button
+                  className={`${styles.confirmButton} animated-button`}
+                  onClick={() => handleDeleteGrade(deleteConfirmation.gradeId)}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <span className={styles.buttonLoader}>
+                      <span className={styles.loaderDot}></span>
+                      <span className={styles.loaderDot}></span>
+                      <span className={styles.loaderDot}></span>
+                    </span>
+                  ) : (
+                    "Löschen"
+                  )}
+                </button>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Form to add a new grade */}
-      <div className={styles.formSection}>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor="subject" className={styles.label}>
-              Fach:
-            </label>
-            <input
-              type="text"
-              id="subject"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              className={`${styles.input} ${errors.subject ? styles.error : ""}`}
-              placeholder="z.B. Mathematik"
-            />
-            {errors.subject && (
-              <div className={styles.fieldError}>
-                <span className={styles.fieldErrorIcon}>
+        {/* Grade Statistics */}
+        <div className={`${styles.statisticsSection} ${animateStats ? styles.animateStats : ""}`} ref={statsRef}>
+          <h2 className={styles.sectionTitle}>Notenstatistik</h2>
+          <div className={styles.statisticsGrid}>
+            <div className={`${styles.statisticsCard} ${styles.averageCard}`}>
+              <div className={styles.statisticsHeader}>
+                <div className={styles.statisticsIcon}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -426,33 +383,26 @@ export default function Noten() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                    <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                    <path d="M7 21h10"></path>
+                    <path d="M12 3v18"></path>
+                    <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
                   </svg>
-                </span>
-                {errors.subject}
+                </div>
+                <div className={styles.statisticsTitle}>Notendurchschnitt</div>
               </div>
-            )}
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="grade" className={styles.label}>
-              Note:
-            </label>
-            <input
-              type="number"
-              id="grade"
-              value={grade}
-              onChange={(e) => setGrade(e.target.value)}
-              className={`${styles.input} ${errors.grade ? styles.error : ""}`}
-              min="1"
-              max="6"
-              step="0.1"
-              placeholder="1.0 - 6.0"
-            />
-            {errors.grade && (
-              <div className={styles.fieldError}>
-                <span className={styles.fieldErrorIcon}>
+              <div className={`${styles.averageValue} ${styles.countUp}`} data-grade={getGradeCategory(average)}>
+                {average.toFixed(2)}
+              </div>
+              <div className={styles.statisticsFooter}>
+                Basierend auf {grades.length} {grades.length === 1 ? "Note" : "Noten"}
+              </div>
+            </div>
+
+            <div className={`${styles.statisticsCard} ${styles.distributionCard}`}>
+              <div className={styles.statisticsHeader}>
+                <div className={styles.statisticsIcon}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -462,43 +412,99 @@ export default function Noten() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    <path d="M3 3v18h18"></path>
+                    <path d="M18 17V9"></path>
+                    <path d="M13 17V5"></path>
+                    <path d="M8 17v-3"></path>
                   </svg>
-                </span>
-                {errors.grade}
+                </div>
+                <div className={styles.statisticsTitle}>Notenverteilung</div>
               </div>
-            )}
+              <div className={styles.distributionGrid}>
+                <div className={styles.distributionItem}>
+                  <div className={styles.distributionLabel}>Sehr gut</div>
+                  <div className={styles.distributionBar}>
+                    <div
+                      className={`${styles.distributionBarFill} ${styles.excellent} ${animateStats ? styles.animate : ""}`}
+                      style={{ width: grades.length ? `${(distribution.excellent / grades.length) * 100}%` : "0%" }}
+                    ></div>
+                  </div>
+                  <div className={styles.distributionCount}>{distribution.excellent}</div>
+                </div>
+                <div className={styles.distributionItem}>
+                  <div className={styles.distributionLabel}>Gut</div>
+                  <div className={styles.distributionBar}>
+                    <div
+                      className={`${styles.distributionBarFill} ${styles.good} ${animateStats ? styles.animate : ""}`}
+                      style={{ width: grades.length ? `${(distribution.good / grades.length) * 100}%` : "0%" }}
+                    ></div>
+                  </div>
+                  <div className={styles.distributionCount}>{distribution.good}</div>
+                </div>
+                <div className={styles.distributionItem}>
+                  <div className={styles.distributionLabel}>Genügend</div>
+                  <div className={styles.distributionBar}>
+                    <div
+                      className={`${styles.distributionBarFill} ${styles.satisfactory} ${animateStats ? styles.animate : ""}`}
+                      style={{ width: grades.length ? `${(distribution.satisfactory / grades.length) * 100}%` : "0%" }}
+                    ></div>
+                  </div>
+                  <div className={styles.distributionCount}>{distribution.satisfactory}</div>
+                </div>
+                <div className={styles.distributionItem}>
+                  <div className={styles.distributionLabel}>Ungenügend</div>
+                  <div className={styles.distributionBar}>
+                    <div
+                      className={`${styles.distributionBarFill} ${styles.insufficient} ${animateStats ? styles.animate : ""}`}
+                      style={{ width: grades.length ? `${(distribution.insufficient / grades.length) * 100}%` : "0%" }}
+                    ></div>
+                  </div>
+                  <div className={styles.distributionCount}>{distribution.insufficient}</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <button type="submit" className={`${styles.submitButton} animated-button`}>
-            Note speichern
-          </button>
-        </form>
-      </div>
+        </div>
 
-      {/* Display saved grades */}
-      <div className={styles.gradesSection}>
-        <h2 className={styles.sectionTitle}>Gespeicherte Noten</h2>
-        {grades.length > 0 ? (
-          <div className={styles.gradesList}>
-            {grades.map((entry) => (
-              <div key={entry._id} className={styles.gradeItem}>
-                <div className={styles.gradeInfo}>
-                  <span className={styles.gradeSubject}>{entry.subject}</span>
-                  <div className={styles.gradeDate}>
-                    Eingetragen am: {new Date(entry.createdAt).toLocaleDateString()}
+        {/* Subject Averages */}
+        {subjectAverages.length > 0 && (
+          <div className={`${styles.subjectAverages} ${pageLoaded ? styles.fadeIn : ""}`}>
+            <h2 className={styles.sectionTitle}>Durchschnitt pro Fach</h2>
+            <div className={`${styles.subjectGrid} stagger-animation animate`}>
+              {subjectAverages.map((item, index) => (
+                <div key={index} className={`${styles.subjectCard} card-hover`}>
+                  <div className={styles.subjectName}>{item.subject}</div>
+                  <div className={styles.subjectAverage} style={{ color: getGradeColor(item.average) }}>
+                    {item.average.toFixed(2)}
+                  </div>
+                  <div className={styles.subjectCount}>
+                    {item.count} {item.count === 1 ? "Note" : "Noten"}
                   </div>
                 </div>
-                <span className={`${styles.gradeValue} ${getGradeValueClass(Number.parseFloat(entry.grade))}`}>
-                  {Number.parseFloat(entry.grade).toFixed(1)}
-                </span>
-                <div className={styles.gradeActions}>
-                  <button
-                    className={styles.deleteButton}
-                    onClick={() => confirmDelete(entry._id)}
-                    aria-label="Note löschen"
-                  >
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Form to add a new grade */}
+        <div className={`${styles.formSection} ${pageLoaded ? styles.slideIn : ""}`}>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.formGroup}>
+              <label htmlFor="subject" className={styles.label}>
+                Fach:
+              </label>
+              <input
+                type="text"
+                id="subject"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                className={`${styles.input} ${errors.subject ? styles.error : ""}`}
+                placeholder="z.B. Mathematik"
+                disabled={isSubmitting}
+              />
+              {errors.subject && (
+                <div className={styles.fieldError}>
+                  <span className={styles.fieldErrorIcon}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -508,22 +514,118 @@ export default function Noten() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path d="M3 6h18"></path>
-                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                      <line x1="10" y1="11" x2="10" y2="17"></line>
-                      <line x1="14" y1="11" x2="14" y2="17"></line>
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
                     </svg>
-                  </button>
+                  </span>
+                  {errors.subject}
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className={styles.emptyMessage}>Keine Noten vorhanden. Füge deine erste Note hinzu!</div>
-        )}
+              )}
+            </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="grade" className={styles.label}>
+                Note:
+              </label>
+              <input
+                type="number"
+                id="grade"
+                value={grade}
+                onChange={(e) => setGrade(e.target.value)}
+                className={`${styles.input} ${errors.grade ? styles.error : ""}`}
+                min="1"
+                max="6"
+                step="0.1"
+                placeholder="1.0 - 6.0"
+                disabled={isSubmitting}
+              />
+              {errors.grade && (
+                <div className={styles.fieldError}>
+                  <span className={styles.fieldErrorIcon}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                  </span>
+                  {errors.grade}
+                </div>
+              )}
+            </div>
+            <button type="submit" className={`${styles.submitButton} animated-button`} disabled={isSubmitting}>
+              {isSubmitting ? (
+                <span className={styles.buttonLoader}>
+                  <span className={styles.loaderDot}></span>
+                  <span className={styles.loaderDot}></span>
+                  <span className={styles.loaderDot}></span>
+                </span>
+              ) : (
+                "Note speichern"
+              )}
+            </button>
+          </form>
+        </div>
+
+        {/* Display saved grades */}
+        <div className={`${styles.gradesSection} ${pageLoaded ? styles.fadeIn : ""}`}>
+          <h2 className={styles.sectionTitle}>Gespeicherte Noten</h2>
+          {grades.length > 0 ? (
+            <div className={`${styles.gradesList} stagger-animation animate`}>
+              {grades.map((entry) => (
+                <div key={entry._id} className={`${styles.gradeItem} card-hover`}>
+                  <div className={styles.gradeInfo}>
+                    <span className={styles.gradeSubject}>{entry.subject}</span>
+                    <div className={styles.gradeDate}>
+                      Eingetragen am: {new Date(entry.createdAt).toLocaleDateString()}
+                    </div>
+                  </div>
+                  <span className={`${styles.gradeValue} ${getGradeValueClass(Number.parseFloat(entry.grade))}`}>
+                    {Number.parseFloat(entry.grade).toFixed(1)}
+                  </span>
+                  <div className={styles.gradeActions}>
+                    <button
+                      className={styles.deleteButton}
+                      onClick={() => confirmDelete(entry._id)}
+                      aria-label="Note löschen"
+                      disabled={isSubmitting}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M3 6h18"></path>
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={`${styles.emptyMessage} ${styles.emptyAnimation}`}>
+              <div className={styles.emptyIcon}>📝</div>
+              <p>Keine Noten vorhanden. Füge deine erste Note hinzu!</p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -1,0 +1,9 @@
+.counter {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  
+  .counter:hover {
+    transform: scale(1.1);
+  }
+  

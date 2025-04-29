@@ -1,567 +1,752 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-  }
-  
-  .pageTitle {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--color-primary-500);
-    position: relative;
-  }
-  
-  .pageTitle::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background-color: var(--color-secondary-500);
-    border-radius: 2px;
-  }
-  
-  .pageDescription {
-    margin-bottom: 2rem;
-    color: var(--color-default-700);
-    font-size: 1rem;
-    max-width: 600px;
-  }
-  
-  /* Statistics Section */
-  .statisticsSection {
-    margin-bottom: 2.5rem;
-  }
-  
-  .statisticsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-  
-  .statisticsCard {
-    background-color: var(--color-content1);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--color-default-200);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .statisticsHeader {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  
-  .statisticsIcon {
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-primary-100);
-    color: var(--color-primary-700);
-    border-radius: 50%;
-    padding: 0.5rem;
-  }
-  
-  .statisticsIcon svg {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .statisticsTitle {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--color-content1-foreground);
-  }
-  
-  .averageValue {
-    font-size: 3rem;
-    font-weight: 700;
-    text-align: center;
-    margin: 1rem 0;
-    color: var(--color-primary-600);
-    position: relative;
-  }
-  
-  .averageValue[data-grade="excellent"] {
-    color: var(--color-success-600);
-  }
-  
-  .averageValue[data-grade="good"] {
-    color: var(--color-secondary-600);
-  }
-  
-  .averageValue[data-grade="satisfactory"] {
-    color: var(--color-warning-600);
-  }
-  
-  .averageValue[data-grade="insufficient"] {
-    color: var(--color-danger-600);
-  }
-  
-  .statisticsFooter {
-    text-align: center;
-    color: var(--color-default-600);
-    font-size: 0.9rem;
-    margin-top: auto;
-  }
-  
-  /* Distribution */
-  .distributionGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  
-  .distributionItem {
-    display: grid;
-    grid-template-columns: 80px 1fr 30px;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  
-  .distributionLabel {
-    font-size: 0.85rem;
-    color: var(--color-content1-foreground);
-  }
-  
-  .distributionBar {
-    height: 8px;
-    background-color: var(--color-default-200);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  
-  .distributionBarFill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.5s ease;
-  }
-  
-  .distributionBarFill.excellent {
-    background-color: var(--color-success-500);
-  }
-  
-  .distributionBarFill.good {
-    background-color: var(--color-secondary-500);
-  }
-  
-  .distributionBarFill.satisfactory {
-    background-color: var(--color-warning-500);
-  }
-  
-  .distributionBarFill.insufficient {
-    background-color: var(--color-danger-500);
-  }
-  
-  .distributionCount {
-    font-weight: 600;
-    text-align: right;
-    font-size: 0.9rem;
-  }
-  
-  .formSection {
-    margin-top: 2rem;
-    background-color: var(--color-content1);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--color-default-200);
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-content1-foreground);
-  }
-  
-  .input {
-    padding: 0.75rem;
-    border: 1px solid var(--color-default-300);
-    border-radius: 6px;
-    font-size: 1rem;
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    transition: border-color 0.2s ease;
-  }
-  
-  .input:focus {
-    outline: none;
-    border-color: var(--color-secondary-500);
-    box-shadow: 0 0 0 2px var(--color-secondary-100);
-  }
-  
-  .input.error {
-    border-color: var(--color-danger-500);
-  }
-  
-  .submitButton {
-    padding: 0.75rem 1.5rem;
-    background-color: var(--color-primary-500);
-    color: var(--color-primary-foreground);
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 0.5rem;
-    align-self: flex-start;
-  }
-  
-  .submitButton:hover {
-    background-color: var(--color-primary-600);
-  }
-  
-  .submitButton:active {
-    background-color: var(--color-primary-700);
-  }
-  
-  .gradesSection {
-    margin-top: 2.5rem;
-  }
-  
-  .sectionTitle {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--color-primary-500);
-  }
-  
-  .gradesList {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 1rem;
-  }
-  
-  .gradeItem {
-    padding: 1rem;
-    background-color: var(--color-content1);
-    border-radius: 8px;
-    border: 1px solid var(--color-default-200);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .gradeInfo {
-    flex-grow: 1;
-  }
-  
-  .gradeSubject {
-    font-weight: 600;
-    color: var(--color-content1-foreground);
-  }
-  
-  .gradeValue {
-    font-weight: 700;
-    padding: 0.25rem 0.75rem;
-    background-color: var(--color-primary-100);
-    color: var(--color-primary-700);
-    border-radius: 999px;
-  }
-  
-  .gradeExcellent {
-    background-color: var(--color-success-100);
-    color: var(--color-success-700);
-  }
-  
-  .gradeGood {
-    background-color: var(--color-secondary-100);
-    color: var(--color-secondary-700);
-  }
-  
-  .gradeSatisfactory {
-    background-color: var(--color-warning-100);
-    color: var(--color-warning-700);
-  }
-  
-  .gradeInsufficient {
-    background-color: var(--color-danger-100);
-    color: var(--color-danger-700);
-  }
-  
-  .gradeDate {
-    font-size: 0.8rem;
-    color: var(--color-default-600);
-    margin-top: 0.5rem;
-  }
-  
-  .gradeActions {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .deleteButton {
-    background-color: var(--color-danger-500);
-    color: var(--color-danger-foreground);
-    border: none;
-    border-radius: 4px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .deleteButton:hover {
-    background-color: var(--color-danger-600);
-  }
-  
-  .deleteButton svg {
-    width: 16px;
-    height: 16px;
-  }
-  
-  .emptyMessage {
-    padding: 2rem;
-    text-align: center;
-    background-color: var(--color-content2);
-    border-radius: 8px;
-    color: var(--color-default-600);
-  }
-  
-  /* Subject Averages */
-  .subjectAverages {
-    margin-top: 2.5rem;
-  }
-  
-  .subjectGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  .subjectCard {
-    background-color: var(--color-content1);
-    border-radius: 8px;
-    padding: 1rem;
-    border: 1px solid var(--color-default-200);
-    text-align: center;
-  }
-  
-  .subjectName {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--color-content1-foreground);
-  }
-  
-  .subjectAverage {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-  
-  .subjectCount {
-    font-size: 0.8rem;
-    color: var(--color-default-600);
-    margin-top: 0.5rem;
-  }
-  
-  /* Notification System */
-  .notificationContainer {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    max-width: 350px;
-  }
-  
-  .notification {
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-  
-  .notificationSuccess {
-    background-color: var(--color-success-50);
-    border-left: 4px solid var(--color-success-500);
-    color: var(--color-success-900);
-  }
-  
-  .notificationError {
-    background-color: var(--color-danger-50);
-    border-left: 4px solid var(--color-danger-500);
-    color: var(--color-danger-900);
-  }
-  
-  .notificationIcon {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .notificationContent {
-    flex-grow: 1;
-  }
-  
-  .notificationTitle {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-  
-  .notificationMessage {
-    font-size: 0.9rem;
-  }
-  
-  .fieldError {
-    color: var(--color-warning-600);
-    font-size: 0.8rem;
-    margin-top: 0.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-  
-  .fieldErrorIcon {
-    width: 14px;
-    height: 14px;
-  }
-  
-  /* Confirmation Modal */
-  .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal {
-    background-color: var(--color-background);
-    border-radius: 8px;
-    padding: 1.5rem;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-  }
-  
-  .modalTitle {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--color-content1-foreground);
-  }
-  
-  .modalContent {
-    margin-bottom: 1.5rem;
-    color: var(--color-default-700);
-  }
-  
-  .modalActions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-  }
-  
-  .cancelButton {
-    padding: 0.5rem 1rem;
-    background-color: var(--color-default-200);
-    color: var(--color-default-700);
-    border: none;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .cancelButton:hover {
-    background-color: var(--color-default-300);
-  }
-  
-  .confirmButton {
-    padding: 0.5rem 1rem;
-    background-color: var(--color-danger-500);
-    color: var(--color-danger-foreground);
-    border: none;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .confirmButton:hover {
-    background-color: var(--color-danger-600);
-  }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .container {
-      padding: 1rem;
-    }
-  
-    .notificationContainer {
-      left: 1rem;
-      right: 1rem;
-      max-width: calc(100% - 2rem);
-    }
-  
-    .statisticsGrid {
-      grid-template-columns: 1fr;
-    }
-  
-    .averageValue {
-      font-size: 2.5rem;
-    }
-  
-    .subjectGrid {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pageHeader {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary-500);
+  position: relative;
+  display: inline-block;
+}
+
+.pageTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background-color: var(--color-secondary-500);
+  border-radius: 2px;
+  animation: expandWidth 1.2s var(--animation-easing-spring) forwards;
+  animation-delay: 0.5s;
+}
+
+.pageDescription {
+  margin-bottom: 2rem;
+  color: var(--color-default-700);
+  font-size: 1rem;
+  max-width: 600px;
+}
+
+/* Statistics Section */
+.statisticsSection {
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animateStats {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.statisticsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.statisticsCard {
+  background-color: var(--color-content1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-default-200);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s var(--animation-easing-spring);
+  position: relative;
+  overflow: hidden;
+}
+
+.statisticsCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--color-secondary-500), var(--color-primary-500));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.statisticsCard:hover::before {
+  opacity: 1;
+}
+
+.statisticsCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.averageCard {
+  animation: fadeInLeft 0.8s var(--animation-easing-spring) forwards;
+  animation-delay: 0.2s;
+}
+
+.distributionCard {
+  animation: fadeInRight 0.8s var(--animation-easing-spring) forwards;
+  animation-delay: 0.4s;
+}
+
+.statisticsHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.statisticsIcon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-700);
+  border-radius: 50%;
+  padding: 0.5rem;
+  transition: all 0.3s var(--animation-easing-spring);
+}
+
+.statisticsCard:hover .statisticsIcon {
+  transform: scale(1.1) rotate(10deg);
+  background-color: var(--color-secondary-500);
+  color: white;
+}
+
+.statisticsIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.statisticsTitle {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--color-content1-foreground);
+}
+
+.averageValue {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--color-primary-600);
+  position: relative;
+}
+
+.countUp {
+  animation: countUp 2s ease-out forwards;
+  animation-delay: 0.8s;
+}
+
+.averageValue[data-grade="excellent"] {
+  color: var(--color-success-600);
+}
+
+.averageValue[data-grade="good"] {
+  color: var(--color-secondary-600);
+}
+
+.averageValue[data-grade="satisfactory"] {
+  color: var(--color-warning-600);
+}
+
+.averageValue[data-grade="insufficient"] {
+  color: var(--color-danger-600);
+}
+
+.statisticsFooter {
+  text-align: center;
+  color: var(--color-default-600);
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+/* Distribution */
+.distributionGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.distributionItem {
+  display: grid;
+  grid-template-columns: 80px 1fr 30px;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.distributionLabel {
+  font-size: 0.85rem;
+  color: var(--color-content1-foreground);
+}
+
+.distributionBar {
+  height: 8px;
+  background-color: var(--color-default-200);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.distributionBarFill {
+  height: 100%;
+  border-radius: 4px;
+  width: 0;
+  transition: width 1.5s var(--animation-easing-spring);
+}
+
+.distributionBarFill.animate {
+  width: 100%;
+}
+
+.distributionBarFill.excellent {
+  background-color: var(--color-success-500);
+}
+
+.distributionBarFill.good {
+  background-color: var(--color-secondary-500);
+}
+
+.distributionBarFill.satisfactory {
+  background-color: var(--color-warning-500);
+}
+
+.distributionBarFill.insufficient {
+  background-color: var(--color-danger-500);
+}
+
+.distributionCount {
+  font-weight: 600;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+.formSection {
+  margin-top: 2rem;
+  background-color: var(--color-content1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-default-200);
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slideIn {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-content1-foreground);
+}
+
+.input {
+  padding: 0.75rem;
+  border: 1px solid var(--color-default-300);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  transition: all 0.3s var(--animation-easing-spring);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-secondary-500);
+  box-shadow: 0 0 0 3px var(--color-secondary-100);
+  transform: translateY(-2px);
+}
+
+.input.error {
+  border-color: var(--color-danger-500);
+  box-shadow: 0 0 0 2px var(--color-danger-100);
+}
+
+.submitButton {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-primary-500);
+  color: var(--color-primary-foreground);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--animation-easing-spring);
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.submitButton:hover {
+  background-color: var(--color-primary-600);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.submitButton:active {
+  background-color: var(--color-primary-700);
+  transform: translateY(-1px);
+}
+
+.buttonLoader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.loaderDot {
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loaderDot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loaderDot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.gradesSection {
+  margin-top: 2.5rem;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-primary-500);
+  position: relative;
+  display: inline-block;
+}
+
+.sectionTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--color-secondary-500);
+}
+
+.gradesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.gradeItem {
+  padding: 1rem;
+  background-color: var(--color-content1);
+  border-radius: 8px;
+  border: 1px solid var(--color-default-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s var(--animation-easing-spring);
+}
+
+.gradeItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gradeInfo {
+  flex-grow: 1;
+}
+
+.gradeSubject {
+  font-weight: 600;
+  color: var(--color-content1-foreground);
+}
+
+.gradeValue {
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-700);
+  border-radius: 999px;
+  transition: all 0.3s var(--animation-easing-spring);
+}
+
+.gradeItem:hover .gradeValue {
+  transform: scale(1.1);
+}
+
+.gradeExcellent {
+  background-color: var(--color-success-100);
+  color: var(--color-success-700);
+}
+
+.gradeGood {
+  background-color: var(--color-secondary-100);
+  color: var(--color-secondary-700);
+}
+
+.gradeSatisfactory {
+  background-color: var(--color-warning-100);
+  color: var(--color-warning-700);
+}
+
+.gradeInsufficient {
+  background-color: var(--color-danger-100);
+  color: var(--color-danger-700);
+}
+
+.gradeDate {
+  font-size: 0.8rem;
+  color: var(--color-default-600);
+  margin-top: 0.5rem;
+}
+
+.gradeActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.deleteButton {
+  background-color: var(--color-danger-500);
+  color: var(--color-danger-foreground);
+  border: none;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s var(--animation-easing-spring);
+  position: relative;
+  overflow: hidden;
+}
+
+.deleteButton::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.deleteButton:hover::before {
+  width: 150%;
+  height: 150%;
+}
+
+.deleteButton:hover {
+  background-color: var(--color-danger-500);
+}
+
+/* Page Transition */
+
+/* Add these styles to fix the notifications and field errors */
+.notificationContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  width: 300px;
+  max-width: 100%;
+}
+
+.notification {
+  background-color: var(--color-content1);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  animation: slideInRight 0.3s var(--animation-easing-spring) forwards;
+  border-left: 4px solid;
+}
+
+.notificationSuccess {
+  border-color: var(--color-success-500);
+}
+
+.notificationError {
+  border-color: var(--color-danger-500);
+}
+
+.notificationIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notificationIconSvg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+}
+
+.notificationSuccess .notificationIcon {
+  color: var(--color-success-500);
+}
+
+.notificationError .notificationIcon {
+  color: var(--color-danger-500);
+}
+
+.notificationContent {
+  flex-grow: 1;
+}
+
+.notificationTitle {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.notificationMessage {
+  font-size: 0.9rem;
+  color: var(--color-default-700);
+}
+
+.fieldError {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: var(--color-danger-500);
+  animation: fadeIn 0.3s var(--animation-easing-spring);
+}
+
+.fieldErrorIcon {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fieldErrorIcon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+}
+
+/* Modal styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  background-color: var(--color-content1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modalAnimation {
+  animation: scaleIn 0.3s var(--animation-easing-spring) forwards;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-content1-foreground);
+}
+
+.modalContent {
+  margin-bottom: 1.5rem;
+  color: var(--color-default-700);
+  line-height: 1.5;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.cancelButton {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-default-200);
+  color: var(--color-default-800);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--animation-easing-spring);
+}
+
+.confirmButton {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-danger-500);
+  color: var(--color-danger-foreground);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--animation-easing-spring);
+}
+
+/* Add these animations to fix loading */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.emptyAnimation {
+  animation: pulse 2s infinite;
+}
+
+.emptyMessage {
+  text-align: center;
+  padding: 3rem 2rem;
+  background-color: var(--color-content2);
+  border-radius: 12px;
+  color: var(--color-default-600);
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.subjectAverages {
+  margin-top: 2.5rem;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.subjectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.subjectCard {
+  background-color: var(--color-content1);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid var(--color-default-200);
+}
+
+.subjectName {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-content1-foreground);
+}
+
+.subjectAverage {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.subjectCount {
+  font-size: 0.8rem;
+  color: var(--color-default-600);
+}
