@@ -208,6 +208,9 @@
     --color-content4-foreground: #000;
     --color-focus: #2b2d42;
     --color-overlay: #000;
+    --color-header-background: #f8fafc;
+    --color-header-foreground: #1e293b;
+    --color-header-border: #e2e8f0;
     --opacity-disabled: .5;
   }
 }
@@ -396,7 +399,7 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-inter), sans-serif;
+    font-family: Inter, sans-serif;
   }
 
   [disabled] {
@@ -1028,68 +1031,6 @@
   .text-balance {
     text-wrap: balance;
   }
-
-  .animated-button {
-    z-index: 1;
-    transition: color .3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .animated-button:before {
-    content: "";
-    background-color: var(--color-primary-600);
-    z-index: -1;
-    width: 100%;
-    height: 0;
-    transition: height .3s;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-
-  .animated-button:hover {
-    color: #fff !important;
-  }
-
-  .animated-button:hover:before {
-    height: 100%;
-  }
-
-  .animated-button:active {
-    transform: scale(.97);
-  }
-
-  .animated-button-secondary {
-    z-index: 1;
-    transition: color .3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .animated-button-secondary:before {
-    content: "";
-    background-color: var(--color-secondary-600);
-    z-index: -1;
-    width: 100%;
-    height: 0;
-    transition: height .3s;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-
-  .animated-button-secondary:hover {
-    color: #fff !important;
-  }
-
-  .animated-button-secondary:hover:before {
-    height: 100%;
-  }
-
-  .animated-button-secondary:active {
-    transform: scale(.97);
-  }
 }
 
 *, :after, :before, ::backdrop, ::file-selector-button {
@@ -1272,8 +1213,291 @@ button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-se
   display: none !important;
 }
 
+:root {
+  --animation-duration-fast: .2s;
+  --animation-duration-medium: .5s;
+  --animation-duration-slow: .8s;
+  --animation-easing-bounce: cubic-bezier(.68, -.55, .265, 1.55);
+  --animation-easing-smooth: cubic-bezier(.65, 0, .35, 1);
+  --animation-easing-spring: cubic-bezier(.175, .885, .32, 1.275);
+  --animation-delay-stagger: 50ms;
+}
+
 body {
-  font-family: var(--font-inter), sans-serif;
+  font-family: Inter, sans-serif;
+  overflow-x: hidden;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-content {
+  opacity: 0;
+  animation: fadeInUp var(--animation-duration-medium) var(--animation-easing-smooth) forwards;
+  animation-delay: .1s;
+  position: relative;
+  transform: translateY(20px);
+}
+
+.app-container {
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.app-loaded {
+  opacity: 1;
+}
+
+.stagger-animation > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.stagger-animation.animate > :first-child {
+  animation: fadeInUp var(--animation-duration-medium) var(--animation-easing-smooth) forwards;
+  animation-delay: calc(var(--animation-delay-stagger) * 1);
+}
+
+.stagger-animation.animate > :nth-child(2) {
+  animation: fadeInUp var(--animation-duration-medium) var(--animation-easing-smooth) forwards;
+  animation-delay: calc(var(--animation-delay-stagger) * 2);
+}
+
+.stagger-animation.animate > :nth-child(3) {
+  animation: fadeInUp var(--animation-duration-medium) var(--animation-easing-smooth) forwards;
+  animation-delay: calc(var(--animation-delay-stagger) * 3);
+}
+
+.stagger-animation.animate > :nth-child(4) {
+  animation: fadeInUp var(--animation-duration-medium) var(--animation-easing-smooth) forwards;
+  animation-delay: calc(var(--animation-delay-stagger) * 4);
+}
+
+.stagger-animation.animate > :nth-child(5) {
+  animation: fadeInUp var(--animation-duration-medium) var(--animation-easing-smooth) forwards;
+  animation-delay: calc(var(--animation-delay-stagger) * 5);
+}
+
+.stagger-animation.animate > :nth-child(n+6) {
+  animation: fadeInUp var(--animation-duration-medium) var(--animation-easing-smooth) forwards;
+  animation-delay: calc(var(--animation-delay-stagger) * 6);
+}
+
+.pulse {
+  animation: 2s infinite pulse;
+}
+
+.floating {
+  animation: 3s ease-in-out infinite floating;
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer:after {
+  content: "";
+  background-image: linear-gradient(90deg, #fff0 0, #fff3 20%, #ffffff80 60%, #fff0);
+  animation: 2s infinite shimmer;
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+}
+
+.animated-button {
+  transition: all .3s var(--animation-easing-spring);
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-button:before {
+  content: "";
+  background-color: var(--color-primary-600);
+  width: 100%;
+  height: 0;
+  transition: height .3s var(--animation-easing-spring);
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.animated-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px #0000001a;
+  color: #fff !important;
+}
+
+.animated-button:hover:before {
+  height: 100%;
+}
+
+.animated-button:active {
+  transform: translateY(-1px)scale(.98);
+}
+
+.animated-button-secondary {
+  transition: all .3s var(--animation-easing-spring);
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-button-secondary:before {
+  content: "";
+  background-color: var(--color-secondary-600);
+  width: 100%;
+  height: 0;
+  transition: height .3s var(--animation-easing-spring);
+  z-index: -1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.animated-button-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px #0000001a;
+  color: #fff !important;
+}
+
+.animated-button-secondary:hover:before {
+  height: 100%;
+}
+
+.animated-button-secondary:active {
+  transform: translateY(-1px)scale(.98);
+}
+
+.card-hover {
+  transition: all .4s var(--animation-easing-spring);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px)scale(1.02);
+  box-shadow: 0 20px 30px #0000001a;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.loading-spinner {
+  border: 3px solid #0000001a;
+  border-top-color: var(--color-primary-500);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: 1s linear infinite rotate;
+}
+
+.dark .loading-spinner {
+  border-color: #ffffff1a;
+  border-top-color: var(--color-primary-500);
+}
+
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transition: opacity .5s, transform .5s;
+  transform: translateY(0);
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity .5s, transform .5s;
+  transform: translateY(-20px);
 }
 
 .seitenTitel {
@@ -1286,11 +1510,14 @@ body {
 }
 
 .header {
-  background: var(--color-primary-500);
-  border-bottom: 2px solid var(--color-primary-100);
+  background: var(--color-header-background);
+  border-bottom: 2px solid var(--color-header-border);
+  z-index: 100;
   justify-content: space-between;
   align-items: center;
   display: flex;
+  position: relative;
+  box-shadow: 0 4px 20px #0000001a;
 }
 
 @media (width <= 768px) {
@@ -1380,6 +1607,9 @@ body {
   --color-content4-foreground: #fff;
   --color-focus: #60a5fa;
   --color-overlay: #00000080;
+  --color-header-background: #111827;
+  --color-header-foreground: #f9fafb;
+  --color-header-border: #1f2937;
 }
 
 @property --tw-rotate-x {
