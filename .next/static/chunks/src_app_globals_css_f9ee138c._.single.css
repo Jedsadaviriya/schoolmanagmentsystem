@@ -1221,6 +1221,11 @@ button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-se
   --animation-easing-smooth: cubic-bezier(.65, 0, .35, 1);
   --animation-easing-spring: cubic-bezier(.175, .885, .32, 1.275);
   --animation-delay-stagger: 50ms;
+  --color-primary-500-rgb: 43, 45, 66;
+  --color-secondary-500-rgb: 3, 218, 198;
+  --color-success-500-rgb: 40, 167, 69;
+  --color-warning-500-rgb: 255, 193, 7;
+  --color-danger-500-rgb: 239, 35, 60;
 }
 
 body {
@@ -1362,7 +1367,7 @@ body {
 .animated-button-secondary:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px #0000001a;
-  color: #fff !important;
+  color: var(--color-secondary-foreground) !important;
 }
 
 .animated-button-secondary:hover:before {
