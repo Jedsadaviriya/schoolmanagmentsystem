@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import styles from "./page.module.css"
 import LoadingAnimation from "@/components/loading-animation"
+import Notification from "@/components/notification"
 
 export default function Noten() {
   const [grades, setGrades] = useState([])
@@ -23,6 +24,7 @@ export default function Noten() {
   const [animateStats, setAnimateStats] = useState(false)
 
   const statsRef = useRef(null)
+  const subjectAveragesRef = useRef(null)
 
   // Intersection Observer for animations
   useEffect(() => {
@@ -30,7 +32,9 @@ export default function Noten() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setAnimateStats(true)
+            if (entry.target === statsRef.current) {
+              setAnimateStats(true)
+            }
             observer.unobserve(entry.target)
           }
         })
@@ -42,9 +46,16 @@ export default function Noten() {
       observer.observe(statsRef.current)
     }
 
+    if (subjectAveragesRef.current) {
+      observer.observe(subjectAveragesRef.current)
+    }
+
     return () => {
       if (statsRef.current) {
         observer.unobserve(statsRef.current)
+      }
+      if (subjectAveragesRef.current) {
+        observer.unobserve(subjectAveragesRef.current)
       }
     }
   }, [])
@@ -59,7 +70,7 @@ export default function Noten() {
         // Check if the response is JSON
         const contentType = res.headers.get("content-type")
         if (!contentType || !contentType.includes("application/json")) {
-          throw new Error(`Server returned non-JSON response: ${await res.text()}`)
+          throw new Error("Verbindungsfehler: Ungültige Serverantwort")
         }
 
         const data = await res.json()
@@ -70,7 +81,7 @@ export default function Noten() {
         }
       } catch (error) {
         console.error("Error fetching grades:", error)
-        showNotification("error", "Verbindungsfehler", `Fehler beim Laden: ${error.message}`)
+        showNotification("error", "Verbindungsfehler", "Es konnte keine Verbindung zum Server hergestellt werden.")
       } finally {
         setIsLoading(false)
         setTimeout(() => {
@@ -85,11 +96,11 @@ export default function Noten() {
   const showNotification = (type, title, message) => {
     const id = Date.now()
     setNotifications((prev) => [...prev, { id, type, title, message }])
+  }
 
-    // Auto-remove notification after 5 seconds
-    setTimeout(() => {
-      setNotifications((prev) => prev.filter((notification) => notification.id !== id))
-    }, 5000)
+  // Handle notification removal
+  const removeNotification = (id) => {
+    setNotifications((prev) => prev.filter((notification) => notification.id !== id))
   }
 
   // Calculate grade average
@@ -221,9 +232,6 @@ export default function Noten() {
   const handleDeleteGrade = async (id) => {
     setIsSubmitting(true)
     try {
-      // Log the ID being deleted for debugging
-      console.log(`Deleting grade with ID: ${id}`)
-
       const res = await fetch(`/api/grades/${id}`, {
         method: "DELETE",
         headers: {
@@ -231,31 +239,22 @@ export default function Noten() {
         },
       })
 
-      // Log the response status for debugging
-      console.log(`Delete response status: ${res.status}`)
-
-      // Handle non-JSON responses
-      const contentType = res.headers.get("content-type")
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error(`Server returned non-JSON response: ${await res.text()}`)
+      if (!res.ok) {
+        throw new Error("Verbindungsfehler: Server antwortet nicht")
       }
 
       const data = await res.json()
-      console.log("Delete response data:", data)
 
       if (data.success) {
         // Update the grades state by filtering out the deleted grade
-        setGrades((prevGrades) => {
-          const updatedGrades = prevGrades.filter((grade) => grade._id !== id)
-          return updatedGrades
-        })
+        setGrades((prevGrades) => prevGrades.filter((grade) => grade._id !== id))
         showNotification("success", "Note gelöscht", "Die Note wurde erfolgreich gelöscht.")
       } else {
         showNotification("error", "Fehler beim Löschen", data.error || "Die Note konnte nicht gelöscht werden.")
       }
     } catch (error) {
       console.error("Error deleting grade:", error)
-      showNotification("error", "Verbindungsfehler", `Fehler beim Löschen: ${error.message}`)
+      showNotification("error", "Verbindungsfehler", "Es konnte keine Verbindung zum Server hergestellt werden.")
     } finally {
       setIsSubmitting(false)
       setDeleteConfirmation({ show: false, gradeId: null })
@@ -287,47 +286,14 @@ export default function Noten() {
         {/* Notification system */}
         <div className={styles.notificationContainer}>
           {notifications.map((notification) => (
-            <div
+            <Notification
               key={notification.id}
-              className={`${styles.notification} ${notification.type === "success" ? styles.notificationSuccess : styles.notificationError}`}
-            >
-              <div className={styles.notificationIcon}>
-                {notification.type === "success" ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className={styles.notificationIconSvg}
-                  >
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className={styles.notificationIconSvg}
-                  >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                  </svg>
-                )}
-              </div>
-              <div className={styles.notificationContent}>
-                <div className={styles.notificationTitle}>{notification.title}</div>
-                <div className={styles.notificationMessage}>{notification.message}</div>
-              </div>
-            </div>
+              id={notification.id}
+              type={notification.type}
+              title={notification.title}
+              message={notification.message}
+              onRemove={removeNotification}
+            />
           ))}
         </div>
 
@@ -467,9 +433,9 @@ export default function Noten() {
         </div>
 
         {/* Subject Averages */}
-        {subjectAverages.length > 0 && (
-          <div className={`${styles.subjectAverages} ${pageLoaded ? styles.fadeIn : ""}`}>
-            <h2 className={styles.sectionTitle}>Durchschnitt pro Fach</h2>
+        <div className={`${styles.subjectAverages} ${pageLoaded ? styles.fadeIn : ""}`} ref={subjectAveragesRef}>
+          <h2 className={styles.sectionTitle}>Durchschnitt pro Fach</h2>
+          {subjectAverages.length > 0 ? (
             <div className={`${styles.subjectGrid} stagger-animation animate`}>
               {subjectAverages.map((item, index) => (
                 <div key={index} className={`${styles.subjectCard} card-hover`}>
@@ -483,8 +449,13 @@ export default function Noten() {
                 </div>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className={`${styles.emptyMessage} ${styles.emptyAnimation}`}>
+              <div className={styles.emptyIcon}>📊</div>
+              <p>Keine Fächerdurchschnitte verfügbar. Füge Noten hinzu, um Durchschnitte zu sehen.</p>
+            </div>
+          )}
+        </div>
 
         {/* Form to add a new grade */}
         <div className={`${styles.formSection} ${pageLoaded ? styles.slideIn : ""}`}>

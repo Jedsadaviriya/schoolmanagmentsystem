@@ -245,6 +245,58 @@
   font-size: 0.9rem;
 }
 
+/* Subject Averages */
+.subjectAverages {
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.subjectAverages.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.subjectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.subjectCard {
+  background-color: var(--color-content1);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid var(--color-default-200);
+  transition: all 0.3s var(--animation-easing-spring);
+}
+
+.subjectCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.subjectName {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-content1-foreground);
+}
+
+.subjectAverage {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.subjectCount {
+  font-size: 0.8rem;
+  color: var(--color-default-600);
+}
+
 .formSection {
   margin-top: 2rem;
   background-color: var(--color-content1);
@@ -360,6 +412,7 @@
 
 .fadeIn {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .sectionTitle {
@@ -492,103 +545,7 @@
 }
 
 .deleteButton:hover {
-  background-color: var(--color-danger-500);
-}
-
-/* Page Transition */
-
-/* Add these styles to fix the notifications and field errors */
-.notificationContainer {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 1000;
-  width: 300px;
-  max-width: 100%;
-}
-
-.notification {
-  background-color: var(--color-content1);
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  animation: slideInRight 0.3s var(--animation-easing-spring) forwards;
-  border-left: 4px solid;
-}
-
-.notificationSuccess {
-  border-color: var(--color-success-500);
-}
-
-.notificationError {
-  border-color: var(--color-danger-500);
-}
-
-.notificationIcon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.notificationIconSvg {
-  width: 100%;
-  height: 100%;
-  stroke: currentColor;
-}
-
-.notificationSuccess .notificationIcon {
-  color: var(--color-success-500);
-}
-
-.notificationError .notificationIcon {
-  color: var(--color-danger-500);
-}
-
-.notificationContent {
-  flex-grow: 1;
-}
-
-.notificationTitle {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.notificationMessage {
-  font-size: 0.9rem;
-  color: var(--color-default-700);
-}
-
-.fieldError {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 6px;
-  font-size: 0.8rem;
-  color: var(--color-danger-500);
-  animation: fadeIn 0.3s var(--animation-easing-spring);
-}
-
-.fieldErrorIcon {
-  width: 14px;
-  height: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fieldErrorIcon svg {
-  width: 100%;
-  height: 100%;
-  stroke: currentColor;
+  background-color: var(--color-danger-600);
 }
 
 /* Modal styles */
@@ -662,7 +619,50 @@
   transition: all 0.3s var(--animation-easing-spring);
 }
 
-/* Add these animations to fix loading */
+/* Empty state */
+.emptyMessage {
+  text-align: center;
+  padding: 3rem 2rem;
+  background-color: var(--color-content2);
+  border-radius: 12px;
+  color: var(--color-default-600);
+}
+
+.emptyAnimation {
+  animation: pulse 2s infinite;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Field error */
+.fieldError {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: var(--color-danger-500);
+  animation: fadeIn 0.3s var(--animation-easing-spring);
+}
+
+.fieldErrorIcon {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fieldErrorIcon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+}
+
+/* Animations */
 @keyframes fadeInLeft {
   from {
     opacity: 0;
@@ -696,57 +696,26 @@
   }
 }
 
-.emptyAnimation {
-  animation: pulse 2s infinite;
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100px;
+  }
 }
 
-.emptyMessage {
-  text-align: center;
-  padding: 3rem 2rem;
-  background-color: var(--color-content2);
-  border-radius: 12px;
-  color: var(--color-default-600);
-}
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
 
-.emptyIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
+  .statisticsGrid {
+    grid-template-columns: 1fr;
+  }
 
-.subjectAverages {
-  margin-top: 2.5rem;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-
-.subjectGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.subjectCard {
-  background-color: var(--color-content1);
-  border-radius: 8px;
-  padding: 1rem;
-  text-align: center;
-  border: 1px solid var(--color-default-200);
-}
-
-.subjectName {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--color-content1-foreground);
-}
-
-.subjectAverage {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
-.subjectCount {
-  font-size: 0.8rem;
-  color: var(--color-default-600);
+  .subjectGrid {
+    grid-template-columns: 1fr;
+  }
 }

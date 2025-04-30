@@ -1,31 +1,39 @@
-import { MongoClient } from "mongodb";
+import { MongoClient } from "mongodb"
 
-const uri = process.env.MONGODB_URI || "mongodb://localhost:27017";
-const dbName = "schoolManagementSystem";
-let client;
-let clientPromise;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/schoolManagementSystem"
+const MONGODB_DB = process.env.MONGODB_DB || "schoolManagementSystem"
 
-if (!process.env.MONGODB_URI) {
-  console.warn("MONGODB_URI not set, using default localhost connection.");
-}
+// Check if we're in production
+const isProd = process.env.NODE_ENV === "production"
 
-const options = {};
-
-if (process.env.NODE_ENV === "development") {
-  // In development, use a global variable to preserve the connection
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
-  // In production, create a new connection
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
-}
+// Connection caching
+let cachedClient = null
+let cachedDb = null
 
 export async function connectToDatabase() {
-  const client = await clientPromise;
-  const db = client.db(dbName);
-  return { db, client };
+  // If we have a cached connection, use it
+  if (cachedClient && cachedDb) {
+    return { client: cachedClient, db: cachedDb }
+  }
+
+  // Set options for MongoDB client
+  const opts = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+
+  try {
+    // Connect to MongoDB
+    const client = await MongoClient.connect(MONGODB_URI, opts)
+    const db = client.db(MONGODB_DB)
+
+    // Cache the connection
+    cachedClient = client
+    cachedDb = db
+
+    return { client, db }
+  } catch (error) {
+    console.error("MongoDB connection error:", error)
+    throw new Error("Failed to connect to database")
+  }
 }

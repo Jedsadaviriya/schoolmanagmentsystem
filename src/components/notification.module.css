@@ -1,0 +1,121 @@
+.notificationContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+    width: 300px;
+    max-width: 100%;
+    pointer-events: none;
+  }
+  
+  .notification {
+    background-color: var(--color-content1);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideInNotification 0.3s var(--animation-easing-spring) forwards;
+    border-left: 4px solid;
+    pointer-events: auto;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .notification.exit {
+    animation: slideOutNotification 0.3s var(--animation-easing-spring) forwards;
+  }
+  
+  .notificationSuccess {
+    border-color: var(--color-success-500);
+  }
+  
+  .notificationError {
+    border-color: var(--color-danger-500);
+  }
+  
+  .notificationIcon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .notificationIconSvg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+  }
+  
+  .notificationSuccess .notificationIcon {
+    color: var(--color-success-500);
+  }
+  
+  .notificationError .notificationIcon {
+    color: var(--color-danger-500);
+  }
+  
+  .notificationContent {
+    flex-grow: 1;
+  }
+  
+  .notificationTitle {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .notificationMessage {
+    font-size: 0.9rem;
+    color: var(--color-default-700);
+  }
+  
+  .notificationProgressBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: var(--color-secondary-500);
+    width: 100%;
+    transform-origin: left;
+    animation: shrinkProgress 5s linear forwards;
+  }
+  
+  @keyframes slideInNotification {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideOutNotification {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+  
+  @keyframes shrinkProgress {
+    from {
+      transform: scaleX(1);
+    }
+    to {
+      transform: scaleX(0);
+    }
+  }
+  
