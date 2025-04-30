@@ -1,82 +1,91 @@
-import { connectToDatabase } from "../../lib/mongodb";
-import { ObjectId } from "mongodb"
-
-
-export async function POST(request) {
-  try {
-    const { subject, grade, date } = await request.json();
-    const { db } = await connectToDatabase();
-
-    const result = await db.collection("grades").insertOne({
-      subject,
-      grade,
-      date: date || new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-    });
-
-    return new Response(
-      JSON.stringify({ success: true, id: result.insertedId }),
-      {
-        status: 201,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  } catch (error) {
-    return new Response(
-      JSON.stringify({ success: false, error: error.message }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
-}
+import { connectToDatabase } from "../../lib/mongodb"
 
 export async function GET() {
   try {
-    const { db } = await connectToDatabase();
-    const grades = await db.collection("grades").find({}).toArray();
+    const { db } = await connectToDatabase()
 
-    return new Response(JSON.stringify({ success: true, grades }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    if (!db) {
+      return Response.json(
+        {
+          success: false,
+          error: "Datenbankverbindung fehlgeschlagen",
+        },
+        { status: 500 },
+      )
+    }
+
+    const grades = await db.collection("grades").find({}).toArray()
+
+    // Transform ObjectId to string for JSON serialization
+    const serializedGrades = grades.map((grade) => ({
+      ...grade,
+      _id: grade._id.toString(),
+    }))
+
+    return Response.json({ success: true, grades: serializedGrades })
   } catch (error) {
-    return new Response(
-      JSON.stringify({ success: false, error: error.message }),
+    console.error("Error fetching grades:", error)
+    return Response.json(
       {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+        success: false,
+        error: error.message,
+      },
+      { status: 500 },
+    )
   }
 }
 
-
-export async function DELETE(request, { params }) {
+export async function POST(request) {
   try {
-    const { id } = params
-    const { db } = await connectToDatabase()
+    const body = await request.json()
+    const { subject, grade, module_id } = body
 
-    const result = await db.collection("grades").deleteOne({
-      _id: new ObjectId(id),
-    })
-
-    if (result.deletedCount === 0) {
-      return new Response(JSON.stringify({ success: false, error: "Note nicht gefunden" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      })
+    if (!subject || !grade) {
+      return Response.json(
+        {
+          success: false,
+          error: "Fach und Note sind erforderlich",
+        },
+        { status: 400 },
+      )
     }
 
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    })
+    const { db } = await connectToDatabase()
+
+    if (!db) {
+      return Response.json(
+        {
+          success: false,
+          error: "Datenbankverbindung fehlgeschlagen",
+        },
+        { status: 500 },
+      )
+    }
+
+    const newGrade = {
+      subject,
+      grade,
+      module_id: module_id || null,
+      createdAt: new Date(),
+    }
+
+    const result = await db.collection("grades").insertOne(newGrade)
+
+    return Response.json(
+      {
+        success: true,
+        id: result.insertedId.toString(),
+      },
+      { status: 201 },
+    )
   } catch (error) {
-    return new Response(JSON.stringify({ success: false, error: error.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    })
+    console.error("Error creating grade:", error)
+    return Response.json(
+      {
+        success: false,
+        error: error.message,
+      },
+      { status: 500 },
+    )
   }
 }

@@ -35,31 +35,41 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/mongodb [external] (mongodb, cjs)");
 ;
-const uri = process.env.MONGODB_URI || "mongodb://localhost:27017";
-const dbName = "schoolManagementSystem";
-let client;
-let clientPromise;
-if (!process.env.MONGODB_URI) {
-    console.warn("MONGODB_URI not set, using default localhost connection.");
-}
-const options = {};
-if ("TURBOPACK compile-time truthy", 1) {
-    // In development, use a global variable to preserve the connection
-    if (!global._mongoClientPromise) {
-        client = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["MongoClient"](uri, options);
-        global._mongoClientPromise = client.connect();
-    }
-    clientPromise = global._mongoClientPromise;
-} else {
-    "TURBOPACK unreachable";
-}
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/schoolManagementSystem";
+const MONGODB_DB = process.env.MONGODB_DB || "schoolManagementSystem";
+// Check if we're in production
+const isProd = ("TURBOPACK compile-time value", "development") === "production";
+// Connection caching
+let cachedClient = null;
+let cachedDb = null;
 async function connectToDatabase() {
-    const client = await clientPromise;
-    const db = client.db(dbName);
-    return {
-        db,
-        client
+    // If we have a cached connection, use it
+    if (cachedClient && cachedDb) {
+        return {
+            client: cachedClient,
+            db: cachedDb
+        };
+    }
+    // Set options for MongoDB client
+    const opts = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     };
+    try {
+        // Connect to MongoDB
+        const client = await __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["MongoClient"].connect(MONGODB_URI, opts);
+        const db = client.db(MONGODB_DB);
+        // Cache the connection
+        cachedClient = client;
+        cachedDb = db;
+        return {
+            client,
+            db
+        };
+    } catch (error) {
+        console.error("MongoDB connection error:", error);
+        throw new Error("Failed to connect to database");
+    }
 }
 }}),
 "[project]/src/app/module/page.module.css [app-rsc] (css module)": ((__turbopack_context__) => {
