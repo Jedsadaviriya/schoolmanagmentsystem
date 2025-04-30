@@ -1,10 +1,5 @@
 {
-  "/api/grades/[id]/route": "app/api/grades/[id]/route.js",
-  "/api/grades/route": "app/api/grades/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/kalender/page": "app/kalender/page.js",
   "/module/[id]/page": "app/module/[id]/page.js",
   "/module/page": "app/module/page.js",
-  "/noten/page": "app/noten/page.js",
   "/page": "app/page.js"
 }
