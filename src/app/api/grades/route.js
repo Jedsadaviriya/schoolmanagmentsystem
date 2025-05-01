@@ -25,6 +25,7 @@ export async function GET() {
     return Response.json({ success: true, grades: serializedGrades })
   } catch (error) {
     console.error("Error fetching grades:", error)
+
     return Response.json(
       {
         success: false,
@@ -80,6 +81,7 @@ export async function POST(request) {
     )
   } catch (error) {
     console.error("Error creating grade:", error)
+
     return Response.json(
       {
         success: false,
