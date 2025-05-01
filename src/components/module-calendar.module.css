@@ -1,0 +1,297 @@
+.calendarContainer {
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.calendarTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.addButton {
+  background-color: white;
+  color: var(--primary-color);
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.addButton:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+.addButton:active {
+  transform: translateY(0);
+}
+
+.monthSection {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.monthSection:last-child {
+  border-bottom: none;
+}
+
+.monthTitle {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.eventsList {
+  display: grid;
+  gap: 1rem;
+}
+
+.eventCard {
+  background-color: var(--bg-color);
+  border-radius: 0.375rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.eventCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.eventHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.eventTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+.eventActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editButton,
+.deleteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.eventDate {
+  font-size: 0.875rem;
+  color: var(--secondary-text);
+  margin-bottom: 0.5rem;
+}
+
+.eventDescription {
+  font-size: 0.875rem;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.noEvents {
+  padding: 2rem;
+  text-align: center;
+  color: var(--secondary-text);
+}
+
+/* Modal styles */
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: var(--bg-color);
+  border-radius: 0.5rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modalForm {
+  padding: 1.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cancelButton,
+.submitButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancelButton {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.cancelButton:hover {
+  background-color: var(--hover-bg);
+}
+
+.submitButton {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-dark);
+}
+
+.submitButton:disabled,
+.cancelButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Notification */
+.notification {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1100;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.success {
+  background-color: #10b981;
+  color: white;
+}
+
+.error {
+  background-color: #ef4444;
+  color: white;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 640px) {
+  .eventsList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .eventsList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
