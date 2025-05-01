@@ -546,3 +546,14 @@ body {
     opacity: var(--opacity-disabled);
   }
 }
+
+/* Dialog styles */
+.dialog-open {
+  /* Allow scrolling but indicate dialog is open */
+  overflow-y: auto !important;
+}
+
+/* Remove the ::after pseudo-element that might be causing blurring issues */
+.dialog-open::after {
+  content: none;
+}

@@ -21,6 +21,7 @@ export async function DELETE(request, { params }) {
     // Ensure the database connection is established
     if (!db) {
       console.error("Database connection failed")
+
       return Response.json(
         {
           success: false,
@@ -52,6 +53,7 @@ export async function DELETE(request, { params }) {
     return Response.json({ success: true }, { status: 200 })
   } catch (error) {
     console.error("Delete grade error:", error)
+
     return Response.json(
       {
         success: false,

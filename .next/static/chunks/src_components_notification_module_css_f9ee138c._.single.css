@@ -1,6 +1,6 @@
 /* [project]/src/components/notification.module.css [app-client] (css) */
 .notification-module__T-atKa__notificationContainer {
-  z-index: 1000;
+  z-index: 9999;
   pointer-events: none;
   flex-direction: column;
   gap: 10px;
