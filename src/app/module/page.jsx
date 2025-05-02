@@ -1,11 +1,11 @@
-import { connectToDatabase } from "../lib/mongodb"
-import Link from "next/link"
-import styles from "./page.module.css"
+import { connectToDatabase } from "../lib/mongodb";
+import Link from "next/link";
+import styles from "./page.module.css";
 
 export default async function Modules() {
   // Fetch modules from MongoDB
-  const { db } = await connectToDatabase()
-  const modules = await db.collection("modules").find({}).toArray()
+  const { db } = await connectToDatabase();
+  const modules = await db.collection("modules").find({}).toArray();
 
   return (
     <div className={styles.container}>
@@ -17,11 +17,18 @@ export default async function Modules() {
             <div key={module._id.toString()} className={styles.moduleCard}>
               <div className={styles.moduleHeader}>
                 <h2 className={styles.moduleTitle}>{module.title}</h2>
-                <p className={styles.moduleNumber}>Modul ({module.module_number})</p>
+                <p className={styles.moduleNumber}>
+                  Modul ({module.module_number})
+                </p>
               </div>
               <div className={styles.moduleBody}>
-                <p className={styles.moduleDescription}>{module.description || "Keine Beschreibung verfügbar"}</p>
-                <Link href={`/module/${module._id}`} className={`${styles.viewButton} animated-button-secondary`}>
+                <p className={styles.moduleDescription}>
+                  {module.description || "Keine Beschreibung verfügbar"}
+                </p>
+                <Link
+                  href={`/module/${module._id}`}
+                  className={`${styles.viewButton} animated-button-secondary`}
+                >
                   Details anzeigen
                 </Link>
               </div>
@@ -35,5 +42,5 @@ export default async function Modules() {
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -2,6 +2,7 @@ import { connectToDatabase } from "../../lib/mongodb";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { ObjectId } from "mongodb";
+import GoogleStyleCalendar from "../../../components/google-style-calendar";
 
 export default async function ModuleDetail({ params }) {
   const { db } = await connectToDatabase();
@@ -38,6 +39,9 @@ export default async function ModuleDetail({ params }) {
 
   const averageGrade = calculateAverage();
 
+  // Ensure events array exists
+  const events = module.events || [];
+
   return (
     <div className={styles.container}>
       <h1 className={styles.pageTitle}>{module.title}</h1>
@@ -46,52 +50,16 @@ export default async function ModuleDetail({ params }) {
       </p>
 
       <div className={styles.moduleCard}>
-        {/* <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Modulinformationen</h2>
-          <div className={styles.infoGrid}>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Dozent</span>
-              <span className={styles.infoValue}>{module.instructor || "Nicht angegeben"}</span>
-            </div>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Semester</span>
-              <span className={styles.infoValue}>{module.semester || "Nicht angegeben"}</span>
-            </div>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>ECTS</span>
-              <span className={styles.infoValue}>{module.credits || "Nicht angegeben"}</span>
-            </div>
-            <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>Status</span>
-              <span className={styles.infoValue}>{module.status || "Aktiv"}</span>
-            </div>
-          </div>
-        </div>  */}
-
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Beschreibung</h2>
           <p className={styles.sectionContent}>
             {module.description || "Keine Beschreibung verfügbar"}
           </p>
         </div>
+
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Termine</h2>
-          {module.events && module.events.length > 0 ? (
-            <div className={styles.section}>
-              {module.events.map((event, index) => (
-                <div className={styles.moduleCard}>
-                  <div key={index} className={styles.section}>
-                    <h2 className={styles.sectionTitle}>{event.title}</h2>
-                    <p className={styles.sectionContent}>Date: {event.date}</p>
-                    <p className="text-gray-600">{event.description}</p>
-                    <br />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-600">Keine Termine</p>
-          )}
+          <h2 className={styles.sectionTitle}>Terminkalender</h2>
+          <GoogleStyleCalendar moduleId={params.id} initialEvents={events} />
         </div>
 
         {grades.length > 0 && (
@@ -124,6 +92,25 @@ export default async function ModuleDetail({ params }) {
             </div>
           </div>
         )}
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Termine</h2>
+          {module.events && module.events.length > 0 ? (
+            <div className={styles.section}>
+              {module.events.map((event, index) => (
+                <div className={styles.moduleCard}>
+                  <div key={index} className={styles.section}>
+                    <h2 className={styles.sectionTitle}>{event.title}</h2>
+                    <p className={styles.sectionContent}>Date: {event.date}</p>
+                    <p className="text-gray-600">{event.description}</p>
+                    <br />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-600">Keine Termine</p>
+          )}
+        </div>
       </div>
 
       <Link href="/module" className={`${styles.backButton} animated-button`}>
