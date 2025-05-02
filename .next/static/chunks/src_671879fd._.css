@@ -546,7 +546,7 @@
 }
 
 .page-module__ANWkCW__modalOverlay {
-  z-index: 1000;
+  z-index: 9000;
   backdrop-filter: blur(3px);
   background-color: #00000080;
   justify-content: center;
@@ -558,15 +558,25 @@
 
 .page-module__ANWkCW__modal {
   background-color: var(--color-content1);
-  border-radius: 12px;
   width: 400px;
   max-width: 90%;
+  animation: page-module__ANWkCW__scaleIn .3s var(--animation-easing-spring) forwards;
+  border-radius: 12px;
   padding: 1.5rem;
+  position: relative;
   box-shadow: 0 10px 25px #0003;
 }
 
-.page-module__ANWkCW__modalAnimation {
-  animation: page-module__ANWkCW__scaleIn .3s var(--animation-easing-spring) forwards;
+@keyframes page-module__ANWkCW__scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .page-module__ANWkCW__modalTitle {
@@ -600,6 +610,11 @@
   font-weight: 600;
 }
 
+.page-module__ANWkCW__cancelButton:hover {
+  background-color: var(--color-default-300);
+  transform: translateY(-2px);
+}
+
 .page-module__ANWkCW__confirmButton {
   background-color: var(--color-danger-500);
   color: var(--color-danger-foreground);
@@ -610,6 +625,11 @@
   padding: .6rem 1.2rem;
   font-size: .95rem;
   font-weight: 600;
+}
+
+.page-module__ANWkCW__confirmButton:hover {
+  background-color: var(--color-danger-600);
+  transform: translateY(-2px);
 }
 
 .page-module__ANWkCW__emptyMessage {
@@ -707,6 +727,19 @@
   .page-module__ANWkCW__statisticsGrid, .page-module__ANWkCW__subjectGrid {
     grid-template-columns: 1fr;
   }
+}
+
+.page-module__ANWkCW__notificationContainer {
+  z-index: 1200;
+  pointer-events: none;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  max-width: 100%;
+  display: flex;
+  position: fixed;
+  top: 20px;
+  right: 20px;
 }
 
 

@@ -306,7 +306,7 @@
   border: 1px solid var(--color-default-200);
   opacity: 0;
   transform: translateX(-20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.8s ease, transform 0.8s;
 }
 
 .slideIn {
@@ -548,7 +548,7 @@
   background-color: var(--color-danger-600);
 }
 
-/* Modal styles */
+/* Update the modal styles to match v8's behavior */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -559,7 +559,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9000; /* High z-index but below notifications */
   backdrop-filter: blur(3px);
 }
 
@@ -570,10 +570,19 @@
   width: 400px;
   max-width: 90%;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: scaleIn 0.3s var(--animation-easing-spring) forwards;
 }
 
-.modalAnimation {
-  animation: scaleIn 0.3s var(--animation-easing-spring) forwards;
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .modalTitle {
@@ -607,6 +616,11 @@
   transition: all 0.3s var(--animation-easing-spring);
 }
 
+.cancelButton:hover {
+  background-color: var(--color-default-300);
+  transform: translateY(-2px);
+}
+
 .confirmButton {
   padding: 0.6rem 1.2rem;
   background-color: var(--color-danger-500);
@@ -617,6 +631,11 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s var(--animation-easing-spring);
+}
+
+.confirmButton:hover {
+  background-color: var(--color-danger-600);
+  transform: translateY(-2px);
 }
 
 /* Empty state */
@@ -718,4 +737,23 @@
   .subjectGrid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Notification container - Updated to position on the right side */
+.notificationContainer {
+  position: sticky;
+  top: 70px; /* Position below header (header height) */
+  left: 100vw; /* Ensure it's not on the left */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999; /* Higher z-index to ensure it appears above all content */
+  width: 320px;
+  max-width: 100%;
+  pointer-events: none; /* Allow clicking through the container */
+  padding-right: 20px;
+}
+
+.notificationContainer > * {
+  pointer-events: auto; /* Enable pointer events on the notifications themselves */
 }

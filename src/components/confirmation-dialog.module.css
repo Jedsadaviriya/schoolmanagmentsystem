@@ -1,0 +1,153 @@
+/* Add a wrapper to ensure proper positioning */
+.overlayWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999; /* Higher than other elements but below notifications */
+  pointer-events: none; /* Allow clicks to pass through to the overlay */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  backdrop-filter: blur(3px);
+  pointer-events: auto; /* Capture clicks on the overlay */
+}
+
+.dialog {
+  background-color: var(--color-content1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 400px;
+  max-width: 90vw; /* Use viewport width to ensure it fits on screen */
+  max-height: 85vh; /* Limit height to ensure it fits on screen */
+  overflow-y: auto; /* Allow scrolling within the dialog if content is too tall */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: scaleIn 0.3s var(--animation-easing-spring) forwards;
+  position: relative;
+  z-index: 9001;
+  pointer-events: auto; /* Ensure clicks work on the dialog */
+  margin: auto; /* Center the dialog */
+}
+
+/* Ensure the dialog is always visible in the viewport */
+@media (max-height: 600px) {
+  .dialog {
+    max-height: 90vh; /* Increase max height on smaller screens */
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-content1-foreground);
+}
+
+.content {
+  margin-bottom: 1.5rem;
+  color: var(--color-default-700);
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.cancelButton {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-default-200);
+  color: var(--color-default-800);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--animation-easing-spring);
+}
+
+.cancelButton:hover {
+  background-color: var(--color-default-300);
+  transform: translateY(-2px);
+}
+
+.confirmButton {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-danger-500);
+  color: var(--color-danger-foreground);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--animation-easing-spring);
+}
+
+.confirmButton:hover {
+  background-color: var(--color-danger-600);
+  transform: translateY(-2px);
+}
+
+/* Loading indicator */
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.loadingDot {
+  width: 6px;
+  height: 6px;
+  background-color: currentColor;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loadingDot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loadingDot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Add styles for when dialog is open */
+.dialog-open {
+  /* Allow scrolling but show the dialog */
+  overflow-y: auto !important;
+}
