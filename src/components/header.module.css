@@ -9,6 +9,7 @@
   top: 0;
   z-index: 100;
   transition: all 0.3s ease;
+  height: 70px; /* Ensure consistent height */
 }
 
 .scrolled {

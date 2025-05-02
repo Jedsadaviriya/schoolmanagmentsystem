@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
 import { AnimationProvider } from "@/components/animation-provider"
 import "./globals.css"
+import "./animations.css"
 
 export default function RootLayout({ children }) {
   return (

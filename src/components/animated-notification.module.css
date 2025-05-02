@@ -1,96 +1,109 @@
 .notification {
-    position: relative;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    overflow: hidden;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-  
-  .visible {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  
-  .hidden {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  
-  .success {
-    background-color: var(--color-success-50);
-    border-left: 4px solid var(--color-success-500);
-    color: var(--color-success-900);
-  }
-  
-  .error {
-    background-color: var(--color-danger-50);
-    border-left: 4px solid var(--color-danger-500);
-    color: var(--color-danger-900);
-  }
-  
-  .warning {
-    background-color: var(--color-warning-50);
-    border-left: 4px solid var(--color-warning-500);
-    color: var(--color-warning-900);
-  }
-  
-  .info {
-    background-color: var(--color-primary-50);
-    border-left: 4px solid var(--color-primary-500);
-    color: var(--color-primary-900);
-  }
-  
-  .icon {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .content {
-    flex-grow: 1;
-  }
-  
-  .title {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-  
-  .message {
-    font-size: 0.9rem;
-  }
-  
-  .closeButton {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    width: 20px;
-    height: 20px;
-    color: currentColor;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-  }
-  
-  .closeButton:hover {
-    opacity: 1;
-  }
-  
-  .progressBar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .progress {
-    height: 100%;
-    background-color: currentColor;
-    opacity: 0.5;
-  }
-  
+  position: relative;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  background-color: var(--color-content1);
+  border-left: 4px solid;
+  width: 300px;
+  max-width: 100%;
+  margin-bottom: 10px;
+  z-index: 9999; /* Ensure high z-index */
+}
+
+.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.hidden {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.success {
+  border-color: var(--color-success-500);
+}
+
+.success .icon {
+  color: var(--color-success-500);
+}
+
+.error {
+  border-color: var(--color-danger-500);
+}
+
+.error .icon {
+  color: var(--color-danger-500);
+}
+
+.warning {
+  border-color: var(--color-warning-500);
+}
+
+.warning .icon {
+  color: var(--color-warning-500);
+}
+
+.info {
+  border-color: var(--color-primary-500);
+}
+
+.info .icon {
+  color: var(--color-primary-500);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.message {
+  font-size: 0.9rem;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  color: currentColor;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.closeButton:hover {
+  opacity: 1;
+}
+
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.progress {
+  height: 100%;
+  background-color: currentColor;
+  opacity: 0.5;
+}

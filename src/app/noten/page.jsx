@@ -3,13 +3,13 @@
 import { useState, useEffect, useRef } from "react"
 import styles from "./page.module.css"
 import LoadingAnimation from "@/components/loading-animation"
-import Notification from "@/components/notification"
+import AnimatedNotification from "@/components/animated-notification"
+import ConfirmationDialog from "@/components/confirmation-dialog"
 
 export default function Noten() {
   const [grades, setGrades] = useState([])
   const [subject, setSubject] = useState("")
   const [grade, setGrade] = useState("")
-  const [notifications, setNotifications] = useState([])
   const [errors, setErrors] = useState({
     subject: "",
     grade: "",
@@ -22,6 +22,7 @@ export default function Noten() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [pageLoaded, setPageLoaded] = useState(false)
   const [animateStats, setAnimateStats] = useState(false)
+  const [notifications, setNotifications] = useState([])
 
   const statsRef = useRef(null)
   const subjectAveragesRef = useRef(null)
@@ -60,6 +61,18 @@ export default function Noten() {
     }
   }, [])
 
+  // Function to show notifications
+  const showNotification = (type, title, message) => {
+    const id = Date.now()
+    setNotifications((prev) => [...prev, { id, type, title, message }])
+    return id
+  }
+
+  // Function to remove notifications
+  const removeNotification = (id) => {
+    setNotifications((prev) => prev.filter((notification) => notification.id !== id))
+  }
+
   // Fetch grades when the component mounts
   useEffect(() => {
     async function fetchGrades() {
@@ -91,17 +104,6 @@ export default function Noten() {
     }
     fetchGrades()
   }, [])
-
-  // Function to show notifications
-  const showNotification = (type, title, message) => {
-    const id = Date.now()
-    setNotifications((prev) => [...prev, { id, type, title, message }])
-  }
-
-  // Handle notification removal
-  const removeNotification = (id) => {
-    setNotifications((prev) => prev.filter((notification) => notification.id !== id))
-  }
 
   // Calculate grade average
   const calculateAverage = () => {
@@ -275,6 +277,31 @@ export default function Noten() {
     <>
       {isLoading && <LoadingAnimation />}
 
+      {/* Notifications */}
+      <div className={styles.notificationContainer}>
+        {notifications.map((notification) => (
+          <AnimatedNotification
+            key={notification.id}
+            type={notification.type}
+            title={notification.title}
+            message={notification.message}
+            onClose={() => removeNotification(notification.id)}
+          />
+        ))}
+      </div>
+
+      {/* Use our confirmation dialog component */}
+      <ConfirmationDialog
+        isOpen={deleteConfirmation.show}
+        onClose={() => setDeleteConfirmation({ show: false, gradeId: null })}
+        onConfirm={() => handleDeleteGrade(deleteConfirmation.gradeId)}
+        title="Note löschen"
+        message="Bist du sicher, dass du diese Note löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden."
+        confirmText="Löschen"
+        cancelText="Abbrechen"
+        isLoading={isSubmitting}
+      />
+
       <div className={`${styles.container} ${pageLoaded ? styles.loaded : ""}`}>
         <div className={styles.pageHeader}>
           <h1 className={styles.pageTitle}>Noten</h1>
@@ -282,56 +309,6 @@ export default function Noten() {
             Hier kannst du deine Noten eintragen und deinen Notendurchschnitt berechnen.
           </p>
         </div>
-
-        {/* Notification system */}
-        <div className={styles.notificationContainer}>
-          {notifications.map((notification) => (
-            <Notification
-              key={notification.id}
-              id={notification.id}
-              type={notification.type}
-              title={notification.title}
-              message={notification.message}
-              onRemove={removeNotification}
-            />
-          ))}
-        </div>
-
-        {/* Delete Confirmation Modal */}
-        {deleteConfirmation.show && (
-          <div className={styles.modalOverlay}>
-            <div className={`${styles.modal} ${styles.modalAnimation}`}>
-              <h3 className={styles.modalTitle}>Note löschen</h3>
-              <p className={styles.modalContent}>
-                Bist du sicher, dass du diese Note löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.
-              </p>
-              <div className={styles.modalActions}>
-                <button
-                  className={`${styles.cancelButton} animated-button`}
-                  onClick={() => setDeleteConfirmation({ show: false, gradeId: null })}
-                  disabled={isSubmitting}
-                >
-                  Abbrechen
-                </button>
-                <button
-                  className={`${styles.confirmButton} animated-button`}
-                  onClick={() => handleDeleteGrade(deleteConfirmation.gradeId)}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <span className={styles.buttonLoader}>
-                      <span className={styles.loaderDot}></span>
-                      <span className={styles.loaderDot}></span>
-                      <span className={styles.loaderDot}></span>
-                    </span>
-                  ) : (
-                    "Löschen"
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Grade Statistics */}
         <div className={`${styles.statisticsSection} ${animateStats ? styles.animateStats : ""}`} ref={statsRef}>
