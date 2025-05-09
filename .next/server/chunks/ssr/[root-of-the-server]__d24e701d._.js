@@ -165,7 +165,7 @@ async function Modules() {
                                         children: module.description || "Keine Beschreibung verfügbar"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/module/page.jsx",
-                                        lineNumber: 23,
+                                        lineNumber: 25,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -174,13 +174,13 @@ async function Modules() {
                                         children: "Details anzeigen"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/module/page.jsx",
-                                        lineNumber: 24,
+                                        lineNumber: 28,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/module/page.jsx",
-                                lineNumber: 22,
+                                lineNumber: 24,
                                 columnNumber: 15
                             }, this)
                         ]
@@ -201,7 +201,7 @@ async function Modules() {
                         children: "📚"
                     }, void 0, false, {
                         fileName: "[project]/src/app/module/page.jsx",
-                        lineNumber: 33,
+                        lineNumber: 40,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -209,13 +209,13 @@ async function Modules() {
                         children: "Keine Module gefunden"
                     }, void 0, false, {
                         fileName: "[project]/src/app/module/page.jsx",
-                        lineNumber: 34,
+                        lineNumber: 41,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/module/page.jsx",
-                lineNumber: 32,
+                lineNumber: 39,
                 columnNumber: 9
             }, this)
         ]
