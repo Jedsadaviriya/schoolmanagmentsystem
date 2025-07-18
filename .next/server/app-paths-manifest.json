@@ -1,4 +1,6 @@
 {
-  "/kalender/page": "app/kalender/page.js",
+  "/api/grades/route": "app/api/grades/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/noten/page": "app/noten/page.js",
   "/page": "app/page.js"
 }
