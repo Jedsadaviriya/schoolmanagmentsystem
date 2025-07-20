@@ -84,7 +84,7 @@ This app uses a clean and modern color theme, created with [HeroUI](https://www.
 
 ## 🖼️ Logo
 
-![App Logo](assets/sms-logo.png)
+<img src="assets/sms-logo.png" width="200" alt="App Logo"/>
 
 I also created a custom logo for this application. It was designed to match the tone of the app and give it a clear visual identity.
 
