@@ -20,8 +20,8 @@
 
 ## 🗂️ Modules Page
 
-- Create and manage school modules
-- Add a title and description for each module
+- Manage school modules
+- each module has a title and description
 - Open a detail view to access related content
 - Each module contains its own calendar
 
