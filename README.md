@@ -33,7 +33,6 @@
 
 - Add and view calendar entries inside module views
 - Responsive and interactive calendar UI
-- (Note: Main calendar page currently non-functional)
 
 ![Calendar Demo](assets/calendar-demo.gif)
 
