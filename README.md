@@ -2,7 +2,7 @@
 
 ![App Overview](assets/sms-demo-overview.gif)
 
-**A modern web app to organise grades, modules, and school events – simple and efficient.**
+**A modern web app to organise grades, modules, and school events. Simple and efficient.**
 
 ---
 
@@ -71,7 +71,7 @@ This app uses a clean and modern color theme, created with [HeroUI](https://www.
 |                    | `success`    | `#28A745`   | Green for successful actions               |
 |                    | `warning`    | `#FFC107`   | Yellow for warnings                        |
 |                    | `danger`     | `#EF233C`   | Vibrant red for errors or danger           |
-| **Content Colors** | `content-1`  | `#EAF4FF`   | Bluish white – main text color             |
+| **Content Colors** | `content-1`  | `#EAF4FF`   | Bluish white, main text color             |
 |                    | `content-2`  | `#6C7680`   | Secondary text or labels                   |
 |                    | `content-3`  | `#A0A6B0`   | Placeholder / disabled text                |
 |                    | `content-4`  | `#C5C9D1`   | Very light text on dark background         |
