@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
@@ -18,7 +19,6 @@ export async function GET() {
   }
 }
 
-// POST: Create a new module
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -50,15 +50,18 @@ export async function POST(request) {
       events: [],
     };
 
+
     const { db } = await connectToDatabase();
     const result = await db.collection("modules").insertOne(newModule);
 
     return NextResponse.json(
       { success: true, id: result.insertedId.toString() },
+
       { status: 201 }
     );
   } catch (error) {
     console.error("Error creating module:", error);
+
     return NextResponse.json(
       { success: false, error: "Fehler beim Erstellen des Moduls" },
       { status: 500 }

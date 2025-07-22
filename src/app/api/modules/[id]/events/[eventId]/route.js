@@ -1,3 +1,4 @@
+
 // File: app/api/modules/[id]/events/[eventId]/route.js
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
@@ -46,6 +47,7 @@ export async function PUT(request, { params }) {
     const { id, eventId } = params;
     const data = await request.json();
 
+
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: "Ungültige Modul-ID" },
@@ -54,6 +56,7 @@ export async function PUT(request, { params }) {
     }
 
     const { db } = await connectToDatabase();
+
     const updateFields = {};
     if (data.title) updateFields["events.$.title"] = data.title;
     if (data.date) updateFields["events.$.date"] = data.date;
@@ -70,6 +73,7 @@ export async function PUT(request, { params }) {
     if (result.matchedCount === 0) {
       return NextResponse.json(
         { success: false, error: "Ereignis oder Modul nicht gefunden" },
+
         { status: 404 }
       );
     }
@@ -85,9 +89,11 @@ export async function PUT(request, { params }) {
 }
 
 // DELETE: Delete a specific event
+
 export async function DELETE(request, { params }) {
   try {
     const { id, eventId } = params;
+
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -97,6 +103,7 @@ export async function DELETE(request, { params }) {
     }
 
     const { db } = await connectToDatabase();
+
     const result = await db
       .collection("modules")
       .updateOne(
@@ -111,12 +118,14 @@ export async function DELETE(request, { params }) {
       );
     }
 
+
     if (result.modifiedCount === 0) {
       return NextResponse.json(
         { success: false, error: "Ereignis nicht gefunden" },
         { status: 404 }
       );
     }
+
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -1,7 +1,7 @@
-// File: app/api/modules/[id]/events/route.js
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../lib/mongodb";
 import { ObjectId } from "mongodb";
+
 
 // GET: Fetch all events for a module
 export async function GET(request, { params }) {
@@ -38,6 +38,7 @@ export async function GET(request, { params }) {
 }
 
 // POST: Create a new event for a module
+
 export async function POST(request, { params }) {
   try {
     const { id } = params;
@@ -50,6 +51,7 @@ export async function POST(request, { params }) {
       );
     }
 
+
     if (!data.title || !data.date) {
       return NextResponse.json(
         { success: false, error: "Titel und Datum sind erforderlich" },
@@ -58,6 +60,7 @@ export async function POST(request, { params }) {
     }
 
     const { db } = await connectToDatabase();
+
     const event = {
       _id: new ObjectId().toString(),
       title: data.title,

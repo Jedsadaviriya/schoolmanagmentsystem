@@ -23,16 +23,20 @@ export default async function ModuleDetail({ params }) {
   // Fetch grades related to this module
   const grades = await db
     .collection("grades")
+
     .find({ module_id: new ObjectId(params.id) })
+
     .toArray();
 
   // Calculate average grade for this module
   const calculateAverage = () => {
     if (grades.length === 0) return 0;
+
     const sum = grades.reduce(
       (total, grade) => total + Number.parseFloat(grade.grade || 0),
       0
     );
+
     return sum / grades.length;
   };
 
@@ -92,6 +96,7 @@ export default async function ModuleDetail({ params }) {
           </div>
         )}
 
+
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Termine</h2>
           {events.length > 0 ? (
@@ -101,11 +106,14 @@ export default async function ModuleDetail({ params }) {
                   <h3 className={styles.eventTitle}>{event.title}</h3>
                   <p className={styles.sectionContent}>Datum: {event.date}</p>
                   <p className={styles.sectionContent}>{event.description}</p>
+
                 </div>
               ))}
             </div>
           ) : (
+
             <p className={styles.sectionContent}>Keine Termine</p>
+
           )}
         </div>
       </div>

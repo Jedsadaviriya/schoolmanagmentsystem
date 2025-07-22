@@ -43,15 +43,18 @@ export default function Modules() {
 
   if (loading) return <div className={styles.container}>Laden...</div>;
 
+
   return (
     <div className={styles.container}>
       <h1 className={styles.pageTitle}>Module</h1>
+
       <button
         className={`${styles.addButton} animated-button`}
         onClick={() => setIsModalOpen(true)}
       >
         Neues Modul hinzufügen
       </button>
+
 
       {modules.length > 0 ? (
         <div className={styles.moduleGrid}>
@@ -84,11 +87,13 @@ export default function Modules() {
         </div>
       )}
 
+
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleAddModule}
       />
+
     </div>
   );
 }

@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
@@ -7,12 +8,15 @@ export async function GET(request, { params }) {
   try {
     const { id } = params;
 
+
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: "Ungültige ID" },
+
         { status: 400 }
       );
     }
+
 
     const { db } = await connectToDatabase();
     const module = await db
@@ -22,32 +26,38 @@ export async function GET(request, { params }) {
     if (!module) {
       return NextResponse.json(
         { success: false, error: "Modul nicht gefunden" },
+
         { status: 404 }
       );
     }
+
 
     return NextResponse.json({ success: true, module });
   } catch (error) {
     console.error("Error fetching module:", error);
     return NextResponse.json(
       { success: false, error: "Fehler beim Laden des Moduls" },
+
       { status: 500 }
     );
   }
 }
 
-// PUT: Update a module by ID
+
 export async function PUT(request, { params }) {
   try {
     const { id } = params;
     const body = await request.json();
 
+
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: "Ungültige ID" },
+
         { status: 400 }
       );
     }
+
 
     const { db } = await connectToDatabase();
     const existingModule = await db
@@ -57,6 +67,7 @@ export async function PUT(request, { params }) {
     if (!existingModule) {
       return NextResponse.json(
         { success: false, error: "Modul nicht gefunden" },
+
         { status: 404 }
       );
     }
@@ -82,17 +93,20 @@ export async function PUT(request, { params }) {
   }
 }
 
-// DELETE: Delete a module by ID
+
 export async function DELETE(request, { params }) {
   try {
     const { id } = params;
 
+
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: "Ungültige ID" },
+
         { status: 400 }
       );
     }
+
 
     const { db } = await connectToDatabase();
     const result = await db
@@ -111,6 +125,7 @@ export async function DELETE(request, { params }) {
     console.error("Error deleting module:", error);
     return NextResponse.json(
       { success: false, error: "Fehler beim Löschen des Moduls" },
+
       { status: 500 }
     );
   }
