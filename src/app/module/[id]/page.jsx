@@ -23,16 +23,19 @@ export default async function ModuleDetail({ params }) {
   // Fetch grades related to this module
   const grades = await db
     .collection("grades")
-    .find({ module_id: params.id })
+
+    .find({ module_id: new ObjectId(params.id) })
+
     .toArray();
 
   // Calculate average grade for this module
   const calculateAverage = () => {
     if (grades.length === 0) return 0;
 
-    const sum = grades.reduce((total, grade) => {
-      return total + Number.parseFloat(grade.grade);
-    }, 0);
+    const sum = grades.reduce(
+      (total, grade) => total + Number.parseFloat(grade.grade || 0),
+      0
+    );
 
     return sum / grades.length;
   };
@@ -92,23 +95,25 @@ export default async function ModuleDetail({ params }) {
             </div>
           </div>
         )}
+
+
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Termine</h2>
-          {module.events && module.events.length > 0 ? (
-            <div className={styles.section}>
-              {module.events.map((event, index) => (
-                <div className={styles.moduleCard}>
-                  <div key={index} className={styles.section}>
-                    <h2 className={styles.sectionTitle}>{event.title}</h2>
-                    <p className={styles.sectionContent}>Date: {event.date}</p>
-                    <p className="text-gray-600">{event.description}</p>
-                    <br />
-                  </div>
+          {events.length > 0 ? (
+            <div className={styles.eventsList}>
+              {events.map((event, index) => (
+                <div key={index} className={styles.eventItem}>
+                  <h3 className={styles.eventTitle}>{event.title}</h3>
+                  <p className={styles.sectionContent}>Datum: {event.date}</p>
+                  <p className={styles.sectionContent}>{event.description}</p>
+
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-gray-600">Keine Termine</p>
+
+            <p className={styles.sectionContent}>Keine Termine</p>
+
           )}
         </div>
       </div>

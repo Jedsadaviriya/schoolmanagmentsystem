@@ -1,0 +1,582 @@
+/* [project]/src/app/module/[id]/page.module.css [app-client] (css) */
+.page-module___BMohW__container {
+  background-color: var(--color-background);
+  max-width: 1000px;
+  color: var(--color-foreground);
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-module___BMohW__pageTitle {
+  color: var(--color-primary-500);
+  margin-bottom: .5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.page-module___BMohW__pageTitle:after {
+  content: "";
+  background-color: var(--color-secondary-500);
+  border-radius: 2px;
+  width: 60px;
+  height: 4px;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+}
+
+.page-module___BMohW__moduleNumber {
+  color: var(--color-default-600);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.page-module___BMohW__moduleCard {
+  background-color: var(--color-content1);
+  border: 1px solid var(--color-default-200);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px #00000014;
+}
+
+.page-module___BMohW__section {
+  border-bottom: 1px solid var(--color-default-200);
+  padding: 1.5rem;
+}
+
+.page-module___BMohW__section:last-child {
+  border-bottom: none;
+}
+
+.page-module___BMohW__sectionTitle {
+  color: var(--color-primary-500);
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.page-module___BMohW__sectionContent {
+  color: var(--color-default-700);
+  line-height: 1.6;
+}
+
+.page-module___BMohW__infoGrid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  display: grid;
+}
+
+.page-module___BMohW__infoItem {
+  flex-direction: column;
+  display: flex;
+}
+
+.page-module___BMohW__infoLabel {
+  color: var(--color-default-600);
+  margin-bottom: .25rem;
+  font-size: .875rem;
+}
+
+.page-module___BMohW__infoValue {
+  color: var(--color-content1-foreground);
+  font-weight: 600;
+}
+
+.page-module___BMohW__backButton {
+  background-color: var(--color-primary-500);
+  color: var(--color-primary-foreground);
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  border-radius: 6px;
+  margin-top: 1.5rem;
+  padding: .75rem 1.5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .2s;
+  display: inline-block;
+}
+
+.page-module___BMohW__backButton:hover {
+  background-color: var(--color-primary-600);
+}
+
+.page-module___BMohW__backButton:active {
+  background-color: var(--color-primary-700);
+}
+
+.page-module___BMohW__gradesSection {
+  margin-top: 2rem;
+}
+
+.page-module___BMohW__gradesGrid {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  display: grid;
+}
+
+.page-module___BMohW__gradeCard {
+  background-color: var(--color-content2);
+  border: 1px solid var(--color-default-200);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.page-module___BMohW__gradeTitle {
+  color: var(--color-content1-foreground);
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+
+.page-module___BMohW__gradeValue {
+  color: var(--color-primary-600);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.page-module___BMohW__gradeDate {
+  color: var(--color-default-600);
+  margin-top: .5rem;
+  font-size: .8rem;
+}
+
+@media (width <= 768px) {
+  .page-module___BMohW__container {
+    padding: 1rem;
+  }
+
+  .page-module___BMohW__infoGrid, .page-module___BMohW__gradesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.page-module___BMohW__eventsList {
+  flex-direction: column;
+  gap: 1rem;
+  display: flex;
+}
+
+.page-module___BMohW__eventItem {
+  background-color: var(--color-content2);
+  border: 1px solid var(--color-default-200);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.page-module___BMohW__eventTitle {
+  color: var(--color-primary-500);
+  margin-bottom: .5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.page-module___BMohW__sectionContent {
+  color: var(--color-default-700);
+  margin: 0;
+  font-size: .95rem;
+}
+
+@media (width <= 480px) {
+  .page-module___BMohW__eventsList {
+    gap: .5rem;
+  }
+
+  .page-module___BMohW__eventItem {
+    padding: .75rem;
+  }
+
+  .page-module___BMohW__eventTitle {
+    font-size: 1rem;
+  }
+
+  .page-module___BMohW__sectionContent {
+    font-size: .85rem;
+  }
+}
+
+@media (width >= 481px) and (width <= 768px) {
+  .page-module___BMohW__eventItem {
+    padding: .9rem;
+  }
+
+  .page-module___BMohW__eventTitle {
+    font-size: 1.05rem;
+  }
+}
+
+
+/* [project]/src/components/google-style-calendar.module.css [app-client] (css) */
+.google-style-calendar-module__2buxAG__calendar {
+  background-color: var(--bg-color, --color-default-background);
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+  overflow: hidden;
+  box-shadow: 0 1px 3px #0000001f, 0 1px 2px #0000003d;
+}
+
+.google-style-calendar-module__2buxAG__calendarHeader {
+  background-color: var(--primary-color, --secondary-color);
+  color: var(--color-default-foreground);
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  display: flex;
+}
+
+.google-style-calendar-module__2buxAG__calendarControls {
+  align-items: center;
+  gap: 16px;
+  display: flex;
+}
+
+.google-style-calendar-module__2buxAG__calendarTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.google-style-calendar-module__2buxAG__navButton {
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  font-size: 1.2rem;
+  transition: background-color .2s;
+  display: flex;
+}
+
+.google-style-calendar-module__2buxAG__navButton:hover {
+  background-color: #fff3;
+}
+
+.google-style-calendar-module__2buxAG__todayButton {
+  color: #fff;
+  cursor: pointer;
+  background-color: #fff3;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: background-color .2s;
+}
+
+.google-style-calendar-module__2buxAG__todayButton:hover {
+  background-color: #ffffff4d;
+}
+
+.google-style-calendar-module__2buxAG__calendarGrid {
+  border-top: 1px solid var(--border-color, #e0e0e0);
+  grid-template-columns: repeat(7, 1fr);
+  display: grid;
+}
+
+.google-style-calendar-module__2buxAG__weekDayHeader {
+  text-align: center;
+  color: var(--secondary-text, #5f6368);
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  padding: 10px;
+  font-size: .85rem;
+  font-weight: 500;
+}
+
+.google-style-calendar-module__2buxAG__calendarDay {
+  border-right: 1px solid var(--border-color, #e0e0e0);
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  cursor: pointer;
+  min-height: 100px;
+  padding: 8px;
+  transition: background-color .2s;
+  position: relative;
+}
+
+.google-style-calendar-module__2buxAG__calendarDay:nth-child(7n) {
+  border-right: none;
+}
+
+.google-style-calendar-module__2buxAG__calendarDay:hover {
+  background-color: var(--hover-bg, #f5f5f5);
+}
+
+.google-style-calendar-module__2buxAG__currentMonth {
+  background-color: var(--bg-color, white);
+}
+
+.google-style-calendar-module__2buxAG__otherMonth {
+  background-color: var(--disabled-bg, #f8f9fa);
+  color: var(--disabled-text, #70757a);
+}
+
+.google-style-calendar-module__2buxAG__today {
+  background-color: var(--highlight-bg, #e8f0fe);
+}
+
+.google-style-calendar-module__2buxAG__today .google-style-calendar-module__2buxAG__dayNumber {
+  background-color: var(--primary-color, #1a73e8);
+  color: #fff;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  display: flex;
+}
+
+.google-style-calendar-module__2buxAG__dayNumber {
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+  font-size: .85rem;
+  display: flex;
+}
+
+.google-style-calendar-module__2buxAG__dayEvents {
+  flex-direction: column;
+  gap: 2px;
+  display: flex;
+}
+
+.google-style-calendar-module__2buxAG__eventIndicator {
+  background-color: var(--primary-color, #1a73e8);
+  color: #fff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 2px 4px;
+  font-size: .7rem;
+  overflow: hidden;
+}
+
+.google-style-calendar-module__2buxAG__moreEvents {
+  color: var(--secondary-text, #5f6368);
+  text-align: center;
+  padding: 2px 0;
+  font-size: .7rem;
+}
+
+.google-style-calendar-module__2buxAG__modalBackdrop {
+  z-index: 1000;
+  background-color: #00000080;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.google-style-calendar-module__2buxAG__modal {
+  background-color: var(--bg-color, white);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 4px 12px #00000026;
+}
+
+.google-style-calendar-module__2buxAG__modalHeader {
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  display: flex;
+}
+
+.google-style-calendar-module__2buxAG__modalHeader h3 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.google-style-calendar-module__2buxAG__closeButton {
+  cursor: pointer;
+  color: var(--secondary-text, #5f6368);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.google-style-calendar-module__2buxAG__eventForm {
+  padding: 20px;
+}
+
+.google-style-calendar-module__2buxAG__formGroup {
+  margin-bottom: 16px;
+}
+
+.google-style-calendar-module__2buxAG__formGroup label {
+  color: var(--text-color, #202124);
+  margin-bottom: 8px;
+  font-weight: 500;
+  display: block;
+}
+
+.google-style-calendar-module__2buxAG__formInput, .google-style-calendar-module__2buxAG__formTextarea {
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 4px;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: .9rem;
+}
+
+.google-style-calendar-module__2buxAG__formInput:focus, .google-style-calendar-module__2buxAG__formTextarea:focus {
+  border-color: var(--primary-color, #1a73e8);
+  outline: none;
+  box-shadow: 0 0 0 2px #1a73e833;
+}
+
+.google-style-calendar-module__2buxAG__formActions {
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  display: flex;
+}
+
+.google-style-calendar-module__2buxAG__saveButton {
+  background-color: var(--primary-color, #1a73e8);
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: background-color .2s;
+}
+
+.google-style-calendar-module__2buxAG__saveButton:hover {
+  background-color: #1765cc;
+}
+
+.google-style-calendar-module__2buxAG__saveButton:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+.google-style-calendar-module__2buxAG__deleteButton {
+  color: #d93025;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #d93025;
+  border-radius: 4px;
+  margin-right: auto;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: background-color .2s;
+}
+
+.google-style-calendar-module__2buxAG__deleteButton:hover {
+  background-color: #d930250a;
+}
+
+.google-style-calendar-module__2buxAG__confirmModal {
+  background-color: var(--bg-color, white);
+  text-align: center;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.google-style-calendar-module__2buxAG__confirmModal h3 {
+  margin-top: 0;
+}
+
+.google-style-calendar-module__2buxAG__confirmActions {
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  display: flex;
+}
+
+.google-style-calendar-module__2buxAG__cancelButton {
+  background-color: var(--bg-color, white);
+  border: 1px solid var(--border-color, #e0e0e0);
+  color: var(--text-color, #202124);
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 500;
+}
+
+.google-style-calendar-module__2buxAG__confirmButton {
+  color: #fff;
+  cursor: pointer;
+  background-color: #d93025;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 500;
+}
+
+.google-style-calendar-module__2buxAG__notification {
+  z-index: 1100;
+  border-radius: 4px;
+  padding: 12px 20px;
+  animation: .3s ease-out google-style-calendar-module__2buxAG__slideIn;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  box-shadow: 0 2px 10px #0000001a;
+}
+
+.google-style-calendar-module__2buxAG__successNotification {
+  color: #fff;
+  background-color: #4caf50;
+}
+
+.google-style-calendar-module__2buxAG__errorNotification {
+  color: #fff;
+  background-color: #f44336;
+}
+
+@keyframes google-style-calendar-module__2buxAG__slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (width <= 768px) {
+  .google-style-calendar-module__2buxAG__calendarDay {
+    min-height: 70px;
+  }
+
+  .google-style-calendar-module__2buxAG__dayEvents {
+    max-height: 40px;
+    overflow: hidden;
+  }
+}
+
+@media (width <= 480px) {
+  .google-style-calendar-module__2buxAG__calendarGrid {
+    font-size: .8rem;
+  }
+
+  .google-style-calendar-module__2buxAG__calendarDay {
+    min-height: 60px;
+    padding: 4px;
+  }
+
+  .google-style-calendar-module__2buxAG__eventIndicator {
+    padding: 1px 3px;
+    font-size: .6rem;
+  }
+}
+
+
+/*# sourceMappingURL=src_542f6671._.css.map*/

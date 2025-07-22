@@ -1,0 +1,126 @@
+/* [project]/src/components/notification.module.css [app-client] (css) */
+.notification-module__T-atKa__notificationContainer {
+  z-index: 9999;
+  pointer-events: none;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  max-width: 100%;
+  display: flex;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.notification-module__T-atKa__notification {
+  background-color: var(--color-content1);
+  opacity: 0;
+  animation: notification-module__T-atKa__slideInNotification .3s var(--animation-easing-spring) forwards;
+  pointer-events: auto;
+  border-left: 4px solid;
+  border-radius: 8px;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: 1rem;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  transform: translateX(100%);
+  box-shadow: 0 4px 12px #00000026;
+}
+
+.notification-module__T-atKa__notification.notification-module__T-atKa__exit {
+  animation: notification-module__T-atKa__slideOutNotification .3s var(--animation-easing-spring) forwards;
+}
+
+.notification-module__T-atKa__notificationSuccess {
+  border-color: var(--color-success-500);
+}
+
+.notification-module__T-atKa__notificationError {
+  border-color: var(--color-danger-500);
+}
+
+.notification-module__T-atKa__notificationIcon {
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  display: flex;
+}
+
+.notification-module__T-atKa__notificationIconSvg {
+  stroke: currentColor;
+  width: 100%;
+  height: 100%;
+}
+
+.notification-module__T-atKa__notificationSuccess .notification-module__T-atKa__notificationIcon {
+  color: var(--color-success-500);
+}
+
+.notification-module__T-atKa__notificationError .notification-module__T-atKa__notificationIcon {
+  color: var(--color-danger-500);
+}
+
+.notification-module__T-atKa__notificationContent {
+  flex-grow: 1;
+}
+
+.notification-module__T-atKa__notificationTitle {
+  margin-bottom: .25rem;
+  font-weight: 600;
+}
+
+.notification-module__T-atKa__notificationMessage {
+  color: var(--color-default-700);
+  font-size: .9rem;
+}
+
+.notification-module__T-atKa__notificationProgressBar {
+  background-color: var(--color-secondary-500);
+  transform-origin: 0;
+  width: 100%;
+  height: 3px;
+  animation: 5s linear forwards notification-module__T-atKa__shrinkProgress;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+@keyframes notification-module__T-atKa__slideInNotification {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes notification-module__T-atKa__slideOutNotification {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes notification-module__T-atKa__shrinkProgress {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/*# sourceMappingURL=src_components_notification_module_css_f9ee138c._.single.css.map*/

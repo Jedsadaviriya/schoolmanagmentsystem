@@ -1,17 +1,19 @@
-import { modulesDB } from "@/app/lib/indexedDB";
 
+import { NextResponse } from "next/server";
+import { connectToDatabase } from "../../lib/mongodb";
+import { ObjectId } from "mongodb";
+
+// GET: Fetch all modules
 export async function GET() {
   try {
-    const modules = await modulesDB.getAll();
+    const { db } = await connectToDatabase();
+    const modules = await db.collection("modules").find({}).toArray();
 
-    return Response.json({ success: true, modules });
+    return NextResponse.json({ success: true, modules });
   } catch (error) {
     console.error("Error fetching modules:", error);
-    return Response.json(
-      {
-        success: false,
-        error: error.message || "Fehler beim Laden der Module",
-      },
+    return NextResponse.json(
+      { success: false, error: "Fehler beim Laden der Module" },
       { status: 500 }
     );
   }
@@ -31,11 +33,8 @@ export async function POST(request) {
     } = body;
 
     if (!title || !module_number) {
-      return Response.json(
-        {
-          success: false,
-          error: "Titel und Modulnummer sind erforderlich",
-        },
+      return NextResponse.json(
+        { success: false, error: "Titel und Modulnummer sind erforderlich" },
         { status: 400 }
       );
     }
@@ -51,22 +50,20 @@ export async function POST(request) {
       events: [],
     };
 
-    const result = await modulesDB.add(newModule);
 
-    return Response.json(
-      {
-        success: true,
-        id: result._id,
-      },
+    const { db } = await connectToDatabase();
+    const result = await db.collection("modules").insertOne(newModule);
+
+    return NextResponse.json(
+      { success: true, id: result.insertedId.toString() },
+
       { status: 201 }
     );
   } catch (error) {
     console.error("Error creating module:", error);
-    return Response.json(
-      {
-        success: false,
-        error: error.message || "Fehler beim Erstellen des Moduls",
-      },
+
+    return NextResponse.json(
+      { success: false, error: "Fehler beim Erstellen des Moduls" },
       { status: 500 }
     );
   }

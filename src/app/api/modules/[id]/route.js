@@ -1,67 +1,73 @@
-import { modulesDB } from "@/app/lib/indexedDB";
 
+import { NextResponse } from "next/server";
+import { connectToDatabase } from "@/lib/mongodb";
+import { ObjectId } from "mongodb";
+
+// GET: Fetch a single module by ID
 export async function GET(request, { params }) {
   try {
     const { id } = params;
 
-    if (!id) {
-      return Response.json(
-        {
-          success: false,
-          error: "Ungültige ID",
-        },
+
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json(
+        { success: false, error: "Ungültige ID" },
+
         { status: 400 }
       );
     }
 
-    const module = await modulesDB.getById(id);
+
+    const { db } = await connectToDatabase();
+    const module = await db
+      .collection("modules")
+      .findOne({ _id: new ObjectId(id) });
 
     if (!module) {
-      return Response.json(
-        {
-          success: false,
-          error: "Modul nicht gefunden",
-        },
+      return NextResponse.json(
+        { success: false, error: "Modul nicht gefunden" },
+
         { status: 404 }
       );
     }
 
-    return Response.json({ success: true, module });
+
+    return NextResponse.json({ success: true, module });
   } catch (error) {
     console.error("Error fetching module:", error);
-    return Response.json(
-      {
-        success: false,
-        error: error.message || "Fehler beim Laden des Moduls",
-      },
+    return NextResponse.json(
+      { success: false, error: "Fehler beim Laden des Moduls" },
+
       { status: 500 }
     );
   }
 }
+
 
 export async function PUT(request, { params }) {
   try {
     const { id } = params;
     const body = await request.json();
 
-    if (!id) {
-      return Response.json(
-        {
-          success: false,
-          error: "Ungültige ID",
-        },
+
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json(
+        { success: false, error: "Ungültige ID" },
+
         { status: 400 }
       );
     }
 
-    const existingModule = await modulesDB.getById(id);
+
+    const { db } = await connectToDatabase();
+    const existingModule = await db
+      .collection("modules")
+      .findOne({ _id: new ObjectId(id) });
 
     if (!existingModule) {
-      return Response.json(
-        {
-          success: false,
-          error: "Modul nicht gefunden",
-        },
+      return NextResponse.json(
+        { success: false, error: "Modul nicht gefunden" },
+
         { status: 404 }
       );
     }
@@ -69,48 +75,57 @@ export async function PUT(request, { params }) {
     const updatedModule = {
       ...existingModule,
       ...body,
-      _id: id,
+      _id: new ObjectId(id),
+      events: existingModule.events, // Preserve events array
     };
 
-    await modulesDB.update(updatedModule);
+    await db
+      .collection("modules")
+      .updateOne({ _id: new ObjectId(id) }, { $set: updatedModule });
 
-    return Response.json({ success: true });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error updating module:", error);
-    return Response.json(
-      {
-        success: false,
-        error: error.message || "Fehler beim Aktualisieren des Moduls",
-      },
+    return NextResponse.json(
+      { success: false, error: "Fehler beim Aktualisieren des Moduls" },
       { status: 500 }
     );
   }
 }
 
+
 export async function DELETE(request, { params }) {
   try {
     const { id } = params;
 
-    if (!id) {
-      return Response.json(
-        {
-          success: false,
-          error: "Ungültige ID",
-        },
+
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json(
+        { success: false, error: "Ungültige ID" },
+
         { status: 400 }
       );
     }
 
-    await modulesDB.remove(id);
 
-    return Response.json({ success: true });
+    const { db } = await connectToDatabase();
+    const result = await db
+      .collection("modules")
+      .deleteOne({ _id: new ObjectId(id) });
+
+    if (result.deletedCount === 0) {
+      return NextResponse.json(
+        { success: false, error: "Modul nicht gefunden" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting module:", error);
-    return Response.json(
-      {
-        success: false,
-        error: error.message || "Fehler beim Löschen des Moduls",
-      },
+    return NextResponse.json(
+      { success: false, error: "Fehler beim Löschen des Moduls" },
+
       { status: 500 }
     );
   }

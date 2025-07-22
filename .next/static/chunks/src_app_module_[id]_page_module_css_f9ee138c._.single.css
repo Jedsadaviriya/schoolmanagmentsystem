@@ -1,0 +1,211 @@
+/* [project]/src/app/module/[id]/page.module.css [app-client] (css) */
+.page-module___BMohW__container {
+  background-color: var(--color-background);
+  max-width: 1000px;
+  color: var(--color-foreground);
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-module___BMohW__pageTitle {
+  color: var(--color-primary-500);
+  margin-bottom: .5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.page-module___BMohW__pageTitle:after {
+  content: "";
+  background-color: var(--color-secondary-500);
+  border-radius: 2px;
+  width: 60px;
+  height: 4px;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+}
+
+.page-module___BMohW__moduleNumber {
+  color: var(--color-default-600);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.page-module___BMohW__moduleCard {
+  background-color: var(--color-content1);
+  border: 1px solid var(--color-default-200);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px #00000014;
+}
+
+.page-module___BMohW__section {
+  border-bottom: 1px solid var(--color-default-200);
+  padding: 1.5rem;
+}
+
+.page-module___BMohW__section:last-child {
+  border-bottom: none;
+}
+
+.page-module___BMohW__sectionTitle {
+  color: var(--color-primary-500);
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.page-module___BMohW__sectionContent {
+  color: var(--color-default-700);
+  line-height: 1.6;
+}
+
+.page-module___BMohW__infoGrid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  display: grid;
+}
+
+.page-module___BMohW__infoItem {
+  flex-direction: column;
+  display: flex;
+}
+
+.page-module___BMohW__infoLabel {
+  color: var(--color-default-600);
+  margin-bottom: .25rem;
+  font-size: .875rem;
+}
+
+.page-module___BMohW__infoValue {
+  color: var(--color-content1-foreground);
+  font-weight: 600;
+}
+
+.page-module___BMohW__backButton {
+  background-color: var(--color-primary-500);
+  color: var(--color-primary-foreground);
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  border-radius: 6px;
+  margin-top: 1.5rem;
+  padding: .75rem 1.5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .2s;
+  display: inline-block;
+}
+
+.page-module___BMohW__backButton:hover {
+  background-color: var(--color-primary-600);
+}
+
+.page-module___BMohW__backButton:active {
+  background-color: var(--color-primary-700);
+}
+
+.page-module___BMohW__gradesSection {
+  margin-top: 2rem;
+}
+
+.page-module___BMohW__gradesGrid {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  display: grid;
+}
+
+.page-module___BMohW__gradeCard {
+  background-color: var(--color-content2);
+  border: 1px solid var(--color-default-200);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.page-module___BMohW__gradeTitle {
+  color: var(--color-content1-foreground);
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+
+.page-module___BMohW__gradeValue {
+  color: var(--color-primary-600);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.page-module___BMohW__gradeDate {
+  color: var(--color-default-600);
+  margin-top: .5rem;
+  font-size: .8rem;
+}
+
+@media (width <= 768px) {
+  .page-module___BMohW__container {
+    padding: 1rem;
+  }
+
+  .page-module___BMohW__infoGrid, .page-module___BMohW__gradesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.page-module___BMohW__eventsList {
+  flex-direction: column;
+  gap: 1rem;
+  display: flex;
+}
+
+.page-module___BMohW__eventItem {
+  background-color: var(--color-content2);
+  border: 1px solid var(--color-default-200);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.page-module___BMohW__eventTitle {
+  color: var(--color-primary-500);
+  margin-bottom: .5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.page-module___BMohW__sectionContent {
+  color: var(--color-default-700);
+  margin: 0;
+  font-size: .95rem;
+}
+
+@media (width <= 480px) {
+  .page-module___BMohW__eventsList {
+    gap: .5rem;
+  }
+
+  .page-module___BMohW__eventItem {
+    padding: .75rem;
+  }
+
+  .page-module___BMohW__eventTitle {
+    font-size: 1rem;
+  }
+
+  .page-module___BMohW__sectionContent {
+    font-size: .85rem;
+  }
+}
+
+@media (width >= 481px) and (width <= 768px) {
+  .page-module___BMohW__eventItem {
+    padding: .9rem;
+  }
+
+  .page-module___BMohW__eventTitle {
+    font-size: 1.05rem;
+  }
+}
+
+/*# sourceMappingURL=src_app_module_%5Bid%5D_page_module_css_f9ee138c._.single.css.map*/
