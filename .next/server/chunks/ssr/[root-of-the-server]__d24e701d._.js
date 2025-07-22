@@ -123,6 +123,15 @@ async function Modules() {
                 lineNumber: 12,
                 columnNumber: 7
             }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                href: "/module/create",
+                className: `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].addButton} animated-button`,
+                children: "Neues Modul hinzufügen"
+            }, void 0, false, {
+                fileName: "[project]/src/app/module/page.jsx",
+                lineNumber: 13,
+                columnNumber: 7
+            }, this),
             modules.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].moduleGrid,
                 children: modules.map((module)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -136,7 +145,7 @@ async function Modules() {
                                         children: module.title
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/module/page.jsx",
-                                        lineNumber: 19,
+                                        lineNumber: 25,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -148,13 +157,13 @@ async function Modules() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/module/page.jsx",
-                                        lineNumber: 20,
+                                        lineNumber: 26,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/module/page.jsx",
-                                lineNumber: 18,
+                                lineNumber: 24,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -165,7 +174,7 @@ async function Modules() {
                                         children: module.description || "Keine Beschreibung verfügbar"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/module/page.jsx",
-                                        lineNumber: 25,
+                                        lineNumber: 31,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -174,24 +183,24 @@ async function Modules() {
                                         children: "Details anzeigen"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/module/page.jsx",
-                                        lineNumber: 28,
+                                        lineNumber: 34,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/module/page.jsx",
-                                lineNumber: 24,
+                                lineNumber: 30,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, module._id.toString(), true, {
                         fileName: "[project]/src/app/module/page.jsx",
-                        lineNumber: 17,
+                        lineNumber: 23,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/app/module/page.jsx",
-                lineNumber: 15,
+                lineNumber: 21,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].emptyState,
@@ -201,7 +210,7 @@ async function Modules() {
                         children: "📚"
                     }, void 0, false, {
                         fileName: "[project]/src/app/module/page.jsx",
-                        lineNumber: 40,
+                        lineNumber: 46,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -209,13 +218,13 @@ async function Modules() {
                         children: "Keine Module gefunden"
                     }, void 0, false, {
                         fileName: "[project]/src/app/module/page.jsx",
-                        lineNumber: 41,
+                        lineNumber: 47,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/module/page.jsx",
-                lineNumber: 39,
+                lineNumber: 45,
                 columnNumber: 9
             }, this)
         ]

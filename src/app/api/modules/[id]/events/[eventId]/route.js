@@ -1,36 +1,75 @@
+// File: app/api/modules/[id]/events/[eventId]/route.js
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "../../../../../lib/mongodb";
+import { connectToDatabase } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
-// PUT - Update an event
-export async function PUT(request, { params }) {
+// GET: Fetch a specific event by ID
+export async function GET(request, { params }) {
   try {
     const { id, eventId } = params;
-    const data = await request.json();
 
-    if (!data.title || !data.date) {
+    if (!ObjectId.isValid(id)) {
       return NextResponse.json(
-        { success: false, error: "Titel und Datum sind erforderlich" },
+        { success: false, error: "Ungültige Modul-ID" },
         { status: 400 }
       );
     }
 
     const { db } = await connectToDatabase();
+    const module = await db
+      .collection("modules")
+      .findOne(
+        { _id: new ObjectId(id), "events._id": eventId },
+        { projection: { "events.$": 1 } }
+      );
 
-    const result = await db.collection("modules").updateOne(
-      { _id: new ObjectId(id), "events._id": eventId },
-      {
-        $set: {
-          "events.$.title": data.title,
-          "events.$.date": data.date,
-          "events.$.description": data.description || "",
-        },
-      }
+    if (!module || !module.events || module.events.length === 0) {
+      return NextResponse.json(
+        { success: false, error: "Ereignis nicht gefunden" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true, event: module.events[0] });
+  } catch (error) {
+    console.error("Error fetching event:", error);
+    return NextResponse.json(
+      { success: false, error: "Fehler beim Laden des Ereignisses" },
+      { status: 500 }
     );
+  }
+}
+
+// PUT: Update a specific event
+export async function PUT(request, { params }) {
+  try {
+    const { id, eventId } = params;
+    const data = await request.json();
+
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json(
+        { success: false, error: "Ungültige Modul-ID" },
+        { status: 400 }
+      );
+    }
+
+    const { db } = await connectToDatabase();
+    const updateFields = {};
+    if (data.title) updateFields["events.$.title"] = data.title;
+    if (data.date) updateFields["events.$.date"] = data.date;
+    if (data.description !== undefined)
+      updateFields["events.$.description"] = data.description;
+
+    const result = await db
+      .collection("modules")
+      .updateOne(
+        { _id: new ObjectId(id), "events._id": eventId },
+        { $set: updateFields }
+      );
 
     if (result.matchedCount === 0) {
       return NextResponse.json(
-        { success: false, error: "Modul oder Termin nicht gefunden" },
+        { success: false, error: "Ereignis oder Modul nicht gefunden" },
         { status: 404 }
       );
     }
@@ -39,19 +78,25 @@ export async function PUT(request, { params }) {
   } catch (error) {
     console.error("Error updating event:", error);
     return NextResponse.json(
-      { success: false, error: "Interner Serverfehler" },
+      { success: false, error: "Fehler beim Aktualisieren des Ereignisses" },
       { status: 500 }
     );
   }
 }
 
-// DELETE - Delete an event
+// DELETE: Delete a specific event
 export async function DELETE(request, { params }) {
   try {
     const { id, eventId } = params;
 
-    const { db } = await connectToDatabase();
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json(
+        { success: false, error: "Ungültige Modul-ID" },
+        { status: 400 }
+      );
+    }
 
+    const { db } = await connectToDatabase();
     const result = await db
       .collection("modules")
       .updateOne(
@@ -66,11 +111,18 @@ export async function DELETE(request, { params }) {
       );
     }
 
+    if (result.modifiedCount === 0) {
+      return NextResponse.json(
+        { success: false, error: "Ereignis nicht gefunden" },
+        { status: 404 }
+      );
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting event:", error);
     return NextResponse.json(
-      { success: false, error: "Interner Serverfehler" },
+      { success: false, error: "Fehler beim Löschen des Ereignisses" },
       { status: 500 }
     );
   }

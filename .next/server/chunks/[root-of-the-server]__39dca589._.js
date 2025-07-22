@@ -113,7 +113,9 @@ async function connectToDatabase() {
 
 var { g: global, __dirname } = __turbopack_context__;
 {
+// File: app/api/modules/[id]/events/route.js
 __turbopack_context__.s({
+    "GET": (()=>GET),
     "POST": (()=>POST)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
@@ -122,10 +124,59 @@ var __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$_
 ;
 ;
 ;
+async function GET(request, { params }) {
+    try {
+        const { id } = params;
+        if (!__TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["ObjectId"].isValid(id)) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
+                error: "Ungültige Modul-ID"
+            }, {
+                status: 400
+            });
+        }
+        const { db } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$lib$2f$mongodb$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
+        const module = await db.collection("modules").findOne({
+            _id: new __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["ObjectId"](id)
+        }, {
+            projection: {
+                events: 1
+            }
+        });
+        if (!module) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
+                error: "Modul nicht gefunden"
+            }, {
+                status: 404
+            });
+        }
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            success: true,
+            events: module.events || []
+        });
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            success: false,
+            error: "Fehler beim Laden der Ereignisse"
+        }, {
+            status: 500
+        });
+    }
+}
 async function POST(request, { params }) {
     try {
         const { id } = params;
         const data = await request.json();
+        if (!__TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["ObjectId"].isValid(id)) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
+                error: "Ungültige Modul-ID"
+            }, {
+                status: 400
+            });
+        }
         if (!data.title || !data.date) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 success: false,
@@ -135,7 +186,6 @@ async function POST(request, { params }) {
             });
         }
         const { db } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$lib$2f$mongodb$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
-        // Create event with a unique ID
         const event = {
             _id: new __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["ObjectId"]().toString(),
             title: data.title,
@@ -165,7 +215,7 @@ async function POST(request, { params }) {
         console.error("Error creating event:", error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: false,
-            error: "Interner Serverfehler"
+            error: "Fehler beim Erstellen des Ereignisses"
         }, {
             status: 500
         });

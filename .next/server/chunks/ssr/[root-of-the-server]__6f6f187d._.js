@@ -79,6 +79,9 @@ var { g: global, __dirname } = __turbopack_context__;
 __turbopack_context__.v({
   "backButton": "page-module___BMohW__backButton",
   "container": "page-module___BMohW__container",
+  "eventItem": "page-module___BMohW__eventItem",
+  "eventTitle": "page-module___BMohW__eventTitle",
+  "eventsList": "page-module___BMohW__eventsList",
   "gradeCard": "page-module___BMohW__gradeCard",
   "gradeDate": "page-module___BMohW__gradeDate",
   "gradeTitle": "page-module___BMohW__gradeTitle",
@@ -184,14 +187,12 @@ async function ModuleDetail({ params }) {
     }
     // Fetch grades related to this module
     const grades = await db.collection("grades").find({
-        module_id: params.id
+        module_id: new __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["ObjectId"](params.id)
     }).toArray();
     // Calculate average grade for this module
     const calculateAverage = ()=>{
         if (grades.length === 0) return 0;
-        const sum = grades.reduce((total, grade)=>{
-            return total + Number.parseFloat(grade.grade);
-        }, 0);
+        const sum = grades.reduce((total, grade)=>total + Number.parseFloat(grade.grade || 0), 0);
         return sum / grades.length;
     };
     const averageGrade = calculateAverage();
@@ -205,7 +206,7 @@ async function ModuleDetail({ params }) {
                 children: module.title
             }, void 0, false, {
                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                lineNumber: 47,
+                lineNumber: 46,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -216,7 +217,7 @@ async function ModuleDetail({ params }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                lineNumber: 48,
+                lineNumber: 47,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -230,7 +231,7 @@ async function ModuleDetail({ params }) {
                                 children: "Beschreibung"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                lineNumber: 54,
+                                lineNumber: 53,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -238,13 +239,13 @@ async function ModuleDetail({ params }) {
                                 children: module.description || "Keine Beschreibung verfügbar"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                lineNumber: 55,
+                                lineNumber: 54,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/module/[id]/page.jsx",
-                        lineNumber: 53,
+                        lineNumber: 52,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -255,7 +256,7 @@ async function ModuleDetail({ params }) {
                                 children: "Terminkalender"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                lineNumber: 61,
+                                lineNumber: 60,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$google$2d$style$2d$calendar$2e$jsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -263,13 +264,13 @@ async function ModuleDetail({ params }) {
                                 initialEvents: events
                             }, void 0, false, {
                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                lineNumber: 62,
+                                lineNumber: 61,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/module/[id]/page.jsx",
-                        lineNumber: 60,
+                        lineNumber: 59,
                         columnNumber: 9
                     }, this),
                     grades.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -280,7 +281,7 @@ async function ModuleDetail({ params }) {
                                 children: "Noten"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                lineNumber: 67,
+                                lineNumber: 66,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -293,7 +294,7 @@ async function ModuleDetail({ params }) {
                                                 children: grade.subject || "Prüfung"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                                lineNumber: 71,
+                                                lineNumber: 70,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -301,7 +302,7 @@ async function ModuleDetail({ params }) {
                                                 children: Number.parseFloat(grade.grade).toFixed(1)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                                lineNumber: 74,
+                                                lineNumber: 73,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -313,18 +314,18 @@ async function ModuleDetail({ params }) {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                                lineNumber: 77,
+                                                lineNumber: 76,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, index, true, {
                                         fileName: "[project]/src/app/module/[id]/page.jsx",
-                                        lineNumber: 70,
+                                        lineNumber: 69,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                lineNumber: 68,
+                                lineNumber: 67,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -338,7 +339,7 @@ async function ModuleDetail({ params }) {
                                         children: "Durchschnittsnote"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/module/[id]/page.jsx",
-                                        lineNumber: 85,
+                                        lineNumber: 84,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -349,19 +350,19 @@ async function ModuleDetail({ params }) {
                                         children: averageGrade.toFixed(2)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/module/[id]/page.jsx",
-                                        lineNumber: 86,
+                                        lineNumber: 85,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                lineNumber: 84,
+                                lineNumber: 83,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/module/[id]/page.jsx",
-                        lineNumber: 66,
+                        lineNumber: 65,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -375,52 +376,40 @@ async function ModuleDetail({ params }) {
                                 lineNumber: 96,
                                 columnNumber: 11
                             }, this),
-                            module.events && module.events.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].section,
-                                children: module.events.map((event, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].moduleCard,
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].section,
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                    className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].sectionTitle,
-                                                    children: event.title
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/module/[id]/page.jsx",
-                                                    lineNumber: 102,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].sectionContent,
-                                                    children: [
-                                                        "Date: ",
-                                                        event.date
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/app/module/[id]/page.jsx",
-                                                    lineNumber: 103,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-gray-600",
-                                                    children: event.description
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/module/[id]/page.jsx",
-                                                    lineNumber: 104,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
-                                                    fileName: "[project]/src/app/module/[id]/page.jsx",
-                                                    lineNumber: 105,
-                                                    columnNumber: 21
-                                                }, this)
-                                            ]
-                                        }, index, true, {
-                                            fileName: "[project]/src/app/module/[id]/page.jsx",
-                                            lineNumber: 101,
-                                            columnNumber: 19
-                                        }, this)
-                                    }, void 0, false, {
+                            events.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].eventsList,
+                                children: events.map((event, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].eventItem,
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].eventTitle,
+                                                children: event.title
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/module/[id]/page.jsx",
+                                                lineNumber: 101,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].sectionContent,
+                                                children: [
+                                                    "Datum: ",
+                                                    event.date
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/module/[id]/page.jsx",
+                                                lineNumber: 102,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].sectionContent,
+                                                children: event.description
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/module/[id]/page.jsx",
+                                                lineNumber: 103,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, index, true, {
                                         fileName: "[project]/src/app/module/[id]/page.jsx",
                                         lineNumber: 100,
                                         columnNumber: 17
@@ -430,11 +419,11 @@ async function ModuleDetail({ params }) {
                                 lineNumber: 98,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-gray-600",
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$module$2f5b$id$5d2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].sectionContent,
                                 children: "Keine Termine"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                                lineNumber: 111,
+                                lineNumber: 108,
                                 columnNumber: 13
                             }, this)
                         ]
@@ -446,7 +435,7 @@ async function ModuleDetail({ params }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                lineNumber: 52,
+                lineNumber: 51,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -455,13 +444,13 @@ async function ModuleDetail({ params }) {
                 children: "Zurück zu Modulen"
             }, void 0, false, {
                 fileName: "[project]/src/app/module/[id]/page.jsx",
-                lineNumber: 116,
+                lineNumber: 113,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/module/[id]/page.jsx",
-        lineNumber: 46,
+        lineNumber: 45,
         columnNumber: 5
     }, this);
 }

@@ -1,11 +1,8 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/grades/[id]/route": "app/api/grades/[id]/route.js",
   "/api/grades/route": "app/api/grades/route.js",
-  "/api/modules/[id]/events/[eventId]/route": "app/api/modules/[id]/events/[eventId]/route.js",
   "/api/modules/[id]/events/route": "app/api/modules/[id]/events/route.js",
+  "/api/modules/route": "app/api/modules/route.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/kalender/page": "app/kalender/page.js",
   "/module/[id]/page": "app/module/[id]/page.js",
   "/module/page": "app/module/page.js",
   "/noten/page": "app/noten/page.js",
