@@ -1,3 +1,8 @@
+![React](https://img.shields.io/badge/React-03DAC6?style=for-the-badge&logo=react&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-FFC107?style=for-the-badge&logo=javascript&logoColor=black)
+![CSS](https://img.shields.io/badge/CSS-28A745?style=for-the-badge&logo=css3&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-6C7680?style=for-the-badge&logo=mongodb&logoColor=white)
+
 # School Management System (SMS)
 
 ![App Overview](assets/sms-demo-overview.gif)
