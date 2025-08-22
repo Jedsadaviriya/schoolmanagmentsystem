@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../lib/mongodb";
 import { ObjectId } from "mongodb";
 
-
 // GET: Fetch all events for a module
 export async function GET(request, { params }) {
   try {
@@ -16,7 +15,7 @@ export async function GET(request, { params }) {
     }
 
     const { db } = await connectToDatabase();
-    const module = await db
+    const modules = await db
       .collection("modules")
       .findOne({ _id: new ObjectId(id) }, { projection: { events: 1 } });
 
@@ -27,7 +26,7 @@ export async function GET(request, { params }) {
       );
     }
 
-    return NextResponse.json({ success: true, events: module.events || [] });
+    return NextResponse.json({ success: true, events: modules.events || [] });
   } catch (error) {
     console.error("Error fetching events:", error);
     return NextResponse.json(
@@ -50,7 +49,6 @@ export async function POST(request, { params }) {
         { status: 400 }
       );
     }
-
 
     if (!data.title || !data.date) {
       return NextResponse.json(

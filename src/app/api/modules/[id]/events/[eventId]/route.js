@@ -1,7 +1,6 @@
-
 // File: app/api/modules/[id]/events/[eventId]/route.js
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/lib/mongodb";
+import { connectToDatabase } from "../.././../../../lib/mongodb";
 import { ObjectId } from "mongodb";
 
 // GET: Fetch a specific event by ID
@@ -17,21 +16,21 @@ export async function GET(request, { params }) {
     }
 
     const { db } = await connectToDatabase();
-    const module = await db
+    const modules = await db
       .collection("modules")
       .findOne(
         { _id: new ObjectId(id), "events._id": eventId },
         { projection: { "events.$": 1 } }
       );
 
-    if (!module || !module.events || module.events.length === 0) {
+    if (!modules || !modules.events || modules.events.length === 0) {
       return NextResponse.json(
         { success: false, error: "Ereignis nicht gefunden" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ success: true, event: module.events[0] });
+    return NextResponse.json({ success: true, event: modules.events[0] });
   } catch (error) {
     console.error("Error fetching event:", error);
     return NextResponse.json(
@@ -46,7 +45,6 @@ export async function PUT(request, { params }) {
   try {
     const { id, eventId } = params;
     const data = await request.json();
-
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -93,8 +91,6 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     const { id, eventId } = params;
-
-
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: "Ungültige Modul-ID" },
@@ -118,14 +114,12 @@ export async function DELETE(request, { params }) {
       );
     }
 
-
     if (result.modifiedCount === 0) {
       return NextResponse.json(
         { success: false, error: "Ereignis nicht gefunden" },
         { status: 404 }
       );
     }
-
 
     return NextResponse.json({ success: true });
   } catch (error) {

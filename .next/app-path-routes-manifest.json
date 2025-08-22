@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/grades/route": "/api/grades",
+  "/api/grades/[id]/route": "/api/grades/[id]",
+  "/api/modules/[id]/events/route": "/api/modules/[id]/events",
+  "/api/modules/route": "/api/modules",
+  "/api/modules/[id]/events/[eventId]/route": "/api/modules/[id]/events/[eventId]",
+  "/api/modules/[id]/route": "/api/modules/[id]",
+  "/favicon.ico/route": "/favicon.ico",
+  "/kalender/page": "/kalender",
+  "/module/page": "/module",
+  "/module/[id]/page": "/module/[id]",
+  "/page": "/",
+  "/noten/page": "/noten"
+}

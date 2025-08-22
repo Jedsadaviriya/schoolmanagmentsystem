@@ -1,13 +1,11 @@
-
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 import { ObjectId } from "mongodb";
 
 // GET: Fetch a single module by ID
 export async function GET(request, { params }) {
   try {
     const { id } = params;
-
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -17,13 +15,12 @@ export async function GET(request, { params }) {
       );
     }
 
-
     const { db } = await connectToDatabase();
-    const module = await db
+    const modules = await db
       .collection("modules")
       .findOne({ _id: new ObjectId(id) });
 
-    if (!module) {
+    if (!modules) {
       return NextResponse.json(
         { success: false, error: "Modul nicht gefunden" },
 
@@ -31,8 +28,7 @@ export async function GET(request, { params }) {
       );
     }
 
-
-    return NextResponse.json({ success: true, module });
+    return NextResponse.json({ success: true, modules });
   } catch (error) {
     console.error("Error fetching module:", error);
     return NextResponse.json(
@@ -43,12 +39,10 @@ export async function GET(request, { params }) {
   }
 }
 
-
 export async function PUT(request, { params }) {
   try {
     const { id } = params;
     const body = await request.json();
-
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -57,7 +51,6 @@ export async function PUT(request, { params }) {
         { status: 400 }
       );
     }
-
 
     const { db } = await connectToDatabase();
     const existingModule = await db
@@ -93,11 +86,9 @@ export async function PUT(request, { params }) {
   }
 }
 
-
 export async function DELETE(request, { params }) {
   try {
     const { id } = params;
-
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -106,7 +97,6 @@ export async function DELETE(request, { params }) {
         { status: 400 }
       );
     }
-
 
     const { db } = await connectToDatabase();
     const result = await db
