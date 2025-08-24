@@ -1,36 +1,37 @@
-// File: app/api/modules/[id]/events/[eventId]/route.js
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "../.././../../../lib/mongodb";
-import { ObjectId } from "mongodb";
 
-// GET: Fetch a specific event by ID
+let modules = [];
+
 export async function GET(request, { params }) {
   try {
     const { id, eventId } = params;
 
-    if (!ObjectId.isValid(id)) {
+    if (!id || !eventId) {
       return NextResponse.json(
-        { success: false, error: "Ungültige Modul-ID" },
+        { success: false, error: "Ungültige Modul-ID oder Ereignis-ID" },
         { status: 400 }
       );
     }
 
-    const { db } = await connectToDatabase();
-    const modules = await db
-      .collection("modules")
-      .findOne(
-        { _id: new ObjectId(id), "events._id": eventId },
-        { projection: { "events.$": 1 } }
-      );
+    const module = modules.find((m) => m._id === id);
 
-    if (!modules || !modules.events || modules.events.length === 0) {
+    if (!module || !module.events) {
+      return NextResponse.json(
+        { success: false, error: "Modul oder Ereignis nicht gefunden" },
+        { status: 404 }
+      );
+    }
+
+    const event = module.events.find((e) => e._id === eventId);
+
+    if (!event) {
       return NextResponse.json(
         { success: false, error: "Ereignis nicht gefunden" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ success: true, event: modules.events[0] });
+    return NextResponse.json({ success: true, event });
   } catch (error) {
     console.error("Error fetching event:", error);
     return NextResponse.json(
@@ -40,41 +41,47 @@ export async function GET(request, { params }) {
   }
 }
 
-// PUT: Update a specific event
 export async function PUT(request, { params }) {
   try {
     const { id, eventId } = params;
     const data = await request.json();
 
-    if (!ObjectId.isValid(id)) {
+    if (!id || !eventId) {
       return NextResponse.json(
-        { success: false, error: "Ungültige Modul-ID" },
+        { success: false, error: "Ungültige Modul-ID oder Ereignis-ID" },
         { status: 400 }
       );
     }
 
-    const { db } = await connectToDatabase();
+    const moduleIndex = modules.findIndex((m) => m._id === id);
 
-    const updateFields = {};
-    if (data.title) updateFields["events.$.title"] = data.title;
-    if (data.date) updateFields["events.$.date"] = data.date;
-    if (data.description !== undefined)
-      updateFields["events.$.description"] = data.description;
-
-    const result = await db
-      .collection("modules")
-      .updateOne(
-        { _id: new ObjectId(id), "events._id": eventId },
-        { $set: updateFields }
-      );
-
-    if (result.matchedCount === 0) {
+    if (moduleIndex === -1 || !modules[moduleIndex].events) {
       return NextResponse.json(
-        { success: false, error: "Ereignis oder Modul nicht gefunden" },
-
+        { success: false, error: "Modul oder Ereignis nicht gefunden" },
         { status: 404 }
       );
     }
+
+    const eventIndex = modules[moduleIndex].events.findIndex(
+      (e) => e._id === eventId
+    );
+
+    if (eventIndex === -1) {
+      return NextResponse.json(
+        { success: false, error: "Ereignis nicht gefunden" },
+        { status: 404 }
+      );
+    }
+
+    const updatedEvent = {
+      ...modules[moduleIndex].events[eventIndex],
+      ...(data.title && { title: data.title }),
+      ...(data.date && { date: data.date }),
+      ...(data.description !== undefined && { description: data.description }),
+      _id: eventId,
+    };
+
+    modules[moduleIndex].events[eventIndex] = updatedEvent;
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -86,35 +93,32 @@ export async function PUT(request, { params }) {
   }
 }
 
-// DELETE: Delete a specific event
-
 export async function DELETE(request, { params }) {
   try {
     const { id, eventId } = params;
-    if (!ObjectId.isValid(id)) {
+
+    if (!id || !eventId) {
       return NextResponse.json(
-        { success: false, error: "Ungültige Modul-ID" },
+        { success: false, error: "Ungültige Modul-ID oder Ereignis-ID" },
         { status: 400 }
       );
     }
 
-    const { db } = await connectToDatabase();
+    const moduleIndex = modules.findIndex((m) => m._id === id);
 
-    const result = await db
-      .collection("modules")
-      .updateOne(
-        { _id: new ObjectId(id) },
-        { $pull: { events: { _id: eventId } } }
-      );
-
-    if (result.matchedCount === 0) {
+    if (moduleIndex === -1 || !modules[moduleIndex].events) {
       return NextResponse.json(
         { success: false, error: "Modul nicht gefunden" },
         { status: 404 }
       );
     }
 
-    if (result.modifiedCount === 0) {
+    const initialLength = modules[moduleIndex].events.length;
+    modules[moduleIndex].events = modules[moduleIndex].events.filter(
+      (e) => e._id !== eventId
+    );
+
+    if (modules[moduleIndex].events.length === initialLength) {
       return NextResponse.json(
         { success: false, error: "Ereignis nicht gefunden" },
         { status: 404 }

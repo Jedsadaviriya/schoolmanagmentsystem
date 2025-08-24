@@ -1,15 +1,19 @@
-
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "../../lib/mongodb";
-import { ObjectId } from "mongodb";
 
-// GET: Fetch all modules
+let modules = [];
+
+const generateId = () => {
+  return Math.random().toString(36).substr(2, 9);
+};
+
 export async function GET() {
   try {
-    const { db } = await connectToDatabase();
-    const modules = await db.collection("modules").find({}).toArray();
+    const serializedModules = modules.map((module) => ({
+      ...module,
+      _id: module._id.toString(),
+    }));
 
-    return NextResponse.json({ success: true, modules });
+    return NextResponse.json({ success: true, modules: serializedModules });
   } catch (error) {
     console.error("Error fetching modules:", error);
     return NextResponse.json(
@@ -40,6 +44,7 @@ export async function POST(request) {
     }
 
     const newModule = {
+      _id: generateId(),
       title,
       module_number,
       description: description || "",
@@ -50,13 +55,10 @@ export async function POST(request) {
       events: [],
     };
 
-
-    const { db } = await connectToDatabase();
-    const result = await db.collection("modules").insertOne(newModule);
+    modules.push(newModule);
 
     return NextResponse.json(
-      { success: true, id: result.insertedId.toString() },
-
+      { success: true, id: newModule._id },
       { status: 201 }
     );
   } catch (error) {
