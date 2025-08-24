@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
 
+// In-memory storage for modules (shared across endpoints)
 let modules = [];
 
+// GET: Fetch a specific event by ID
 export async function GET(request, { params }) {
   try {
     const { id, eventId } = params;
 
+    // Basic ID validation
     if (!id || !eventId) {
       return NextResponse.json(
         { success: false, error: "Ungültige Modul-ID oder Ereignis-ID" },
@@ -13,16 +16,18 @@ export async function GET(request, { params }) {
       );
     }
 
-    const module = modules.find((m) => m._id === id);
+    // Find module in in-memory storage
+    const moduleItem = modules.find((m) => m._id === id); // Renamed from module to moduleItem
 
-    if (!module || !module.events) {
+    if (!moduleItem || !moduleItem.events) {
       return NextResponse.json(
         { success: false, error: "Modul oder Ereignis nicht gefunden" },
         { status: 404 }
       );
     }
 
-    const event = module.events.find((e) => e._id === eventId);
+    // Find event within module
+    const event = moduleItem.events.find((e) => e._id === eventId);
 
     if (!event) {
       return NextResponse.json(
@@ -41,11 +46,13 @@ export async function GET(request, { params }) {
   }
 }
 
+// PUT: Update a specific event
 export async function PUT(request, { params }) {
   try {
     const { id, eventId } = params;
     const data = await request.json();
 
+    // Basic ID validation
     if (!id || !eventId) {
       return NextResponse.json(
         { success: false, error: "Ungültige Modul-ID oder Ereignis-ID" },
@@ -53,6 +60,7 @@ export async function PUT(request, { params }) {
       );
     }
 
+    // Find module in in-memory storage
     const moduleIndex = modules.findIndex((m) => m._id === id);
 
     if (moduleIndex === -1 || !modules[moduleIndex].events) {

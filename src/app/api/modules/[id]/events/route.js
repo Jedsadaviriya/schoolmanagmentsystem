@@ -1,15 +1,19 @@
 import { NextResponse } from "next/server";
 
+// In-memory storage for modules (shared across endpoints)
 let modules = [];
 
+// Simulate ObjectId for compatibility
 const generateId = () => {
-  return Math.random().toString(36).substr(2, 9);
+  return Math.random().toString(36).substr(2, 9); // Simple ID generator
 };
 
+// GET: Fetch all events for a module
 export async function GET(request, { params }) {
   try {
     const { id } = params;
 
+    // Basic ID validation
     if (!id) {
       return NextResponse.json(
         { success: false, error: "Ungültige Modul-ID" },
@@ -17,16 +21,20 @@ export async function GET(request, { params }) {
       );
     }
 
-    const module = modules.find((m) => m._id === id);
+    // Find module in in-memory storage
+    const moduleItem = modules.find((m) => m._id === id); // Renamed from module to moduleItem
 
-    if (!module) {
+    if (!moduleItem) {
       return NextResponse.json(
         { success: false, error: "Modul nicht gefunden" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ success: true, events: module.events || [] });
+    return NextResponse.json({
+      success: true,
+      events: moduleItem.events || [],
+    });
   } catch (error) {
     console.error("Error fetching events:", error);
     return NextResponse.json(
@@ -36,11 +44,13 @@ export async function GET(request, { params }) {
   }
 }
 
+// POST: Create a new event for a module
 export async function POST(request, { params }) {
   try {
     const { id } = params;
     const data = await request.json();
 
+    // Validate inputs
     if (!id) {
       return NextResponse.json(
         { success: false, error: "Ungültige Modul-ID" },
@@ -55,6 +65,7 @@ export async function POST(request, { params }) {
       );
     }
 
+    // Find module in in-memory storage
     const moduleIndex = modules.findIndex((m) => m._id === id);
 
     if (moduleIndex === -1) {
@@ -64,6 +75,7 @@ export async function POST(request, { params }) {
       );
     }
 
+    // Create new event
     const event = {
       _id: generateId(),
       title: data.title,
@@ -71,6 +83,7 @@ export async function POST(request, { params }) {
       description: data.description || "",
     };
 
+    // Add event to module's events array
     modules[moduleIndex].events = modules[moduleIndex].events || [];
     modules[moduleIndex].events.push(event);
 
