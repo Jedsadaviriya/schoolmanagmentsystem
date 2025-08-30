@@ -11,7 +11,7 @@
 
 ---
 
-## 📊 Grades Page
+## Grades Page
 
 - Add new grades with validation
 - Calculate overall and subject-wise averages
@@ -23,7 +23,7 @@
 
 ---
 
-## 🗂️ Modules Page
+## Modules Page
 
 - Manage school modules
 - each module has a title and description
@@ -34,7 +34,7 @@
 
 ---
 
-## 📅 Calendar Integration
+## Calendar Integration
 
 - Add and view calendar entries inside module views
 - Responsive and interactive calendar UI
@@ -43,7 +43,7 @@
 
 ---
 
-## 🖱️ UI & Animations
+## UI & Animations
 
 - Smooth hover effects across all elements
 - Subtle transitions between views and modals
@@ -53,7 +53,7 @@
 
 ---
 
-## 🖥️ Homepage
+## Homepage
 
 - Title: **School Management System**
 - Subtitle: *Manage your school activities easily and efficiently*
@@ -64,7 +64,7 @@
 
 ---
 
-## 🎨 Design System
+## Design System
 
 This app uses a clean and modern color theme, created with [HeroUI](https://www.heroui.com/themes), balancing clarity with contrast.
 
@@ -87,7 +87,7 @@ This app uses a clean and modern color theme, created with [HeroUI](https://www.
 
 ---
 
-## 🖼️ Logo
+## Logo
 
 <img src="assets/sms-logo.png" width="200" alt="App Logo"/>
 
@@ -96,7 +96,7 @@ I also created a custom logo for this application. It was designed to match the 
 
 ---
 
-## 🛠️ Tech Stack & Setup
+## Tech Stack & Setup
 
 **Built With:**
 - React (with JSX)
@@ -116,7 +116,7 @@ npm install
 # MONGODB_URI=your_mongodb_connection_string
 npm run dev
 ```
-## 📘 Project Context
+## Project Context
 
 This app was built during a 3-day project week at GIB, where teams had to create a complete application within a tight time frame. We were a group of three, and the goal was not only technical execution but also collaboration, presentation, and documentation.
 
