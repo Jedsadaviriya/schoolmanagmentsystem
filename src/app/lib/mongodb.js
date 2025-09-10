@@ -2,7 +2,8 @@
 import { MongoClient } from "mongodb";
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/schoolManagementSystem";
+  process.env.MONGODB_URI ||
+  "mongodb://localhost:27017/schoolManagementSystem?retryWrites=true&w=majority";
 const MONGODB_DB = process.env.MONGODB_DB || "schoolManagementSystem";
 
 // Validate environment variables
