@@ -1,39 +1,32 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "../../../lib/mongodb";
-import { ObjectId } from "mongodb";
+import { modules } from "../../../lib/store";
 
 // GET: Fetch a single module by ID
 export async function GET(request, { params }) {
   try {
     const { id } = params;
 
-    if (!ObjectId.isValid(id)) {
+    if (!id) {
       return NextResponse.json(
         { success: false, error: "Ungültige ID" },
-
         { status: 400 }
       );
     }
 
-    const { db } = await connectToDatabase();
-    const modules = await db
-      .collection("modules")
-      .findOne({ _id: new ObjectId(id) });
+    const foundModule = modules.find((m) => m._id === id);
 
-    if (!modules) {
+    if (!foundModule) {
       return NextResponse.json(
         { success: false, error: "Modul nicht gefunden" },
-
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ success: true, modules });
+    return NextResponse.json({ success: true, modules: foundModule });
   } catch (error) {
     console.error("Error fetching module:", error);
     return NextResponse.json(
       { success: false, error: "Fehler beim Laden des Moduls" },
-
       { status: 500 }
     );
   }
@@ -44,37 +37,31 @@ export async function PUT(request, { params }) {
     const { id } = params;
     const body = await request.json();
 
-    if (!ObjectId.isValid(id)) {
+    if (!id) {
       return NextResponse.json(
         { success: false, error: "Ungültige ID" },
-
         { status: 400 }
       );
     }
 
-    const { db } = await connectToDatabase();
-    const existingModule = await db
-      .collection("modules")
-      .findOne({ _id: new ObjectId(id) });
+    const index = modules.findIndex((m) => m._id === id);
 
-    if (!existingModule) {
+    if (index === -1) {
       return NextResponse.json(
         { success: false, error: "Modul nicht gefunden" },
-
         { status: 404 }
       );
     }
 
+    const existingModule = modules[index];
     const updatedModule = {
       ...existingModule,
       ...body,
-      _id: new ObjectId(id),
+      _id: id,
       events: existingModule.events, // Preserve events array
     };
 
-    await db
-      .collection("modules")
-      .updateOne({ _id: new ObjectId(id) }, { $set: updatedModule });
+    modules[index] = updatedModule;
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -90,32 +77,29 @@ export async function DELETE(request, { params }) {
   try {
     const { id } = params;
 
-    if (!ObjectId.isValid(id)) {
+    if (!id) {
       return NextResponse.json(
         { success: false, error: "Ungültige ID" },
-
         { status: 400 }
       );
     }
 
-    const { db } = await connectToDatabase();
-    const result = await db
-      .collection("modules")
-      .deleteOne({ _id: new ObjectId(id) });
+    const index = modules.findIndex((m) => m._id === id);
 
-    if (result.deletedCount === 0) {
+    if (index === -1) {
       return NextResponse.json(
         { success: false, error: "Modul nicht gefunden" },
         { status: 404 }
       );
     }
 
+    modules.splice(index, 1);
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting module:", error);
     return NextResponse.json(
       { success: false, error: "Fehler beim Löschen des Moduls" },
-
       { status: 500 }
     );
   }

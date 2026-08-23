@@ -1,36 +1,30 @@
 // File: app/api/modules/[id]/events/[eventId]/route.js
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "../.././../../../lib/mongodb";
-import { ObjectId } from "mongodb";
+import { modules } from "../../../../../lib/store";
 
 // GET: Fetch a specific event by ID
 export async function GET(request, { params }) {
   try {
     const { id, eventId } = params;
 
-    if (!ObjectId.isValid(id)) {
+    if (!id) {
       return NextResponse.json(
         { success: false, error: "Ungültige Modul-ID" },
         { status: 400 }
       );
     }
 
-    const { db } = await connectToDatabase();
-    const modules = await db
-      .collection("modules")
-      .findOne(
-        { _id: new ObjectId(id), "events._id": eventId },
-        { projection: { "events.$": 1 } }
-      );
+    const foundModule = modules.find((m) => m._id === id);
+    const event = foundModule?.events?.find((e) => e._id === eventId);
 
-    if (!modules || !modules.events || modules.events.length === 0) {
+    if (!event) {
       return NextResponse.json(
         { success: false, error: "Ereignis nicht gefunden" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ success: true, event: modules.events[0] });
+    return NextResponse.json({ success: true, event });
   } catch (error) {
     console.error("Error fetching event:", error);
     return NextResponse.json(
@@ -46,35 +40,26 @@ export async function PUT(request, { params }) {
     const { id, eventId } = params;
     const data = await request.json();
 
-    if (!ObjectId.isValid(id)) {
+    if (!id) {
       return NextResponse.json(
         { success: false, error: "Ungültige Modul-ID" },
         { status: 400 }
       );
     }
 
-    const { db } = await connectToDatabase();
+    const foundModule = modules.find((m) => m._id === id);
+    const event = foundModule?.events?.find((e) => e._id === eventId);
 
-    const updateFields = {};
-    if (data.title) updateFields["events.$.title"] = data.title;
-    if (data.date) updateFields["events.$.date"] = data.date;
-    if (data.description !== undefined)
-      updateFields["events.$.description"] = data.description;
-
-    const result = await db
-      .collection("modules")
-      .updateOne(
-        { _id: new ObjectId(id), "events._id": eventId },
-        { $set: updateFields }
-      );
-
-    if (result.matchedCount === 0) {
+    if (!event) {
       return NextResponse.json(
         { success: false, error: "Ereignis oder Modul nicht gefunden" },
-
         { status: 404 }
       );
     }
+
+    if (data.title) event.title = data.title;
+    if (data.date) event.date = data.date;
+    if (data.description !== undefined) event.description = data.description;
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -87,34 +72,32 @@ export async function PUT(request, { params }) {
 }
 
 // DELETE: Delete a specific event
-
 export async function DELETE(request, { params }) {
   try {
     const { id, eventId } = params;
-    if (!ObjectId.isValid(id)) {
+
+    if (!id) {
       return NextResponse.json(
         { success: false, error: "Ungültige Modul-ID" },
         { status: 400 }
       );
     }
 
-    const { db } = await connectToDatabase();
+    const foundModule = modules.find((m) => m._id === id);
 
-    const result = await db
-      .collection("modules")
-      .updateOne(
-        { _id: new ObjectId(id) },
-        { $pull: { events: { _id: eventId } } }
-      );
-
-    if (result.matchedCount === 0) {
+    if (!foundModule) {
       return NextResponse.json(
         { success: false, error: "Modul nicht gefunden" },
         { status: 404 }
       );
     }
 
-    if (result.modifiedCount === 0) {
+    const initialLength = (foundModule.events || []).length;
+    foundModule.events = (foundModule.events || []).filter(
+      (e) => e._id !== eventId
+    );
+
+    if (foundModule.events.length === initialLength) {
       return NextResponse.json(
         { success: false, error: "Ereignis nicht gefunden" },
         { status: 404 }

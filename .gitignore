@@ -8,7 +8,7 @@
 *.suo
 *.user
 *.userosscache
-*.sln.docstates# MONGODB_URI=mongodb+srv://admin:admin@sms.nvrgisu.mongodb.net/
+*.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -398,6 +398,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Next.js build output
+.next/
+out/
 
 # Secret
 .env

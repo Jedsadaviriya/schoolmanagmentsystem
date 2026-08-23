@@ -1,49 +1,33 @@
-import { connectToDatabase } from "../../lib/mongodb";
+import { grades as gradesStore, events as eventsStore, modules } from "../../lib/store";
 import Link from "next/link";
 import styles from "./page.module.css";
-import { ObjectId } from "mongodb";
 import GoogleStyleCalendar from "../../../components/google-style-calendar";
 
 export default async function ModuleDetail({ params }) {
-  const { db } = await connectToDatabase();
-  let module;
-
-  try {
-    module = await db
-      .collection("modules")
-      .findOne({ _id: new ObjectId(params.id) });
-  } catch (e) {
-    return <div className={styles.container}>Modul nicht gefunden</div>;
-  }
+  const moduleId = String(params.id);
+  const module = modules.find((m) => m._id === moduleId);
 
   if (!module) {
     return <div className={styles.container}>Modul nicht gefunden</div>;
   }
 
   // Fetch grades related to this module
-  const grades = await db
-    .collection("grades")
-
-    .find({ module_id: new ObjectId(params.id) })
-
-    .toArray();
+  const grades = gradesStore.filter((g) => g.module_id === moduleId);
 
   // Calculate average grade for this module
   const calculateAverage = () => {
     if (grades.length === 0) return 0;
-
     const sum = grades.reduce(
       (total, grade) => total + Number.parseFloat(grade.grade || 0),
       0
     );
-
     return sum / grades.length;
   };
 
   const averageGrade = calculateAverage();
 
-  // Ensure events array exists
-  const events = module.events || [];
+  // Fetch events from the shared events collection
+  const events = eventsStore.filter((e) => e.module_id === moduleId);
 
   return (
     <div className={styles.container}>

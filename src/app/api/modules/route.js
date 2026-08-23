@@ -1,14 +1,9 @@
-
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "../../lib/mongodb";
-import { ObjectId } from "mongodb";
+import { modules, generateId } from "../../lib/store";
 
 // GET: Fetch all modules
 export async function GET() {
   try {
-    const { db } = await connectToDatabase();
-    const modules = await db.collection("modules").find({}).toArray();
-
     return NextResponse.json({ success: true, modules });
   } catch (error) {
     console.error("Error fetching modules:", error);
@@ -19,6 +14,7 @@ export async function GET() {
   }
 }
 
+// POST: Create a new module
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -40,6 +36,7 @@ export async function POST(request) {
     }
 
     const newModule = {
+      _id: generateId(),
       title,
       module_number,
       description: description || "",
@@ -50,18 +47,14 @@ export async function POST(request) {
       events: [],
     };
 
-
-    const { db } = await connectToDatabase();
-    const result = await db.collection("modules").insertOne(newModule);
+    modules.push(newModule);
 
     return NextResponse.json(
-      { success: true, id: result.insertedId.toString() },
-
+      { success: true, id: newModule._id },
       { status: 201 }
     );
   } catch (error) {
     console.error("Error creating module:", error);
-
     return NextResponse.json(
       { success: false, error: "Fehler beim Erstellen des Moduls" },
       { status: 500 }

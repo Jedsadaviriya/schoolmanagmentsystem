@@ -36,13 +36,15 @@ export default function Header() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
             className={styles.logoIcon}
           >
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-            <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
+            <polygon points="12,3 21,8 12,13 3,8" fill="currentColor" stroke="none" />
+            <path d="M6,10.5 L6,16 C6,17.5 8.5,18.5 12,18.5 C15.5,18.5 18,17.5 18,16 L18,10.5" fill="none" />
+            <line x1="21" y1="8" x2="21" y2="15" />
+            <circle cx="21" cy="16.5" r="1.5" fill="currentColor" stroke="none" />
           </svg>
         </div>
         <span className={styles.logoText}>School Management</span>
